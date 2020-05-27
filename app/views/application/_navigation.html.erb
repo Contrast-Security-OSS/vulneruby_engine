@@ -1,0 +1,22 @@
+<nav class="navbar ">
+  <div class="navbar-brand">
+    <a class="navbar-item" href=<%= vulneruby_engine.root_url %>>
+      Contrast Security Ruby
+    </a>
+  </div>
+</nav>
+<div class="columns">
+  <aside class="column is-2 hero aside is-fullheight" style="background: lightgray">
+    <div>
+      <div class="main">
+        <ul class="menu-list">
+          <li><a href=<%= cmdi_path %>>CMD Injection</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+  <br>
+  <div class="column container">
+    <%= yield %>
+  </div>
+</div>
