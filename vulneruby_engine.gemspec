@@ -1,33 +1,58 @@
-$:.push File.expand_path("lib", __dir__)
+# frozen_string_literal: true
+
+$LOAD_PATH.push(File.expand_path('lib', __dir__))
 
 # Maintain your gem's version:
-require "vulneruby_engine/version"
+require('vulneruby_engine/version')
+
+# Add those dependencies required to develop or test the project
+def self.add_dev_dependencies spec
+  spec.add_development_dependency('rails-controller-testing')
+  spec.add_development_dependency('rspec', '~> 3.0')
+  spec.add_development_dependency('rspec-rails')
+  spec.add_development_dependency('rubocop', '0.83.0')
+  spec.add_development_dependency('rubocop-performance', '1.5.2')
+  spec.add_development_dependency('rubocop-rspec', '1.39.0')
+  spec.add_development_dependency('simplecov', '~> 0.18.5')
+  spec.add_development_dependency('sqlite3')
+end
+
+# Add those dependencies required to run the project
+def self.add_dependencies spec
+  spec.add_dependency('rails', '~> 6.0.3', '>= 6.0.3.1')
+  spec.add_dependency('rake', '~> 12.0')
+end
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |spec|
-  spec.name        = "vulneruby_engine"
+  spec.name        = 'vulneruby_engine'
   spec.version     = VulnerubyEngine::VERSION
-  spec.authors     = ["Donald Propst"]
-  spec.email       = ["donald.propst@contrastsecurity.com"]
-  spec.homepage    = "https://github.com"
-  spec.summary     = "Summary of VulnerubyEngine."
-  spec.description = "Description of VulnerubyEngine."
-  spec.license     = "MIT"
+  spec.authors     = ['Donald Propst']
+  spec.email       = ['donald.propst@contrastsecurity.com']
+  spec.homepage    = 'https://github.com'
+  spec.summary     = 'Summary of VulnerubyEngine.'
+  spec.description = 'Description of VulnerubyEngine.'
+  spec.license     = 'MIT'
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
+  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the
+  # 'allowed_push_host' to allow pushing to a single host or delete this
+  # section to allow pushing to any host.
   if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "http://mygemserver.com"
+    spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
   else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
+    raise(
+        StandardError,
+        'RubyGems 2.0 or newer is required to protect against public gem '\
+        'pushes.')
   end
 
-  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  spec.files = Dir[
+      '{app,config,db,lib}/**/*',
+      'MIT-LICENSE',
+      'Rakefile',
+      'README.md'
+  ]
 
-  spec.add_dependency "rails", "~> 6.0.3", ">= 6.0.3.1"
-  spec.add_development_dependency "rspec-rails"
-  spec.add_development_dependency "rails-controller-testing"
-
-  spec.add_development_dependency "sqlite3"
+  add_dev_dependencies(spec)
+  add_dependencies(spec)
 end
