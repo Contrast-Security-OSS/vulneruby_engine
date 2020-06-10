@@ -10,7 +10,7 @@ module VulnerubyEngine
     end
 
     def run
-      @result = Vulneruby::Trigger::Xxe.run_nokogiri
+      @result = Vulneruby::Trigger::Xxe.run_nokogiri(params[:entity])
       render('layouts/vulneruby_engine/xxe/run')
     end
   end

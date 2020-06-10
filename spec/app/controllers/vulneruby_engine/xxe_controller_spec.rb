@@ -10,9 +10,9 @@ RSpec.describe('XXE Controller', type: :request) do
 
   describe 'POST /xxe' do
     it 'renders the xxe result page' do
-      post '/vulneruby_engine/xxe'
+      post '/vulneruby_engine/xxe', params: { entity: 'nokogiri' }
       expect(response).to(render_template(:run))
-      expect(response.body).to(include('xml'))
+      expect(response.body).to(include('nokogiri'))
     end
   end
 end
