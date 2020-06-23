@@ -6,6 +6,7 @@ VulnerubyEngine::Engine.routes.draw do
   RULES = %w[
     cmdi
     ssrf
+    xxe
   ].freeze
 
   RULES.each do |rule|
