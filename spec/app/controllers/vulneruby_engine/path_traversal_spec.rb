@@ -10,7 +10,8 @@ RSpec.describe('Path Traversal Controller', type: :request) do
 
   describe 'POST /cmdi' do
     it 'renders any requested file contents' do
-      post '/vulneruby_engine/path_traversal', params: { file_path: '/etc/passwd' }
+      post '/vulneruby_engine/path_traversal',
+           params: { file_path: '/etc/passwd' }
       expect(response).to(render_template(:run))
       expect(response.body).to(include('etc'))
     end

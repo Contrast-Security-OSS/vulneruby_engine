@@ -10,7 +10,8 @@ module VulnerubyEngine
     end
 
     def run
-      @result = Vulneruby::Trigger::ReflectionInjection.run_const_get(params[:const])
+      @result = Vulneruby::Trigger::ReflectionInjection.
+          run_const_get(params[:const])
       render('layouts/vulneruby_engine/reflection_injection/run')
     end
   end

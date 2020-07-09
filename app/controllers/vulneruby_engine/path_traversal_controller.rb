@@ -10,7 +10,8 @@ module VulnerubyEngine
     end
 
     def run
-      @result = Vulneruby::Trigger::PathTraversal.run_file_read(params[:file_path])
+      @result = Vulneruby::Trigger::PathTraversal.
+          run_file_read(params[:file_path])
       render('layouts/vulneruby_engine/path_traversal/run')
     end
   end
