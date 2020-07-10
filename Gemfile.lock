@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/Contrast-Security-OSS/vulneruby
-  revision: e734ff1bad41c3f856a72f9ca5a65becd43c5c0e
-  branch: RUBY-905-RUBY-909
+  revision: 600cb8f7c49fa14596975c682b044638a08135fb
   specs:
     vulneruby (0.1.1)
       nokogiri
