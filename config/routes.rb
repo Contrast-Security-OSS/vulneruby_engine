@@ -8,6 +8,8 @@ VulnerubyEngine::Engine.routes.draw do
     path_traversal
     reflection_injection
     ssrf
+    unsafe_code_execution
+    untrusted_deserialization
     xxe
   ].freeze
 
