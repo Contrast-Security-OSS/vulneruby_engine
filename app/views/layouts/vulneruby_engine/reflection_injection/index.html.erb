@@ -1,0 +1,16 @@
+<div>
+  <h1>Reflection Injection</h1>
+  <form action=<%= reflection_injection_path %> method="post">
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" name="const" placeholder="ENV">
+      </div>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="control">
+        <button class="button is-info" action="submit">
+          Load Constant
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

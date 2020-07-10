@@ -1,0 +1,16 @@
+<div>
+  <h1>Path Traversal</h1>
+  <form action=<%= path_traversal_path %> method="post">
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" name="file_path" placeholder="ls">
+      </div>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="control">
+        <button class="button is-info" action="submit">
+          Load File
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

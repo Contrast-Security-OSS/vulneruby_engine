@@ -1,8 +1,9 @@
 GIT
   remote: https://github.com/Contrast-Security-OSS/vulneruby
-  revision: d4b777b2fb630cdd6ff073d4eeb34175397db334
+  revision: b6d43bf42dfe09490c032600937eddf323362026
   specs:
     vulneruby (0.1.1)
+      nokogiri
       rake (~> 12.0)
 
 PATH

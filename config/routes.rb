@@ -5,6 +5,8 @@ VulnerubyEngine::Engine.routes.draw do
 
   RULES = %w[
     cmdi
+    path_traversal
+    reflection_injection
     ssrf
     xxe
   ].freeze
