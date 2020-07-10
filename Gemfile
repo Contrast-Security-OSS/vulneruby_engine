@@ -11,8 +11,7 @@ gemspec
 # Pull in our vulnerable gem used to call the triggers
 gem(
     'vulneruby',
-    git: 'https://github.com/Contrast-Security-OSS/vulneruby',
-    branch: 'RUBY-905-RUBY-909')
+    git: 'https://github.com/Contrast-Security-OSS/vulneruby')
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
