@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('SSRF Controller', type: :request) do
+RSpec.describe('Untrusted Deserialization Controller', type: :request) do
   describe 'GET /untrusted_deserialization' do
     it 'renders the untrusted_deserialization input page' do
       get '/vulneruby_engine/untrusted_deserialization'
