@@ -20,3 +20,4 @@ gem(
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+gem 'contrast-agent'
