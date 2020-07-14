@@ -1,0 +1,17 @@
+<div>
+  <h1>Untrusted Deserialization</h1>
+  <form action=<%= untrusted_deserialization_path %> method="post">
+    <p>Example marshal string: <%= raw @example %></p>
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" name="data" placeholder="Marshal string">
+      </div>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="control">
+        <button class="button is-info" action="submit">
+          Load
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
