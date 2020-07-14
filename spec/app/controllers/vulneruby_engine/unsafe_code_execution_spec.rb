@@ -2,7 +2,7 @@
 
 RSpec.describe('Unsafe Code Execution Controller', type: :request) do
   describe 'GET /unsafe_code_execution' do
-    it 'renders the ssrf input page' do
+    it 'renders the unsafe_code_execution input page' do
       get '/vulneruby_engine/unsafe_code_execution'
       expect(response).to(render_template(:index))
     end

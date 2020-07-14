@@ -11,8 +11,7 @@ module VulnerubyEngine
     end
 
     def run
-      @data = params[:data] || params[:ruby25] ||
-          params[:ruby26] || params[:ruby27]
+      @data = params[:data]
       @result = Vulneruby::Trigger::UntrustedDeserialization.
           run_marshal_load(@data)
       render('layouts/vulneruby_engine/untrusted_deserialization/run')
