@@ -4,27 +4,22 @@ require('vulneruby/trigger/cmd_injection')
 
 module VulnerubyEngine
   # Entry point for the CMD Injection tests
-  class CmdiController < ApplicationController
+  class MisconfigurationController < ApplicationController
     def index
-      render('layouts/vulneruby_engine/header_misconfiguration/index')
+      render('layouts/vulneruby_engine/misconfiguration/index')
     end
 
     def run
-      #This should involve
-      # DONE cache-controls-missing
-      # DONE xcontent-typeheader-missing
-      # session-timeout,
-      # rails-http-only-disabled,
-      # csp-header-insecure,
-      # hsts-header-missing,
-      # xxss-protection-header-disabled,
-      # csp-header-missing,
-      # secure-flag-missing
-      response.delete_header('Cache-Control')
-      response.delete_header('X-Frame-Options')
-      response.delete_header('X-Content-Type-Options')
+      response.set_header('Cache-Control', 'no-cache, store')
+      response.set_header('Pragma', 'no-cache')
+      response.set_header('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT')
+      response.set_header('X-XSS-Protection', '0')
+      response.set_header('X-Frame-Options', 'InvalidValue')
+      response.set_header('X-Content-Type-Options', 'InvalidValue')
+      response.set_header('X-Content-Security-Policy', 'default-src= none; object-src foo')
       response.delete_header('Strict-Transport-Security')
-      render('layouts/vulneruby_engine/header_misconfiguration/run')
+      @result = response.headers
+      render('layouts/vulneruby_engine/misconfiguration/run')
     end
   end
 end

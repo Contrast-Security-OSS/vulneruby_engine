@@ -1,1 +1,1 @@
-# VulnerubyEngine.application.config.session_store :cookie_store, key: 'vulneruby_engine', httponly: false, secure: false
+Rails.application.config.session_store :cookie_store, key: 'vulneruby_engine', httponly: false, secure: false
