@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require('vulneruby/trigger/cmd_injection')
-
 module VulnerubyEngine
   # Entry point for the CMD Injection tests
   class MisconfigurationController < ApplicationController
