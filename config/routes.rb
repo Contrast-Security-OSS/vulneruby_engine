@@ -10,6 +10,7 @@ VulnerubyEngine::Engine.routes.draw do
     ssrf
     unsafe_code_execution
     untrusted_deserialization
+    misconfiguration
     xxe
   ].freeze
 
