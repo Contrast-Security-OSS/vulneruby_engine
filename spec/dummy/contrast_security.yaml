@@ -1,0 +1,27 @@
+api:
+  url: https://teamserver-darpa.contsec.com/Contrast
+  api_key: 4c2Wg1fVb1Wp9LbNe7d0afuWcYxhV34l
+  service_key: C4FPJ396VH4AY4GG
+  user_name: donald.propst@contrastsecurity.com
+  request_audit:
+    enable: true
+    path: /Users/donaldpropst/Desktop/messages
+    requests: true
+    responses: true
+agent:
+  logger:
+    path: agent.log
+    level: TRACE
+  service:
+    logger:
+      path: service.log
+      level: DEBUG
+    socket: /tmp/socket.sock
+application:
+  name: RailsEngine
+server:
+  name: RailsArelServer
+assess:
+  enable: true
+protect:
+  enable: false
