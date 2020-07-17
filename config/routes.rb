@@ -5,6 +5,7 @@ VulnerubyEngine::Engine.routes.draw do
 
   RULES = %w[
     cmdi
+    insecure_algorithm
     path_traversal
     reflection_injection
     ssrf
