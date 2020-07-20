@@ -12,6 +12,7 @@ VulnerubyEngine::Engine.routes.draw do
     unsafe_code_execution
     untrusted_deserialization
     misconfiguration
+    xpath_injection
     xxe
   ].freeze
 
