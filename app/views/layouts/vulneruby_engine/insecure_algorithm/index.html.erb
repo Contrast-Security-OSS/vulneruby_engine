@@ -1,0 +1,13 @@
+<div>
+  <h1>Insecure Crypto Methods</h1>
+  <form action=<%= insecure_algorithm_path %> method="post">
+    <div class="field has-addons">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="control">
+        <button class="button is-info" action="submit">
+          Run
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
