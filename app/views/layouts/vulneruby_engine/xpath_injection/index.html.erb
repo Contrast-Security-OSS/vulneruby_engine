@@ -1,0 +1,16 @@
+<div>
+  <h1>XPath Injection</h1>
+  <form action=<%= xpath_injection_path %> method="post">
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" name="xpath_data" placeholder="some_class">
+      </div>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="control">
+        <button class="button is-info" action="submit">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
