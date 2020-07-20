@@ -10,7 +10,7 @@ module VulnerubyEngine
     end
 
     def run
-      @result = Vulneruby::Trigger::XpathInjection.run_xpath(params[:xpath_data])
+      @result = Vulneruby::Trigger::XpathInjection.run_nokogiri(params[:xpath_data])
       render('layouts/vulneruby_engine/xpath_injection/run')
     end
   end
