@@ -8,6 +8,7 @@ VulnerubyEngine::Engine.routes.draw do
     insecure_algorithm
     path_traversal
     reflection_injection
+    regex_dos
     ssrf
     unsafe_code_execution
     untrusted_deserialization
