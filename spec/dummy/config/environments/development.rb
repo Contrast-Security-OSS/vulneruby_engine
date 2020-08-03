@@ -57,6 +57,9 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # In compose we will use a variety of host names
+  config.hosts.clear
+
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 

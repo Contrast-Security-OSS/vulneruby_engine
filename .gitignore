@@ -10,3 +10,5 @@ spec/dummy/tmp/
 /.idea
 **/contrast_security.yaml
 **/contrast_security.yml
+**/*.log
+.DS_STORE

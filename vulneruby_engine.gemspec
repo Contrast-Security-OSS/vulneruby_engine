@@ -15,6 +15,9 @@ def self.add_dev_dependencies spec
   spec.add_development_dependency('rubocop-rspec', '1.39.0')
   spec.add_development_dependency('simplecov', '~> 0.18.5')
   spec.add_development_dependency('sqlite3')
+  spec.add_development_dependency('watir')
+  spec.add_development_dependency('webdrivers', '~> 4.0')
+  spec.add_development_dependency('headless', '~> 2.3')
 end
 
 # Add those dependencies required to run the project

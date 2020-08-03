@@ -1,0 +1,116 @@
+[
+  {
+    "rule_id": "rails-http-only-disabled",
+    "dataflow": false
+  },
+  {
+    "rule_id": "secure-flag-missing",
+    "dataflow": false
+  },
+  {
+    "rule_id": "session-timeout",
+    "dataflow": false
+  },
+  {
+    "rule_id": "cache-controls-missing",
+    "dataflow": false
+  },
+  {
+    "rule_id": "csp-header-insecure",
+    "dataflow": false
+  },
+  {
+    "rule_id": "csp-header-missing",
+    "dataflow": false
+  },
+  {
+    "rule_id": "hsts-header-missing",
+    "dataflow": false
+  },
+  {
+    "rule_id": "xcontenttype-header-missing",
+    "dataflow": false
+  },
+  {
+    "rule_id": "autocomplete-missing",
+    "dataflow": false
+  },
+  {
+    "rule_id": "hardcoded-password",
+    "dataflow": false
+  },
+  {
+    "rule_id": "clickjacking-control-missing",
+    "dataflow": false
+  },
+  {
+    "rule_id": "xxssprotection-header-disabled",
+    "dataflow": false
+  },
+  {
+    "rule_id": "cmd-injection",
+    "dataflow": true,
+    "trigger_class": "Kernel",
+    "trigger_method": "`"
+  },
+  {
+    "rule_id": "crypto-bad-mac",
+    "dataflow": true,
+    "trigger_class": "Digest::MD5",
+    "trigger_method": "initialize"
+  },
+  {
+    "rule_id": "crypto-weak-randomness",
+    "dataflow": true,
+    "trigger_class": "Kernel",
+    "trigger_method": "rand"
+  },
+  {
+    "rule_id": "crypto-bad-mac",
+    "dataflow": true,
+    "trigger_class": "Digest::MD5",
+    "trigger_method": "initialize"
+  },
+  {
+    "rule_id": "path-traversal",
+    "dataflow": true,
+    "trigger_class": "IO",
+    "trigger_method": "read"
+  },
+  {
+    "rule_id": "reflection-injection",
+    "dataflow": true,
+    "trigger_class": "Module",
+    "trigger_method": "const_get"
+  },
+  {
+    "rule_id": "reflected-xss",
+    "dataflow": true,
+    "trigger_class": "String",
+    "trigger_method": "html_safe"
+  },
+  {
+    "rule_id": "ssrf",
+    "dataflow": true,
+    "trigger_class": "Net::HTTP",
+    "trigger_method": "initialize"
+  },
+  {
+    "rule_id": "unsafe-code-execution",
+    "dataflow": true,
+    "trigger_class": "Kernel",
+    "trigger_method": "eval"
+  },
+  {
+    "rule_id": "untrusted-deserialization",
+    "dataflow": true,
+    "trigger_class": "Marshal",
+    "trigger_method": "load"
+  },
+  {
+    "rule_id": "xxe",
+    "dataflow": true,
+    "trigger_class": "FindOut",
+    "trigger_method": "load"
+  }
+]
