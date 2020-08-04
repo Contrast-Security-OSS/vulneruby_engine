@@ -1,0 +1,50 @@
+[
+  {
+    "navigation_name": "CMD Injection",
+    "input_field_name": "command",
+    "value": "ls"
+  },
+  {
+    "navigation_name": "Insecure Algorithm",
+    "input_field_name": null
+  },
+  {
+    "navigation_name": "Misconfiguration",
+    "input_field_name": null
+  },
+  {
+    "navigation_name": "Path Traversal",
+    "input_field_name": "file_path",
+    "value": "/etc/passwd"
+  },
+  {
+    "navigation_name": "Reflection Injection",
+    "input_field_name": "const",
+    "value": "Kernel"
+  },
+  {
+    "navigation_name": "Reflected XSS",
+    "input_field_name": "data",
+    "value": "<script>console.log(document.cookies);</script>"
+  },
+  {
+    "navigation_name": "SSRF",
+    "input_field_name": "uri",
+    "value": "http://google.com"
+  },
+  {
+    "navigation_name": "Untrusted Deserialization",
+    "input_field_name": "data",
+    "value": "\u0004\bI\"\u000Bfoobar\u0006:\u0006ET"
+  },
+  {
+    "navigation_name": "XPath Injection",
+    "input_field_name": "xpath_data",
+    "value": "red"
+  },
+  {
+    "navigation_name": "XXE",
+    "input_field_name": "entity",
+    "value": "nokogiri"
+  }
+]

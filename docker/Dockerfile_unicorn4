@@ -1,0 +1,24 @@
+FROM ruby:2.7
+ARG PORT_ARG=3010
+
+WORKDIR app
+
+COPY Gemfile .
+COPY Gemfile.lock .
+COPY vulneruby_engine.gemspec .
+COPY lib/vulneruby_engine/version.rb ./lib/vulneruby_engine/version.rb
+
+RUN bundle install --with unicorn_4
+
+COPY . .
+RUN rm **/*.log | true
+
+# this is used by the volume in docker-compose
+RUN mkdir -p /tmp/unicorn4/messages
+
+RUN bundle exec rails db:migrate
+
+ENV UNICORN_4_TEST=true
+ENV PORT=$PORT_ARG
+
+CMD bundle exec unicorn -p $PORT -c ./spec/dummy/config/unicorn.rb ./spec/dummy/config.ru
