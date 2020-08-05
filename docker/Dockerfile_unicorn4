@@ -3,6 +3,7 @@ ARG PORT_ARG=3010
 
 WORKDIR app
 
+COPY agent/* agent/
 COPY Gemfile .
 COPY Gemfile.lock .
 COPY vulneruby_engine.gemspec .
