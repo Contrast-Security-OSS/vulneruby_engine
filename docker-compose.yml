@@ -6,6 +6,8 @@ services:
       context: .
       args:
         port: 3010
+    env_file:
+      - ./docker/.env
     volumes:
       - ./run-data/unicorn4:/tmp/unicorn4
     ports:
