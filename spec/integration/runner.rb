@@ -50,7 +50,7 @@ if test_env_var = ENV['TEST_HOSTS']
   test_hosts = test_env_var.split(',')
 end
 request_data = JSON.load(File.read("#{__dir__}/requests.json"))
-sleep(10)
+sleep(45)
 exercise_apps(test_hosts, request_data)
 sleep(30)
 test_data = JSON.load(File.read("#{__dir__}/test.json"))
