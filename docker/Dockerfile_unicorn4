@@ -16,7 +16,7 @@ RUN gem install ./agent/contrast-agent.gem --platform ruby -N
 
 RUN bundle install --with unicorn_4
 
-echo \"\ngem 'contrast-agent'\" >> ./Gemfile
+ENV CI_TEST=true
 
 COPY . .
 RUN rm **/*.log | true
