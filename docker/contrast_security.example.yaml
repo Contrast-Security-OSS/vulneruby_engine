@@ -1,8 +1,8 @@
 api:
-  url:
-  api_key:
-  service_key:
-  user_name:
+  url: localhost
+  api_key: demo
+  service_key: demo
+  user_name: agent_user
   request_audit:
     enable: true
     path: /tmp/unicorn4/messages

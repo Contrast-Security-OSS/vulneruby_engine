@@ -23,6 +23,8 @@ RUN rm **/*.log | true
 
 # this is used by the volume in docker-compose
 RUN mkdir -p /tmp/unicorn4/messages
+ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/unicorn4/agent.log
+ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/unicorn4/service.log
 
 RUN bundle exec rails db:migrate
 

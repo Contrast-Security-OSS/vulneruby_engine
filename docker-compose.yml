@@ -7,7 +7,7 @@ services:
       args:
         port: 3010
     volumes:
-      - ./run-data/unicorn4:/tmp/unicorn4/messages
+      - ./run-data/unicorn4:/tmp/unicorn4
     ports:
       - "3010:3010"
   test_harness:
