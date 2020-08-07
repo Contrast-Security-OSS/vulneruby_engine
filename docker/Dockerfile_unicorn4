@@ -1,7 +1,7 @@
 FROM ruby:2.7
 ARG PORT_ARG=3010
 
-RUN apt-get update && apt-get install -y build-essential
+RUN apt-get update && apt-get install -y build-essential coreutils
 
 WORKDIR app
 
@@ -26,14 +26,12 @@ RUN mkdir -p /tmp/unicorn4/messages
 ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/unicorn4/agent.log
 ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/unicorn4/service.log
 
-timestamp=$(date +%s)
-APP_NAME="RailsEngine-Unicorn4-${timestamp}"
-RUN echo "Application name in teamserver: ${APP_NAME}"
-ENV CONTRAST_APPLICATION__NAME=$APP_NAME
+RUN ./docker/app_name_generator.sh Unicorn4 >> /tmp/app_name.txt
+RUN cat /tmp/app_name.txt
 
 RUN bundle exec rails db:migrate
 
 ENV UNICORN_4_TEST=true
 ENV PORT=$PORT_ARG
 
-CMD bundle exec unicorn -p $PORT -c ./spec/dummy/config/unicorn.rb ./spec/dummy/config.ru
+CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec unicorn -p $PORT -c ./spec/dummy/config/unicorn.rb ./spec/dummy/config.ru
