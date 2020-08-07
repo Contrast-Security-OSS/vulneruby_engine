@@ -26,7 +26,8 @@ RUN mkdir -p /tmp/unicorn4/messages
 ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/unicorn4/agent.log
 ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/unicorn4/service.log
 
-APP_NAME="RailsEngine-Unicorn4-$(date +%s)"
+timestamp=$(date +%s)
+APP_NAME="RailsEngine-Unicorn4-${timestamp}"
 RUN echo "Application name in teamserver: ${APP_NAME}"
 ENV CONTRAST_APPLICATION__NAME=$APP_NAME
 
