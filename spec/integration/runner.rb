@@ -29,7 +29,8 @@ def verify hosts, test_data
     # Load all the trace JSON blobs into an array
     #
     root_path = ENV['DOCKER'] ? '/run-data' : '../../run-data'
-    trace_file_paths = Dir.glob(File.join(root_path, test_host, "requests", "*-traces.json"))
+    puts Dir.glob("#{root_path}/**/*")
+    trace_file_paths = Dir.glob(File.join(root_path, test_host, "messages", "requests", "*-traces.json"))
     messages = trace_file_paths.map { |trace_file_path| JSON.load(File.read(trace_file_path)) }
     puts "Found #{messages.length} trace messages"
 
