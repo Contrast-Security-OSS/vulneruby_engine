@@ -5,6 +5,7 @@ class TestCase
     @dataflow = data['dataflow']
     @trigger_class = data['trigger_class']
     @trigger_method = data['trigger_method']
+    @ticket = data['ticket']
     @found = false
   end
 
@@ -16,8 +17,12 @@ class TestCase
     !!@found
   end
 
+  def has_ticket?
+    !!@ticket
+  end
+
   def print
-    puts "#{rule_id} - #{found?}"
+    puts "#{rule_id} - #{found?} #{" - Ticket: #{@ticket}" if has_ticket?}"
   end
 
   def assert! reported_messages

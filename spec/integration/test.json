@@ -96,18 +96,21 @@
     "trigger_method": "initialize"
   },
   {
+    "ticket": "foo",
     "rule_id": "unsafe-code-execution",
     "dataflow": true,
     "trigger_class": "Kernel",
     "trigger_method": "eval"
   },
   {
+    "ticket": "foo",
     "rule_id": "untrusted-deserialization",
     "dataflow": true,
     "trigger_class": "Marshal",
     "trigger_method": "load"
   },
   {
+    "ticket": "foo",
     "rule_id": "xxe",
     "dataflow": true,
     "trigger_class": "FindOut",
