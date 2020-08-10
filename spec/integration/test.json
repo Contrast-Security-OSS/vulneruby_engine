@@ -96,7 +96,6 @@
     "trigger_method": "initialize"
   },
   {
-    "ticket": "foo",
     "rule_id": "unsafe-code-execution",
     "dataflow": true,
     "trigger_class": "Kernel",
@@ -110,10 +109,9 @@
     "trigger_method": "load"
   },
   {
-    "ticket": "foo",
     "rule_id": "xxe",
     "dataflow": true,
-    "trigger_class": "FindOut",
-    "trigger_method": "load"
+    "trigger_class": "Nokogiri::XML::Document",
+    "trigger_method": "parse"
   }
 ]

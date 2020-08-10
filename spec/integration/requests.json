@@ -38,6 +38,11 @@
     "value": "\u0004\bI\"\u000Bfoobar\u0006:\u0006ET"
   },
   {
+    "navigation_name": "Unsafe Code Execution",
+    "input_field_name": "data",
+    "value": "2+2"
+  },
+  {
     "navigation_name": "XPath Injection",
     "input_field_name": "xpath_data",
     "value": "red"
