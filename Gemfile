@@ -13,7 +13,11 @@ gem('vulneruby', git: 'https://github.com/Contrast-Security-OSS/vulneruby')
 
 
 group 'unicorn_4', optional: true do
-  gem 'unicorn', '~> 4'
+  gem 'unicorn', '~> 4' if !!ENV['UNICORN_4']
+end
+
+group 'unicorn_5', optional: true do
+  gem 'unicorn', '~> 5' if !!ENV['UNICORN_5']
 end
 
 # Declare any dependencies that are still in development here instead of in
