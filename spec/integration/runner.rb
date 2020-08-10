@@ -25,12 +25,14 @@ ensure
 end
 
 def verify hosts, test_data
+  test_results = {}
   hosts.each do |test_host|
     # Load all the trace JSON blobs into an array
     #
     root_path = ENV['DOCKER'] ? '/run-data' : '../../run-data'
-    trace_file_paths = Dir.glob(File.join(root_path, test_host, "requests", "*-traces.json"))
+    trace_file_paths = Dir.glob(File.join(root_path, test_host, "messages", "requests", "*-traces.json"))
     messages = trace_file_paths.map { |trace_file_path| JSON.load(File.read(trace_file_path)) }
+    puts "Found #{messages.length} trace messages"
 
     tests = []
     test_data.each do |test_hash|
@@ -41,7 +43,9 @@ def verify hosts, test_data
     end
 
     tests.map{|t|t.print}
+    test_results[test_host] = tests
   end
+  test_results
 end
 
 
@@ -50,9 +54,13 @@ if test_env_var = ENV['TEST_HOSTS']
   test_hosts = test_env_var.split(',')
 end
 request_data = JSON.load(File.read("#{__dir__}/requests.json"))
-sleep(10)
+sleep(45)
 exercise_apps(test_hosts, request_data)
 sleep(30)
 test_data = JSON.load(File.read("#{__dir__}/test.json"))
 puts "Waiting for SR messages to drain"
-verify(test_hosts, test_data)
+test_result_data = verify(test_hosts, test_data)
+
+not_rejected = test_result_data.values.flatten.reject{|test|test.has_ticket?}
+all_found = not_rejected.all?{|t|t.found?}
+exit all_found ? 0 : 1

@@ -1,0 +1,27 @@
+api:
+  url: localhost
+  api_key: demo
+  service_key: demo
+  user_name: agent_user
+  request_audit:
+    enable: true
+    path: /tmp/unicorn4/messages
+    requests: true
+    responses: true
+agent:
+  logger:
+    path: agent.log
+    level: TRACE
+  service:
+    logger:
+      path: service.log
+      level: DEBUG
+    socket: /tmp/socket.sock
+application:
+  name: RailsEngine
+server:
+  name: RailsArelServer
+assess:
+  enable: true
+protect:
+  enable: false

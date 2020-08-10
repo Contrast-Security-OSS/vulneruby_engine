@@ -102,6 +102,7 @@
     "trigger_method": "eval"
   },
   {
+    "ticket": "https://contrast.atlassian.net/browse/RUBY-965",
     "rule_id": "untrusted-deserialization",
     "dataflow": true,
     "trigger_class": "Marshal",
@@ -110,7 +111,7 @@
   {
     "rule_id": "xxe",
     "dataflow": true,
-    "trigger_class": "FindOut",
-    "trigger_method": "load"
+    "trigger_class": "Nokogiri::XML::Document",
+    "trigger_method": "parse"
   }
 ]
