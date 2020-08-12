@@ -35,7 +35,7 @@
   {
     "navigation_name": "Untrusted Deserialization",
     "input_field_name": "data",
-    "value": "\u0004\bI\"\u000Bfoobar\u0006:\u0006ET"
+    "value": "BAhJIgtmb29iYXIGOgZFVA=="
   },
   {
     "navigation_name": "Unsafe Code Execution",

@@ -1,7 +1,7 @@
 <div>
   <h1>Untrusted Deserialization</h1>
   <form action=<%= untrusted_deserialization_path %> method="post">
-    <p>Example marshal string: <%= raw @example %></p>
+    <p>Example base64 encoded marshal string: <%= raw @example %></p>
     <div class="field has-addons">
       <div class="control">
         <input class="input" type="text" name="data" placeholder="Marshal string">

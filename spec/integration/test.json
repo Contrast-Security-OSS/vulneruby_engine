@@ -102,7 +102,6 @@
     "trigger_method": "eval"
   },
   {
-    "ticket": "https://contrast.atlassian.net/browse/RUBY-965",
     "rule_id": "untrusted-deserialization",
     "dataflow": true,
     "trigger_class": "Marshal",
