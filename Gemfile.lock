@@ -204,10 +204,6 @@ GEM
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
-    unicorn (4.9.0)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
     watir (6.16.5)
       regexp_parser (~> 1.2)
       selenium-webdriver (~> 3.6)
@@ -233,7 +229,6 @@ DEPENDENCIES
   rubocop-rspec (= 1.39.0)
   simplecov (~> 0.18.5)
   sqlite3
-  unicorn (~> 4)
   vulneruby!
   vulneruby_engine!
   watir

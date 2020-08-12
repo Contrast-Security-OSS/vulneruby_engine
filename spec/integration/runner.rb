@@ -12,7 +12,9 @@ def exercise_apps hosts, request_data
                                headless: true,
                                switches: %w[--no-sandbox])
   hosts.each do |test_host|
-    browser.goto "http://#{test_host}:3010/vulneruby_engine/"
+    base_path = "http://#{test_host}/vulneruby_engine/"
+    puts "Base Path: #{base_path}"
+    browser.goto base_path
     request_data.each do |test|
       puts "Testing #{test['navigation_name']}"
       browser.link(text: test['navigation_name']).click
@@ -28,7 +30,7 @@ def verify hosts, test_data
   test_results = {}
   hosts.each do |test_host|
     # Load all the trace JSON blobs into an array
-    #
+    test_host = test_host.split(':')[0] # remove the :PORT so we can find the right directory
     root_path = ENV['DOCKER'] ? '/run-data' : '../../run-data'
     trace_file_paths = Dir.glob(File.join(root_path, test_host, "messages", "requests", "*-traces.json"))
     messages = trace_file_paths.map { |trace_file_path| JSON.load(File.read(trace_file_path)) }

@@ -12,6 +12,18 @@ services:
       - ./run-data/unicorn4:/tmp/unicorn4
     ports:
       - "3010:3010"
+  unicorn5:
+    build:
+      dockerfile: docker/Dockerfile_unicorn5
+      context: .
+      args:
+        port: 3011
+    env_file:
+      - ./docker/.env
+    volumes:
+      - ./run-data/unicorn5:/tmp/unicorn5
+    ports:
+      - "3011:3011"
   test_harness:
     build:
       dockerfile: docker/Dockerfile_testrunner
@@ -19,7 +31,7 @@ services:
     volumes:
       - ./run-data:/run-data
     environment:
-      - TEST_HOSTS=unicorn4 # Update this with the service name - the script parses this env var to iterate over test instances
+      - TEST_HOSTS=unicorn4:3010,unicorn5:3011 # Update this with the service name - the script parses this env var to iterate over test instances
       - DOCKER=true
     depends_on:
       - unicorn4
