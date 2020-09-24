@@ -8,7 +8,7 @@ module VulnerubyEngine
     end
 
     def run
-      @result = params[:data].html_safe
+      @result = params[:data]
       render('layouts/vulneruby_engine/reflected_xss/run')
     end
   end

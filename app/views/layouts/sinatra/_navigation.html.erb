@@ -1,0 +1,27 @@
+<nav class="navbar ">
+  <div class="navbar-brand">
+    <a class="navbar-item" href=<%= uri('') %>>
+      Contrast Security Ruby - Sinatra
+    </a>
+  </div>
+</nav>
+<div class="columns">
+  <aside class="column is-2 hero aside is-fullheight" style="background: lightgray">
+    <div>
+      <div class="main">
+        <ul class="menu-list">
+          <li><a href=<%= uri('/..') %>>Contrast Security Ruby - Rails</a></li>
+        </ul>
+        <br/>
+        <br/>
+        <ul class="menu-list">
+          <li><a href=<%= uri('/reflected_xss') %>>Reflected XSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+  <br>
+  <div class="column container">
+    <%= @page %>
+  </div>
+</div>

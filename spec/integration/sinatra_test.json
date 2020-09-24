@@ -1,0 +1,8 @@
+[
+  {
+    "rule_id": "reflected-xss",
+    "dataflow": true,
+    "trigger_class": "String",
+    "trigger_method": "html_safe"
+  }
+]

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+
+
 VulnerubyEngine::Engine.routes.draw do
   root 'application#home'
 
@@ -23,4 +25,7 @@ VulnerubyEngine::Engine.routes.draw do
     get  "/#{ rule }" => "#{ rule }#index"
     post "/#{ rule }" => "#{ rule }#run"
   end
+
+  get  "/sinatra" => VulnerubyEngine::SinatraController, :anchor => false
+  post "/sinatra" => VulnerubyEngine::SinatraController, :anchor => false
 end

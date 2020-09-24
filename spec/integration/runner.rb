@@ -6,13 +6,21 @@ require 'webdrivers'
 require 'net/http'
 require_relative './test_case'
 
-def exercise_apps hosts, request_data
+def exercise_rails_app hosts, request_data
+  exercise_apps(hosts, request_data, 'vulneruby_engine')
+end
+
+def exercise_sinatra_app hosts, request_data
+  exercise_apps(hosts, request_data, 'vulneruby_engine/sinatra')
+end
+
+def exercise_apps hosts, request_data, path
   puts "Loaded test hosts: #{hosts}"
   browser = Watir::Browser.new(:chrome,
                                headless: true,
                                switches: %w[--no-sandbox])
   hosts.each do |test_host|
-    base_path = "http://#{test_host}/vulneruby_engine/"
+    base_path = "http://#{test_host}/#{path}/"
     puts "Base Path: #{base_path}"
     browser.goto base_path
     request_data.each do |test|
@@ -55,14 +63,19 @@ test_hosts = ['unicorn4']
 if test_env_var = ENV['TEST_HOSTS']
   test_hosts = test_env_var.split(',')
 end
-request_data = JSON.load(File.read("#{__dir__}/requests.json"))
+rails_request_data = JSON.load(File.read("#{__dir__}/rails_requests.json"))
+sinatra_request_data = JSON.load(File.read("#{__dir__}/sinatra_requests.json"))
 sleep(45)
-exercise_apps(test_hosts, request_data)
+exercise_rails_app(test_hosts, rails_request_data)
+exercise_sinatra_app(test_hosts, sinatra_request_data)
 sleep(30)
-test_data = JSON.load(File.read("#{__dir__}/test.json"))
+rails_test_data = JSON.load(File.read("#{__dir__}/rails_test.json"))
+sinatra_test_data = JSON.load(File.read("#{__dir__}/sinatra_test.json"))
 puts "Waiting for SR messages to drain"
-test_result_data = verify(test_hosts, test_data)
+rails_test_result_data = verify(test_hosts, rails_test_data)
+sinatra_test_result_data = verify(test_hosts, sinatra_test_data)
 
-not_rejected = test_result_data.values.flatten.reject{|test|test.has_ticket?}
-all_found = not_rejected.all?{|t|t.found?}
+rails_not_rejected = rails_test_result_data.values.flatten.reject{|test|test.has_ticket?}
+sinatra_test_result_data = sinatra_test_result_data.values.flatten.reject{|test|test.has_ticket?}
+all_found = rails_not_rejected.all?{|t|t.found?} && sinatra_test_result_data.all?{|t|t.found?}
 exit all_found ? 0 : 1
