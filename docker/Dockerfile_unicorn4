@@ -15,7 +15,7 @@ COPY lib/vulneruby_engine/version.rb ./lib/vulneruby_engine/version.rb
 RUN gem install ./agent/contrast-agent.gem
 
 ENV UNICORN_4=true
-RUN bundle install --with unicorn_4
+RUN bundle config set with 'unicorn_4'
 
 ENV CI_TEST=true
 

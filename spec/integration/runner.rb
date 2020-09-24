@@ -39,8 +39,10 @@ def verify hosts, test_data
   hosts.each do |test_host|
     # Load all the trace JSON blobs into an array
     test_host = test_host.split(':')[0] # remove the :PORT so we can find the right directory
-    root_path = ENV['DOCKER'] ? '/run-data' : '../../run-data'
-    trace_file_paths = Dir.glob(File.join(root_path, test_host, "messages", "requests", "*-traces.json"))
+    root_path = ENV['DOCKER'] ? '/run-data' : "#{ __dir__}/../../run-data"
+    join = File.join(root_path, test_host, "messages", "requests", "*-traces.json")
+    trace_file_paths = Dir.glob(join)
+    puts "Looking for traces in #{ join }"
     messages = trace_file_paths.map { |trace_file_path| JSON.load(File.read(trace_file_path)) }
     puts "Found #{messages.length} trace messages"
 
@@ -59,10 +61,11 @@ def verify hosts, test_data
 end
 
 
-test_hosts = ['unicorn4']
+test_hosts = ['localhost:3000']
 if test_env_var = ENV['TEST_HOSTS']
   test_hosts = test_env_var.split(',')
 end
+puts "Testing #{ test_hosts }"
 rails_request_data = JSON.load(File.read("#{__dir__}/rails_requests.json"))
 sinatra_request_data = JSON.load(File.read("#{__dir__}/sinatra_requests.json"))
 sleep(45)
