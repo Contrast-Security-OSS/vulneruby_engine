@@ -86,8 +86,8 @@
   {
     "rule_id": "reflected-xss",
     "dataflow": true,
-    "trigger_class": "String",
-    "trigger_method": "html_safe"
+    "trigger_class": "ActionView::Helpers::RawOutputHelper",
+    "trigger_method": "raw"
   },
   {
     "rule_id": "ssrf",
