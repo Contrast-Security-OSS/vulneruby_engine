@@ -23,7 +23,7 @@ COPY . .
 RUN rm **/*.log | true
 
 # this is used by the volume in docker-compose
-RUN mkdir -p /tmp/unicorn4/messages
+RUN mkdir -p /tmp/unicorn5/messages
 ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/unicorn5/agent.log
 ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/unicorn5/service.log
 ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/unicorn5/messages

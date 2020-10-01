@@ -86,7 +86,7 @@
   {
     "rule_id": "reflected-xss",
     "dataflow": true,
-    "trigger_class": "ActionView::Helpers::RawOutputHelper",
+    "trigger_class": "ActionView::Helpers::OutputSafetyHelper",
     "trigger_method": "raw"
   },
   {
