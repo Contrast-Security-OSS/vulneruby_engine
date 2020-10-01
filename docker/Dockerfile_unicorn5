@@ -16,6 +16,7 @@ RUN gem install ./agent/contrast-agent.gem --platform ruby -N
 
 ENV UNICORN_5=true
 RUN bundle config set with 'unicorn_5'
+RUN bundle install
 
 ENV CI_TEST=true
 
