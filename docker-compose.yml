@@ -1,5 +1,17 @@
 version: '3'
 services:
+  puma:
+    build:
+      dockerfile: docker/Dockerfile_puma
+      context: .
+      args:
+        port: 3009
+    env_file:
+      - ./docker/.env
+    volumes:
+      - ./run-data/puma:/tmp/puma
+    ports:
+      - "3009:3009"
   unicorn4:
     build:
       dockerfile: docker/Dockerfile_unicorn4
@@ -31,9 +43,11 @@ services:
     volumes:
       - ./run-data:/run-data
     environment:
-      - TEST_HOSTS=unicorn4:3010,unicorn5:3011 # Update this with the service name - the script parses this env var to iterate over test instances
+      - TEST_HOSTS=puma:3009,unicorn4:3010,unicorn5:3011 # Update this with the service name - the script parses this env var to iterate over test instances
       - DOCKER=true
     depends_on:
+      - puma
       - unicorn4
+      - unicorn5
 volumes:
   run-data:

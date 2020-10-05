@@ -6,6 +6,8 @@ require('rails/all')
 
 Bundler.require(*Rails.groups)
 Bundler.require(:unicorn_4) if !!ENV['UNICORN_4_TEST']
+Bundler.require(:unicorn_5) if !!ENV['UNICORN_5_TEST']
+Bundler.require(:puma) if !!ENV['PUMA_TEST']
 
 require('vulneruby_engine')
 
