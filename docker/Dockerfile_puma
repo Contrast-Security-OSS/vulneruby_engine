@@ -1,5 +1,5 @@
 FROM ruby:2.7
-ARG PORT_ARG=3011
+ARG PORT_ARG=3009
 
 RUN apt-get update && apt-get install -y build-essential coreutils
 
@@ -14,8 +14,8 @@ COPY lib/vulneruby_engine/version.rb ./lib/vulneruby_engine/version.rb
 # Used in CI to install gem dropped in ./agent/ directory
 RUN gem install ./agent/contrast-agent.gem
 
-ENV UNICORN_4=true
-RUN bundle config set with 'unicorn_4'
+ENV PUMA=true
+RUN bundle config set with 'puma'
 RUN bundle install
 
 ENV CI_TEST=true
@@ -24,17 +24,18 @@ COPY . .
 RUN rm **/*.log | true
 
 # this is used by the volume in docker-compose
-RUN mkdir -p /tmp/unicorn4/messages
-ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/unicorn4/agent.log
-ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/unicorn4/service.log
-ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/unicorn4/messages
+RUN mkdir -p /tmp/puma/messages
+ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/puma/agent.log
+ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/puma/service.log
+ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/puma/messages
 
-RUN ./docker/app_name_generator.sh Unicorn4 >> /tmp/app_name.txt
+RUN ./docker/app_name_generator.sh Puma >> /tmp/app_name.txt
 RUN cat /tmp/app_name.txt
 
 RUN bundle exec rails db:migrate
 
-ENV UNICORN_4_TEST=true
+ENV PUMA_TEST=true
 ENV PORT=$PORT_ARG
 
-CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec unicorn -p $PORT -c ./spec/dummy/config/unicorn.rb ./spec/dummy/config.ru
+RUN mkdir tmp && mkdir tmp/pids
+CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec puma -C ./spec/dummy/config/puma.rb ./spec/dummy/config.ru
