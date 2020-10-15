@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('Insecure Algorithm Controller', type: :request) do
+::RSpec.describe('Insecure Algorithm Controller', type: :request) do
   describe 'GET /insecure_algorithm' do
     it 'renders the insecure_algorithm input page' do
       get '/vulneruby_engine/insecure_algorithm'

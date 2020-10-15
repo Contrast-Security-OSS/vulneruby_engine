@@ -1,0 +1,34 @@
+[
+  {
+    "rule_id": "cmd-injection",
+    "input_name": "command",
+    "input_value": "ls -al; echo pwd"
+  },
+  {
+    "rule_id": "path-traversal",
+    "input_name": "file_path",
+    "input_value": "/etc/passwd"
+  },
+  {
+    "rule_id": "reflected-xss",
+    "input_name": "data",
+    "input_value": "<script>console.log(document.cookies);</script>"
+  },
+  {
+    "rule_id": "sql-injection",
+    "input_name": "id",
+    "input_value": "'' or 1=1"
+  },
+  {
+    "rule_id": "untrusted-deserialization",
+    "input_name": "data",
+    "input_value": "LS0tICFydWJ5L29iamVjdDpFUkIgdGhpcyBpcyBzb21lIHlhbWwgbGlrZSBzdHJpbmcgZG9uZSB3aXRoIEVSQg==",
+    "ticket": "foo"
+  },
+  {
+    "rule_id": "xxe",
+    "input_name": "entity",
+    "input_value": "nokogiri",
+    "ticket": "foo"
+  }
+]

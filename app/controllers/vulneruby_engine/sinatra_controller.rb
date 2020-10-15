@@ -1,22 +1,26 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 
-module VulnerubyEngine
-  class SinatraController < ::Sinatra::Base
-    set :views, "#{__dir__}/../../views/layouts/sinatra"
+module VulnerubyEngine # rubocop:disable Lint/ConstantResolution
+  # Base controller for the Sinatra mount, used to test XSS and other framework
+  # specific vulnerabilities
+  class SinatraController < ::Sinatra::Base  # rubocop:disable Lint/ConstantResolution
+    set :views, "#{ __dir__ }/../../views/layouts/sinatra"
 
     get '/' do
-      @page = erb :'home.html'
+      @page = erb(:'home.html')
       erb :'application.html'
     end
 
-    get "/reflected_xss" do
-      @page = erb :'reflected_xss/index.html'
+    get '/reflected_xss' do
+      @page = erb(:'reflected_xss/index.html')
       erb :'application.html'
     end
 
-    post "/reflected_xss" do
+    post '/reflected_xss' do
       @result = params[:data].html_safe
-      @page = erb :'reflected_xss/run.html'
+      @page = erb(:'reflected_xss/run.html')
       erb :'application.html'
     end
   end

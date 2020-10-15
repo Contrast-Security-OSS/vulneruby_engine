@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Spring.watch(
+::Spring.watch(
     '.ruby-version',
     '.rbenv-vars',
     'tmp/restart.txt',

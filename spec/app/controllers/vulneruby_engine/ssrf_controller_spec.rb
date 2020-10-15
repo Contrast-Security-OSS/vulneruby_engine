@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('SSRF Controller', type: :request) do
+::RSpec.describe('SSRF Controller', type: :request) do
   describe 'GET /ssrf' do
     it 'renders the ssrf input page' do
       get '/vulneruby_engine/ssrf'

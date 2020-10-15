@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('Path Traversal Controller', type: :request) do
+::RSpec.describe('Path Traversal Controller', type: :request) do
   describe 'GET /path_traversal' do
     it 'renders the path traversal input page' do
       get '/vulneruby_engine/path_traversal'

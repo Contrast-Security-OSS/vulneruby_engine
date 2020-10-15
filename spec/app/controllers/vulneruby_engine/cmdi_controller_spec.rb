@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('Cmdi Controller', type: :request) do
+::RSpec.describe('Cmdi Controller', type: :request) do
   describe 'GET /cmdi' do
     it 'renders the cmdi input page' do
       get '/vulneruby_engine/cmdi'

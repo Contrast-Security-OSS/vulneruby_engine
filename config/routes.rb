@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-
-
-VulnerubyEngine::Engine.routes.draw do
+::VulnerubyEngine::Engine.routes.draw do
   root 'application#home'
 
   RULES = %w[

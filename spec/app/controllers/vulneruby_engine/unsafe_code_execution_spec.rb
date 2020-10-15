@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('Unsafe Code Execution Controller', type: :request) do
+::RSpec.describe('Unsafe Code Execution Controller', type: :request) do
   describe 'GET /unsafe_code_execution' do
     it 'renders the unsafe_code_execution input page' do
       get '/vulneruby_engine/unsafe_code_execution'

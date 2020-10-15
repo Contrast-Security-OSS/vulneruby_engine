@@ -1,0 +1,43 @@
+name: Pipeline
+on:
+  push:
+    branches:
+      - master
+      - develop
+    tags:
+      - '*/*.*.*'
+  pull_request:
+    branches:
+      - master
+      - develop
+env:
+jobs:
+  linting:
+    name: "Running ${{ matrix.linter }}"
+    runs-on: ubuntu-latest
+    container: ruby:2.5
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        linter: ['debride', 'fasterer', 'flay', 'rubocop']
+    steps:
+      - name: Setup Dependencies Cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: bundle-use-linter-${{ matrix.linter }}
+          restore-keys: |
+            bundle-use-linter-${{ matrix.linter }}
+      - name: Copy Agent
+        uses: actions/checkout@v2
+      - name: Run the linter
+        run: |
+          cd ./.github/linters/
+          chmod +x ${{ matrix.linter }}.sh
+          ./${{ matrix.linter }}.sh
+      - name: Upload results
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: linter-artifacts-${{ matrix.linter }}
+          path: ./${{ matrix.linter }}_out.txt

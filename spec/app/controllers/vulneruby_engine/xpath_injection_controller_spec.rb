@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('XPath Injection Controller', type: :request) do
+::RSpec.describe('XPath Injection Controller', type: :request) do
   describe 'GET /xpath_injection' do
     it 'renders the xpath_injection input page' do
       get '/vulneruby_engine/xpath_injection'

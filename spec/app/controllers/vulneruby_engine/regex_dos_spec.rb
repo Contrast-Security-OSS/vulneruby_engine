@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('Regex DoS Controller', type: :request) do
+::RSpec.describe('Regex DoS Controller', type: :request) do
   describe 'GET /regex_dos' do
     it 'renders the regex dos input page' do
       get '/vulneruby_engine/regex_dos'

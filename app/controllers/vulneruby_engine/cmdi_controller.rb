@@ -2,15 +2,15 @@
 
 require('vulneruby/trigger/cmd_injection')
 
-module VulnerubyEngine
-  # Entry point for the CMD Injection tests
-  class CmdiController < ApplicationController
+module VulnerubyEngine # rubocop:disable Lint/ConstantResolution
+  # Entry point for the Command Injection tests
+  class CmdiController < ApplicationController # rubocop:disable Lint/ConstantResolution
     def index
       render('layouts/vulneruby_engine/cmdi/index')
     end
 
     def run
-      @result = Vulneruby::Trigger::CmdInjection.run_system(params[:command])
+      @result = ::Vulneruby::Trigger::CmdInjection.run_system(params[:command])
       render('layouts/vulneruby_engine/cmdi/run')
     end
   end

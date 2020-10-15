@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('Application Controller', type: :request) do
+::RSpec.describe('Application Controller', type: :request) do
   describe '/' do
     it 'renders the homepage' do
       get '/vulneruby_engine'

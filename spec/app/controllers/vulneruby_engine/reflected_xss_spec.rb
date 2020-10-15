@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('Reflected XSS Controller', type: :request) do
+::RSpec.describe('Reflected XSS Controller', type: :request) do
   describe 'GET /reflected_xss' do
     it 'renders the reflected xss input page' do
       get '/vulneruby_engine/reflected_xss'

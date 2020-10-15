@@ -1,5 +1,12 @@
-class TestCase
+# frozen_string_literal: true
+
+class AssessTestCase # rubocop:disable Lint/ConstantResolution
   attr_accessor :rule_id, :trigger_class, :trigger_method
+
+  def self.msg_source
+    'traces'
+  end
+
   def initialize data
     @rule_id = data['rule_id']
     @dataflow = data['dataflow']
@@ -21,22 +28,25 @@ class TestCase
     !!@ticket
   end
 
-  def print
-    puts "#{rule_id} - #{found?} #{" - Ticket: #{@ticket}" if has_ticket?}"
+  def passed?
+    found? || has_ticket?
+  end
+
+  def to_s
+    "#{ rule_id } - #{ found? } #{ " - Ticket: #{ @ticket }" if has_ticket? }"
   end
 
   def assert! reported_messages
-    unless dataflow? # as long as an instance was reported it will pass
-      @found = reported_messages.length > 0
-      return
-    end
+    vulnerabilities = reported_messages.select { |m| m['ruleId'] == rule_id }
+    # if this isn't a dataflow rule, then as long as an instance was reported
+    # it will pass
+    return @found = !vulnerabilities.empty? unless dataflow?
 
-    @found = reported_messages.any? do |trace_message|
+    @found = vulnerabilities.any? do |trace_message|
       trace_message['events'].any? do |action|
         signature = action['signature']
         signature['className'] == @trigger_class && signature['methodName'] == @trigger_method
       end
     end
-
   end
 end

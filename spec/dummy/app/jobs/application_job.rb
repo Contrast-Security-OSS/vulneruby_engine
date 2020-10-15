@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApplicationJob < ActiveJob::Base
+class ApplicationJob < ::ActiveJob::Base # rubocop:disable Lint/ConstantResolution
   # Automatically retry jobs that encountered a deadlock
   # retry_on ActiveRecord::Deadlocked
 

@@ -4,13 +4,13 @@ require_relative('boot')
 
 require('rails/all')
 
-Bundler.require(*Rails.groups)
-Bundler.require(:unicorn_4) if !!ENV['UNICORN_4_TEST']
+::Bundler.require(*::Rails.groups)
+::Bundler.require(:unicorn_4) if !!::ENV['UNICORN_4_TEST']
 
 require('vulneruby_engine')
 
-module Dummy
-  class Application < Rails::Application
+module Dummy # rubocop:disable Lint/ConstantResolution
+  class Application < ::Rails::Application # rubocop:disable Lint/ConstantResolution
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults(6.0)
 

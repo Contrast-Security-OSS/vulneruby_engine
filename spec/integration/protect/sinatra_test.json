@@ -1,0 +1,7 @@
+[
+  {
+    "rule_id": "reflected-xss",
+    "input_name": "data",
+    "input_value": "<script>console.log(document.location);</script>"
+  }
+]

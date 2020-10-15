@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module VulnerubyEngine
-  # Entry point for the CMD Injection tests
-  class MisconfigurationController < ApplicationController
+module VulnerubyEngine # rubocop:disable Lint/ConstantResolution
+  # Entry point for the misconfiguration and response based tests
+  class MisconfigurationController < ApplicationController # rubocop:disable Lint/ConstantResolution
     def index
       render('layouts/vulneruby_engine/misconfiguration/index')
     end
