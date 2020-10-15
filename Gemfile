@@ -11,6 +11,15 @@ gemspec
 # Pull in our vulnerable gem used to call the triggers
 gem('vulneruby', git: 'https://github.com/Contrast-Security-OSS/vulneruby')
 
+
+group 'puma', optional: true do
+  gem 'puma', '~> 3.0' if !!ENV['PUMA']
+end
+
+group 'thin', optional: true do
+  gem 'thin', '~> 1.0' if !!ENV['THIN']
+end
+
 group 'unicorn_4', optional: true do
   gem 'unicorn', '~> 4' if !!::ENV['UNICORN_4']
 end

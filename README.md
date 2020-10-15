@@ -43,7 +43,11 @@ end
 
 1. Uncomment `gem 'contrast-agent' in the Gemfile`.
 
-2. Move a `contrast-security.yaml` file to the `spec/dummy` directory, ensure that `assess.enable` is set to `true`.
+2. Move a `contrast-security.yaml` file to the root directory. In that configuration, ensure that 
+   1. the `api` section is populated with valid connection settings
+   2. `api.request_audit.enable` is set to `true`.
+   3. `assess.enable` is set to `true`.
+   4. `assess.sampling.enable` is set to `false`.
 
 3. Place an agent, named `contrast-agent.gem` in the `agent` directory.
 

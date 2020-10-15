@@ -1,29 +1,53 @@
 version: '3'
 services:
-  unicorn4:
+  puma:
     build:
-      dockerfile: docker/Dockerfile_unicorn4
+      dockerfile: docker/Dockerfile_puma
+      context: .
+      args:
+        port: 3009
+    env_file:
+      - ./docker/.env
+    volumes:
+      - ./run-data/puma:/tmp/puma
+    ports:
+      - "3009:3009"
+  thin:
+    build:
+      dockerfile: docker/Dockerfile_thin
       context: .
       args:
         port: 3010
     env_file:
       - ./docker/.env
     volumes:
-      - ./run-data/unicorn4:/tmp/unicorn4
+      - ./run-data/thin:/tmp/thin
     ports:
       - "3010:3010"
-  unicorn5:
+  unicorn4:
     build:
-      dockerfile: docker/Dockerfile_unicorn5
+      dockerfile: docker/Dockerfile_unicorn4
       context: .
       args:
         port: 3011
     env_file:
       - ./docker/.env
     volumes:
-      - ./run-data/unicorn5:/tmp/unicorn5
+      - ./run-data/unicorn4:/tmp/unicorn4
     ports:
       - "3011:3011"
+  unicorn5:
+    build:
+      dockerfile: docker/Dockerfile_unicorn5
+      context: .
+      args:
+        port: 3012
+    env_file:
+      - ./docker/.env
+    volumes:
+      - ./run-data/unicorn5:/tmp/unicorn5
+    ports:
+      - "3012:3012"
   test_harness:
     build:
       dockerfile: docker/Dockerfile_testrunner
@@ -31,9 +55,12 @@ services:
     volumes:
       - ./run-data:/run-data
     environment:
-      - TEST_HOSTS=unicorn4:3010,unicorn5:3011 # Update this with the service name - the script parses this env var to iterate over test instances
+      - TEST_HOSTS=puma:3009,thin:3010,unicorn4:3011,unicorn5:3012 # Update this with the service name - the script parses this env var to iterate over test instances
       - DOCKER=true
     depends_on:
+      - puma
+      - thin
       - unicorn4
+      - unicorn5
 volumes:
   run-data:
