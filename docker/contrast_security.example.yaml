@@ -24,4 +24,4 @@ server:
 assess:
   enable: true
 protect:
-  enable: false
+  enable: true

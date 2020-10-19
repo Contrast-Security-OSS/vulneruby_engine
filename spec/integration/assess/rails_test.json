@@ -1,18 +1,15 @@
 [
   {
     "rule_id": "rails-http-only-disabled",
-    "dataflow": false,
-    "ticket": "RUBY-1019"
+    "dataflow": false
   },
   {
     "rule_id": "secure-flag-missing",
-    "dataflow": false,
-    "ticket": "RUBY-1019"
+    "dataflow": false
   },
   {
     "rule_id": "session-timeout",
-    "dataflow": false,
-    "ticket": "RUBY-1019"
+    "dataflow": false
   },
   {
     "rule_id": "cache-controls-missing",
@@ -54,8 +51,7 @@
     "rule_id": "cmd-injection",
     "dataflow": true,
     "trigger_class": "Kernel",
-    "trigger_method": "`",
-    "ticket": "RUBY-1020"
+    "trigger_method": "`"
   },
   {
     "rule_id": "crypto-bad-mac",
