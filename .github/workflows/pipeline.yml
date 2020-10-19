@@ -10,7 +10,6 @@ on:
     branches:
       - master
       - develop
-env:
 jobs:
   linting:
     name: "Running ${{ matrix.linter }}"
