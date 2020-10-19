@@ -23,12 +23,12 @@
     "rule_id": "untrusted-deserialization",
     "input_name": "data",
     "input_value": "LS0tICFydWJ5L29iamVjdDpFUkIgdGhpcyBpcyBzb21lIHlhbWwgbGlrZSBzdHJpbmcgZG9uZSB3aXRoIEVSQg==",
-    "ticket": "foo"
+    "ticket": "RUBY-1021"
   },
   {
     "rule_id": "xxe",
     "input_name": "entity",
     "input_value": "nokogiri",
-    "ticket": "foo"
+    "ticket": "RUBY-1022"
   }
 ]

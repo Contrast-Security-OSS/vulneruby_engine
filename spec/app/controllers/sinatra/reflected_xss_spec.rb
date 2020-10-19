@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-::RSpec.describe('Reflected XSS Controller', type: :request) do
+RSpec.describe('Reflected XSS Controller', type: :request) do
   let(:route) { '/vulneruby_engine/sinatra/reflected_xss' }
 
   describe 'GET /sinatra/reflected_xss' do

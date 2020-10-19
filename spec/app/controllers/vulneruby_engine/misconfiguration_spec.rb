@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-::RSpec.describe('Misconfiguration Controller', type: :request) do
+RSpec.describe('Misconfiguration Controller', type: :request) do
   describe 'GET /misconfiguration' do
     it 'renders the misconfiguration page' do
       get '/vulneruby_engine/misconfiguration'

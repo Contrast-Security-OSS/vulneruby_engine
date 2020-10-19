@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Create the Secrets table
-class CreateVulnerubyEngineSecrets < ::ActiveRecord::Migration[6.0] # rubocop:disable Lint/ConstantResolution
+class CreateVulnerubyEngineSecrets < ActiveRecord::Migration[6.0]
   def change
     create_table(:vulneruby_engine_secrets) do |t|
       t.string(:name)

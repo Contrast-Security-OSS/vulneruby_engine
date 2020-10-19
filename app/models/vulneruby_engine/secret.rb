@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module VulnerubyEngine # rubocop:disable Lint/ConstantResolution
-  class Secret < ::ApplicationRecord # rubocop:disable Lint/ConstantResolution
+module VulnerubyEngine
+  class Secret < ApplicationRecord
   end
 end

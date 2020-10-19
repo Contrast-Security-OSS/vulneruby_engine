@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-::RSpec.describe('Reflection Injection Controller', type: :request) do
+RSpec.describe('Reflection Injection Controller', type: :request) do
   describe 'GET /reflection_injection' do
     it 'renders the reflection injection input page' do
       get '/vulneruby_engine/reflection_injection'

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module VulnerubyEngine # rubocop:disable Lint/ConstantResolution
+module VulnerubyEngine
   # Our base controller for the vulnerable application. We'll modify common
   # settings here to add new response vulnerabilities as we begin to test them.
-  class ApplicationController < ActionController::Base # rubocop:disable Lint/ConstantResolution
+  class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
 
     def home

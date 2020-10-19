@@ -4,16 +4,16 @@ require_relative('boot')
 
 require('rails/all')
 
-Bundler.require(*::Rails.groups)
-Bundler.require(:puma) if !!::ENV['PUMA_TEST']
-Bundler.require(:thin) if !!::ENV['THIN_TEST']
-Bundler.require(:unicorn_4) if !!::ENV['UNICORN_4_TEST']
-Bundler.require(:unicorn_5) if !!::ENV['UNICORN_5_TEST']
+Bundler.require(*Rails.groups)
+Bundler.require(:puma) if !!ENV['PUMA_TEST']
+Bundler.require(:thin) if !!ENV['THIN_TEST']
+Bundler.require(:unicorn_4) if !!ENV['UNICORN_4_TEST']
+Bundler.require(:unicorn_5) if !!ENV['UNICORN_5_TEST']
 
 require('vulneruby_engine')
 
-module Dummy # rubocop:disable Lint/ConstantResolution
-  class Application < ::Rails::Application # rubocop:disable Lint/ConstantResolution
+module Dummy
+  class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults(6.0)
 

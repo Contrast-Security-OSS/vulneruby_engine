@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-::RSpec.describe('XXE Controller', type: :request) do
+RSpec.describe('XXE Controller', type: :request) do
   describe 'GET /xxe' do
     it 'renders the xxe input page' do
       get '/vulneruby_engine/xxe'

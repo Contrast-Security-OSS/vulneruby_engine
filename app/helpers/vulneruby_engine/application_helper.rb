@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module VulnerubyEngine # rubocop:disable Lint/ConstantResolution
+module VulnerubyEngine
   # Helper for the vulnerable application. It might actually be unused and we
   # may remove it.
-  module ApplicationHelper # rubocop:disable Lint/ConstantResolution
+  module ApplicationHelper
   end
 end

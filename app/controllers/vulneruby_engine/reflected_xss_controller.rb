@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module VulnerubyEngine # rubocop:disable Lint/ConstantResolution
+module VulnerubyEngine
   # Entry point for the Reflected Cross Site Scripting tests
-  class ReflectedXssController < ApplicationController # rubocop:disable Lint/ConstantResolution
+  class ReflectedXssController < ApplicationController
     def index
       render('layouts/vulneruby_engine/reflected_xss/index')
     end

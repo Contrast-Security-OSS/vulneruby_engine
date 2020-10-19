@@ -2,10 +2,10 @@
 
 require 'sinatra'
 
-module VulnerubyEngine # rubocop:disable Lint/ConstantResolution
+module VulnerubyEngine
   # Base controller for the Sinatra mount, used to test XSS and other framework
   # specific vulnerabilities
-  class SinatraController < ::Sinatra::Base  # rubocop:disable Lint/ConstantResolution
+  class SinatraController < ::Sinatra::Base
     set :views, "#{ __dir__ }/../../views/layouts/sinatra"
 
     get '/' do

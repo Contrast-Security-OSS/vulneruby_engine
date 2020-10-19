@@ -2,15 +2,15 @@
 
 require('vulneruby/trigger/xxe')
 
-module VulnerubyEngine # rubocop:disable Lint/ConstantResolution
-  # Entry point for the XXE tests
-  class XxeController < ApplicationController # rubocop:disable Lint/ConstantResolution
+module VulnerubyEngine
+  # Entry point for the XML External Entity tests
+  class XxeController < ApplicationController
     def index
       render('layouts/vulneruby_engine/xxe/index')
     end
 
     def run
-      @result = ::Vulneruby::Trigger::Xxe.run_nokogiri(params[:entity])
+      @result = Vulneruby::Trigger::Xxe.run_nokogiri(params[:entity])
       render('layouts/vulneruby_engine/xxe/run')
     end
   end

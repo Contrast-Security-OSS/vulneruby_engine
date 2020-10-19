@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AssessTestCase # rubocop:disable Lint/ConstantResolution
+class AssessTestCase
   attr_accessor :rule_id, :trigger_class, :trigger_method
 
   def self.msg_source
@@ -42,11 +42,12 @@ class AssessTestCase # rubocop:disable Lint/ConstantResolution
     # it will pass
     return @found = !vulnerabilities.empty? unless dataflow?
 
-    @found = vulnerabilities.any? do |trace_message|
-      trace_message['events'].any? do |action|
-        signature = action['signature']
-        signature['className'] == @trigger_class && signature['methodName'] == @trigger_method
+    @found =
+      vulnerabilities.any? do |trace_message|
+        trace_message['events'].any? do |action|
+          signature = action['signature']
+          signature['className'] == @trigger_class && signature['methodName'] == @trigger_method
+        end
       end
-    end
   end
 end

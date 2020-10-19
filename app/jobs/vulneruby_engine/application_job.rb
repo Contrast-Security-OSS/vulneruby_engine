@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module VulnerubyEngine # rubocop:disable Lint/ConstantResolution
-  class ApplicationJob < ::ActiveJob::Base # rubocop:disable Lint/ConstantResolution
+module VulnerubyEngine
+  class ApplicationJob < ActiveJob::Base
   end
 end

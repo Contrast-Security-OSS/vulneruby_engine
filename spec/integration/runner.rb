@@ -19,8 +19,8 @@ end
 
 def exercise_apps hosts, framework, path
   puts("Loaded test hosts: #{ hosts }")
-  request_data = ::JSON.parse(::File.read("#{ __dir__ }/#{ framework }_requests.json"))
-  browser = ::Watir::Browser.new(:chrome, headless: true, switches: %w[--no-sandbox])
+  request_data = JSON.parse(File.read("#{ __dir__ }/#{ framework }_requests.json"))
+  browser = Watir::Browser.new(:chrome, headless: true, switches: %w[--no-sandbox])
   hosts.each do |test_host|
     exercise_host(browser, test_host, request_data, path)
   end
@@ -45,21 +45,21 @@ def exercise_request browser, test
 end
 
 def verify_assess hosts, test_data
-  verify(hosts, test_data, ::AssessTestCase)
+  verify(hosts, test_data, AssessTestCase)
 end
 
 def verify_protect hosts, test_data
-  verify(hosts, test_data, ::ProtectTestCase)
+  verify(hosts, test_data, ProtectTestCase)
 end
 
 def verify hosts, test_data, test_class
   hosts.each_with_object({}) do |test_host, test_results|
-    puts "#{ test_host }"
+    puts(test_host.to_s)
     messages = find_messages(test_host, test_class.msg_source)
     tests = generate_tests(test_class, test_data)
     tests.each do |test|
       test.assert!(messages)
-      puts "\t#{ test }"
+      puts("\t#{ test }")
     end
     test_results[test_host] = tests
   end
@@ -76,10 +76,10 @@ def find_messages test_host, msg_type
   # Load all the trace JSON blobs into an array
   # remove the :PORT so we can find the right directory
   test_host = test_host.split(':')[0]
-  root_path = ::ENV['DOCKER'] ? '/run-data' : "#{ __dir__ }/../../run-data"
-  join = ::File.join(root_path, test_host, 'messages', 'requests', "*-#{ msg_type }.json")
-  trace_file_paths = ::Dir.glob(join)
-  trace_file_paths.map { |trace_file_path| ::JSON.parse(::File.read(trace_file_path)) }
+  root_path = ENV['DOCKER'] ? '/run-data' : "#{ __dir__ }/../../run-data"
+  join = File.join(root_path, test_host, 'messages', 'requests', "*-#{ msg_type }.json")
+  trace_file_paths = Dir.glob(join)
+  trace_file_paths.map { |trace_file_path| JSON.parse(File.read(trace_file_path)) }
 end
 
 # Convert the hashes of the test data into the given type
@@ -92,11 +92,11 @@ def generate_tests test_class, test_data
 end
 
 begin
-  test_hosts = ::ENV['TEST_HOSTS'] ? ::ENV['TEST_HOSTS'].split(',') : ['localhost:3000']
+  test_hosts = ENV['TEST_HOSTS'] ? ENV['TEST_HOSTS'].split(',') : ['localhost:3000']
   puts("Testing #{ test_hosts }")
-  puts 'Waiting for Docker container startup'
+  puts('Waiting for Docker container startup')
   sleep(45)
-  puts 'Exercising the applications'
+  puts('Exercising the applications')
   # Exercise the applications
   exercise_rails_app(test_hosts)
   exercise_sinatra_app(test_hosts)
@@ -110,10 +110,10 @@ begin
   web_frameworks.each do |framework|
     features.each do |feature|
       # load the framework test
-      test_data = ::JSON.parse(::File.read("#{ __dir__ }/#{ feature }/#{ framework }_test.json"))
+      test_data = JSON.parse(File.read("#{ __dir__ }/#{ feature }/#{ framework }_test.json"))
       # verify the expected results
       puts("Verifying #{ framework } - #{ feature }")
-      result_data = send(:"verify_#{ feature }", test_hosts, test_data)
+      result_data = send(:"verify_#{ feature }", test_hosts, test_data) # rubocop:disable Style/Send
       # and if any were not found, then this test failed
       if result_data.values.flatten.all?(&:passed?)
         puts("Completed #{ framework } - #{ feature } tests: pass.")
@@ -125,7 +125,7 @@ begin
   end
 
   exit(failed ? 1 : 0)
-rescue ::StandardError => e
+rescue StandardError => e
   puts('Test runner failed')
   puts(e)
   puts(e.backtrace.join("\n"))

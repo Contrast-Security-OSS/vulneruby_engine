@@ -36,6 +36,8 @@ Layout/MultilineOperationIndentation:
   IndentationWidth: 4
 Layout/SpaceInsideStringInterpolation:
   EnforcedStyle: space
+Lint/ConstantResolution:
+  Enabled: false
 Naming/MemoizedInstanceVariableName:
   EnforcedStyleForLeadingUnderscores: required
 Style/Alias:

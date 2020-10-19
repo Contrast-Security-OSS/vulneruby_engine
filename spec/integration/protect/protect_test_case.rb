@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ProtectTestCase # rubocop:disable Lint/ConstantResolution
+class ProtectTestCase
   attr_accessor :rule_id, :trigger_class, :trigger_method
 
   def self.msg_source
@@ -41,18 +41,22 @@ class ProtectTestCase # rubocop:disable Lint/ConstantResolution
       next unless attackers
 
       attackers.each do |attacker_message|
-        messages = attacker_message.fetch('protectionRules', nil)&.fetch(rule_id, nil)
-        next unless messages
-
-        probes = messages['ineffective']&.fetch('samples', nil)
-        exploits = messages['exploited']&.fetch('samples', nil)
-        return true if reported?(probes) || reported?(exploits)
+        return true if attack_match?(attacker_message)
       end
     end
     false
   end
 
   private
+
+  def attack_match? attacker_message
+    messages = attacker_message.fetch('protectionRules', nil)&.fetch(rule_id, nil)
+    return unless messages
+
+    probes = messages['ineffective']&.fetch('samples', nil)
+    exploits = messages['exploited']&.fetch('samples', nil)
+    reported?(probes) || reported?(exploits)
+  end
 
   def reported? samples
     return false unless samples

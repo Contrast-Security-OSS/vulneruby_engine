@@ -11,7 +11,6 @@ gemspec
 # Pull in our vulnerable gem used to call the triggers
 gem('vulneruby', git: 'https://github.com/Contrast-Security-OSS/vulneruby')
 
-
 group 'puma', optional: true do
   gem 'puma', '~> 3.0' if !!ENV['PUMA']
 end
@@ -21,11 +20,11 @@ group 'thin', optional: true do
 end
 
 group 'unicorn_4', optional: true do
-  gem 'unicorn', '~> 4' if !!::ENV['UNICORN_4']
+  gem 'unicorn', '~> 4' if !!ENV['UNICORN_4']
 end
 
 group 'unicorn_5', optional: true do
-  gem 'unicorn', '~> 5' if !!::ENV['UNICORN_5']
+  gem 'unicorn', '~> 5' if !!ENV['UNICORN_5']
 end
 
 # Declare any dependencies that are still in development here instead of in
@@ -35,4 +34,4 @@ end
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]gem 'contrast-agent', path: './agent'
-gem 'contrast-agent' if !!::ENV['CI_TEST']
+gem 'contrast-agent' if !!ENV['CI_TEST']
