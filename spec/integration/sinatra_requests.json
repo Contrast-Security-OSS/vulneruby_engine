@@ -2,6 +2,6 @@
   {
     "navigation_name": "Reflected XSS",
     "input_field_name": "data",
-    "value": "<script>console.log(document.cookies);</script>"
+    "value": "<script>console.log(document.location);</script>"
   }
 ]

@@ -3,7 +3,7 @@
 require('vulneruby/trigger/unsafe_code_execution')
 
 module VulnerubyEngine
-  # Entry point for the CMD Injection tests
+  # Entry point for the Unsafe Code Execution tests
   class UnsafeCodeExecutionController < ApplicationController
     def index
       render('layouts/vulneruby_engine/unsafe_code_execution/index')

@@ -2,7 +2,7 @@
   {
     "navigation_name": "CMD Injection",
     "input_field_name": "command",
-    "value": "ls"
+    "value": "ls -al; echo pwd"
   },
   {
     "navigation_name": "Insecure Algorithm",
@@ -26,6 +26,11 @@
     "navigation_name": "Reflected XSS",
     "input_field_name": "data",
     "value": "<script>console.log(document.cookies);</script>"
+  },
+  {
+    "navigation_name": "SQL Injection",
+    "input_field_name": "id",
+    "value": "'' or 1=1"
   },
   {
     "navigation_name": "SSRF",

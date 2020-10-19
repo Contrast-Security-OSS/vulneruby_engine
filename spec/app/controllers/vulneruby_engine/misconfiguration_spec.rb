@@ -12,7 +12,14 @@ RSpec.describe('Misconfiguration Controller', type: :request) do
     it 'renders the misconfiguration result page' do
       post '/vulneruby_engine/misconfiguration'
       expect(response).to(render_template(:run))
-      expect(response.body).to(include('Cache-Control','Pragma', 'Expires', 'X-XSS-Protection', 'X-Frame-Options', 'X-Content-Type-Options', 'X-Content-Security-Policy' ))
+      expect(response.body).to(include(
+                                   'Cache-Control',
+                                   'Pragma',
+                                   'Expires',
+                                   'X-XSS-Protection',
+                                   'X-Frame-Options',
+                                   'X-Content-Type-Options',
+                                   'X-Content-Security-Policy'))
     end
   end
 end

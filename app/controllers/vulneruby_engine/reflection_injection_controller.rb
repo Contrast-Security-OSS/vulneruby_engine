@@ -3,7 +3,7 @@
 require('vulneruby/trigger/reflection_injection')
 
 module VulnerubyEngine
-  # Entry point for the CMD Injection tests
+  # Entry point for the Reflection Injection tests
   class ReflectionInjectionController < ApplicationController
     def index
       render('layouts/vulneruby_engine/reflection_injection/index')

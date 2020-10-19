@@ -1,9 +1,12 @@
 # frozen_string_literal: true
+
 module VulnerubyEngine
-  # Entry point for the CMD Injection tests
+  # Entry point for the Insecure Hash Algorithm and Random tests
   class InsecureAlgorithmController < ApplicationController
-    SOME_HARDCODED_PASSWORD = "BadPracticeOfStoringPasswordInRepo"
-    SOME_HARDCODED_KEY = "BadPracticeOfStoringKeyInRepo"
+    SOME_HARDCODED_PASSWORD = 'BadPracticeOfStoringPasswordInRepo'
+    SOME_HARDCODED_KEY = 'BadPracticeOfStoringKeyInRepo'
+    public_constant :SOME_HARDCODED_KEY
+    public_constant :SOME_HARDCODED_PASSWORD
     def index
       render('layouts/vulneruby_engine/insecure_algorithm/index')
     end

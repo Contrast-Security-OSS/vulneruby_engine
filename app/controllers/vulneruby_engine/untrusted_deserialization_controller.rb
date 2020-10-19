@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+
 require 'base64'
 
 require('vulneruby/trigger/untrusted_deserialization')
 
 module VulnerubyEngine
-  # Entry point for the CMD Injection tests
+  # Entry point for the Untrusted Deserialization tests
   class UntrustedDeserializationController < ApplicationController
     def index
       @example = Base64.strict_encode64(Marshal.dump('foobar'))

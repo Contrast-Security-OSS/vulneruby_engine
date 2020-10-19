@@ -39,8 +39,6 @@ end
 
 # Integration Tests
 
-
-
 ### In Docker
 
 1. Uncomment `gem 'contrast-agent' in the Gemfile`.
@@ -54,6 +52,7 @@ end
 3. Place an agent, named `contrast-agent.gem` in the `agent` directory.
 
 4. Run `docker-compose up --abort-on-container-exit`.
+   * add `--build` if iterating on containers
 
 ### To run manually
 
@@ -74,10 +73,12 @@ To run the integration tests locally there are a few steps:
 5. cd to `./spec/dummy`
 
 6. Create a `contrast_security.yaml` with proper connection settings and:
-    1. `assess.enable` set to `true`
-    2. `api.request_audit.enable` set to `true`
-    3. `api.request_audit.requests` set to `true`
-    4. `api.request_audit.path` set to `./run-data/localhost/messages`
+    1. `api.request_audit.enable` set to `true`
+    2. `api.request_audit.requests` set to `true`
+    3. `api.request_audit.path` set to `./run-data/localhost/messages`
+    4. `assess.enable` set to `true`
+    5. `assess.sampling.enable` set to `false`
+    6. `protect.enable` set to `true`
 
 7. Run the application: `CI_TEST=true bundle exec rails s`.
 

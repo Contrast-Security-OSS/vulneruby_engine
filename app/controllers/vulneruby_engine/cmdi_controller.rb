@@ -3,7 +3,7 @@
 require('vulneruby/trigger/cmd_injection')
 
 module VulnerubyEngine
-  # Entry point for the CMD Injection tests
+  # Entry point for the Command Injection tests
   class CmdiController < ApplicationController
     def index
       render('layouts/vulneruby_engine/cmdi/index')

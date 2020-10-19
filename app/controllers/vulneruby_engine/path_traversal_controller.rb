@@ -3,7 +3,7 @@
 require('vulneruby/trigger/path_traversal')
 
 module VulnerubyEngine
-  # Entry point for the CMD Injection tests
+  # Entry point for the Path Traversal tests
   class PathTraversalController < ApplicationController
     def index
       render('layouts/vulneruby_engine/path_traversal/index')

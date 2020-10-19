@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-
-
 VulnerubyEngine::Engine.routes.draw do
   root 'application#home'
 
@@ -26,6 +24,6 @@ VulnerubyEngine::Engine.routes.draw do
     post "/#{ rule }" => "#{ rule }#run"
   end
 
-  get  "/sinatra" => VulnerubyEngine::SinatraController, :anchor => false
-  post "/sinatra" => VulnerubyEngine::SinatraController, :anchor => false
+  get  '/sinatra' => VulnerubyEngine::SinatraController, :anchor => false # rubocop:disable Style/StringHashKeys
+  post '/sinatra' => VulnerubyEngine::SinatraController, :anchor => false # rubocop:disable Style/StringHashKeys
 end

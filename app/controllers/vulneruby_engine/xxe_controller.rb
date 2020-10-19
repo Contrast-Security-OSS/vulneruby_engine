@@ -3,7 +3,7 @@
 require('vulneruby/trigger/xxe')
 
 module VulnerubyEngine
-  # Entry point for the XXE tests
+  # Entry point for the XML External Entity tests
   class XxeController < ApplicationController
     def index
       render('layouts/vulneruby_engine/xxe/index')

@@ -9,6 +9,10 @@ AllCops:
   EnabledByDefault: true
   NewCops: enable
   TargetRubyVersion: 2.5
+Bundler/DuplicatedGem:
+  Enabled: false
+Bundler/GemComment:
+  Enabled: false
 Layout/DotPosition:
   EnforcedStyle: trailing
 Layout/FirstArgumentIndentation:
@@ -32,10 +36,14 @@ Layout/MultilineOperationIndentation:
   IndentationWidth: 4
 Layout/SpaceInsideStringInterpolation:
   EnforcedStyle: space
+Lint/ConstantResolution:
+  Enabled: false
 Naming/MemoizedInstanceVariableName:
   EnforcedStyleForLeadingUnderscores: required
 Style/Alias:
   EnforcedStyle: prefer_alias_method
+Style/DisableCopsWithinSourceCodeDirective:
+  Enabled: false
 Style/DoubleNegation: # team prefers !!var over !var.nil? syntax, so we are leaving this cop off
   Enabled: false
 Style/MethodDefParentheses:

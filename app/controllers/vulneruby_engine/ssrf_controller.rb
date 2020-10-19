@@ -3,7 +3,7 @@
 require('vulneruby/trigger/ssrf')
 
 module VulnerubyEngine
-  # Entry point for the CMD Injection tests
+  # Entry point for the Server Side Request Forgery tests
   class SsrfController < ApplicationController
     def index
       render('layouts/vulneruby_engine/ssrf/index')

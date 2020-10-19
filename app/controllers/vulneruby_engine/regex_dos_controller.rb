@@ -3,7 +3,7 @@
 require('vulneruby/trigger/regex_dos')
 
 module VulnerubyEngine
-  # Entry point for the CMD Injection tests
+  # Entry point for the Regex Denial of Service tests
   class RegexDosController < ApplicationController
     def index
       render('layouts/vulneruby_engine/regex_dos/index')
