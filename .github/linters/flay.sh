@@ -3,7 +3,7 @@
 OUT_FILE="flay_out.txt"
 
 bundle config set path 'vendor/bundle'
-bundle install
+bundle update
 
 expected_string="Total score (lower is better) = 0"
 bundle exec flay ./lib > $OUT_FILE

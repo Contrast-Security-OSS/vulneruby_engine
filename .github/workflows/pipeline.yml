@@ -27,7 +27,10 @@ jobs:
           key: bundle-use-linter-${{ matrix.linter }}
           restore-keys: |
             bundle-use-linter-${{ matrix.linter }}
-      - name: Copy Agent
+      - name: Install Bundler
+        run: |
+          gem install bundler
+      - name: Copy Test Suite
         uses: actions/checkout@v2
       - name: Run the linter
         run: |
