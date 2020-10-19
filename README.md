@@ -45,9 +45,15 @@ end
 
 2. Move a `contrast-security.yaml` file to the root directory. In that configuration, ensure that 
    1. the `api` section is populated with valid connection settings
-   2. `api.request_audit.enable` is set to `true`.
-   3. `assess.enable` is set to `true`.
-   4. `assess.sampling.enable` is set to `false`.
+   2. `api.request_audit.enable` set to `true`
+   3. `api.request_audit.requests` set to `true`
+   4. `api.request_audit.path` set to `./run-data/localhost/messages`
+   5. `assess.enable` set to `true`
+   6. `assess.sampling.enable` set to `false`
+   7. `protect.enable` set to `true`
+   
+   NOTE: for the Contrast Ruby Agent pipeline testing, this configuration will be the `docker/contrast_security.example.yaml`
+   file, with connection properties overridden by ENV variables and secrets set in `docker/.env` by the pipeline
 
 3. Place an agent, named `contrast-agent.gem` in the `agent` directory.
 
@@ -73,12 +79,13 @@ To run the integration tests locally there are a few steps:
 5. cd to `./spec/dummy`
 
 6. Create a `contrast_security.yaml` with proper connection settings and:
-    1. `api.request_audit.enable` set to `true`
-    2. `api.request_audit.requests` set to `true`
-    3. `api.request_audit.path` set to `./run-data/localhost/messages`
-    4. `assess.enable` set to `true`
-    5. `assess.sampling.enable` set to `false`
-    6. `protect.enable` set to `true`
+   1. the `api` section is populated with valid connection settings
+   2. `api.request_audit.enable` set to `true`
+   3. `api.request_audit.requests` set to `true`
+   4. `api.request_audit.path` set to `./run-data/localhost/messages`
+   5. `assess.enable` set to `true`
+   6. `assess.sampling.enable` set to `false`
+   7. `protect.enable` set to `true`
 
 7. Run the application: `CI_TEST=true bundle exec rails s`.
 
