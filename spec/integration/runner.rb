@@ -95,13 +95,13 @@ begin
   test_hosts = ENV['TEST_HOSTS'] ? ENV['TEST_HOSTS'].split(',') : ['localhost:3000']
   puts("Testing #{ test_hosts }")
   puts('Waiting for Docker container startup')
-  sleep(45)
+  sleep(60)
   puts('Exercising the applications')
   # Exercise the applications
   exercise_rails_app(test_hosts)
   exercise_sinatra_app(test_hosts)
   puts('Waiting for SR messages to drain')
-  sleep(30)
+  sleep(45)
 
   # Assert Results Results
   web_frameworks = %w[rails sinatra]
