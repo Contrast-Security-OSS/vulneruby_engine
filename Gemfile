@@ -12,7 +12,10 @@ gemspec
 gem('vulneruby', git: 'https://github.com/Contrast-Security-OSS/vulneruby')
 
 group 'passenger', optional: true do
-  gem 'passenger', '~> 6.0', require: 'phusion_passenger/rack_handler' if !!ENV['PASSENGER']
+  if !!ENV['PASSENGER']
+    gem 'passenger', '~> 6.0', require: 'phusion_passenger/rack_handler'
+    gem 'tzinfo-data'
+  end
 end
 
 group 'puma', optional: true do
