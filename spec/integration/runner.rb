@@ -101,7 +101,7 @@ begin
   exercise_rails_app(test_hosts)
   exercise_sinatra_app(test_hosts)
   puts('Waiting for SR messages to drain')
-  sleep(45)
+  sleep(90)
 
   # Assert Results Results
   web_frameworks = %w[rails sinatra]
