@@ -1,0 +1,48 @@
+FROM ruby:2.7
+ARG PORT_ARG=3008
+
+RUN apt-get update && apt-get install -y build-essential coreutils
+
+WORKDIR app
+
+ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+ENV SECRET_KEY_BASE=foobarblah
+ENV RAILS_ENV=production
+ENV APP_HOME=./
+
+COPY agent/* agent/
+COPY Gemfile .
+COPY Gemfile.lock .
+COPY vulneruby_engine.gemspec .
+COPY lib/vulneruby_engine/version.rb ./lib/vulneruby_engine/version.rb
+
+RUN gem install bundler -v 2.1.4
+# Used in CI to install gem dropped in ./agent/ directory
+RUN gem install ./agent/contrast-agent.gem
+
+ENV CI_TEST=true
+
+COPY . .
+RUN rm **/*.log | true
+
+ENV PASSENGER=true
+ENV PASSENGER_TEST=true
+RUN bundle config set with 'passenger'
+RUN bundle update
+
+# this is used by the volume in docker-compose
+RUN mkdir -p /tmp/passenger/messages
+ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/passenger/agent.log
+ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/passenger/service.log
+ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/passenger/messages
+
+RUN ./docker/app_name_generator.sh Passenger >> /tmp/app_name.txt
+RUN cat /tmp/app_name.txt
+
+RUN bundle exec rake app:assets:precompile
+RUN bundle exec rails db:migrate
+
+ENV PASSENGER_TEST=true
+ENV PORT=$PORT_ARG
+
+CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec rails s -p $PORT

@@ -5,6 +5,7 @@ require_relative('boot')
 require('rails/all')
 
 Bundler.require(*Rails.groups)
+Bundler.require(:passenger) if !!ENV['PASSENGER_TEST']
 Bundler.require(:puma) if !!ENV['PUMA_TEST']
 Bundler.require(:thin) if !!ENV['THIN_TEST']
 Bundler.require(:unicorn_4) if !!ENV['UNICORN_4_TEST']

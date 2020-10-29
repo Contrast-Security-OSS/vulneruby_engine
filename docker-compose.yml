@@ -1,5 +1,17 @@
 version: '3'
 services:
+  passenger:
+    build:
+      dockerfile: docker/Dockerfile_passenger
+      context: .
+      args:
+        port: 3008
+    env_file:
+      - ./docker/.env
+    volumes:
+      - ./run-data/passenger:/tmp/passenger
+    ports:
+      - "3008:3008"
   puma:
     build:
       dockerfile: docker/Dockerfile_puma
@@ -55,9 +67,10 @@ services:
     volumes:
       - ./run-data:/run-data
     environment:
-      - TEST_HOSTS=puma:3009,thin:3010,unicorn4:3011,unicorn5:3012 # Update this with the service name - the script parses this env var to iterate over test instances
+      - TEST_HOSTS=passenger:3008,puma:3009,thin:3010,unicorn4:3011,unicorn5:3012 # Update this with the service name - the script parses this env var to iterate over test instances
       - DOCKER=true
     depends_on:
+      - passenger
       - puma
       - thin
       - unicorn4

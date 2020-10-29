@@ -13,6 +13,7 @@ def self.add_dev_dependencies spec
   spec.add_development_dependency('rspec-rails')
   spec.add_development_dependency('simplecov', '~> 0.18.5')
   spec.add_development_dependency('sqlite3')
+  spec.add_development_dependency('tzinfo-data')
   spec.add_development_dependency('watir')
   spec.add_development_dependency('webdrivers', '~> 4.0')
 end
