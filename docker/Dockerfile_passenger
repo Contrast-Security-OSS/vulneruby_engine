@@ -35,6 +35,7 @@ RUN mkdir -p /tmp/passenger/messages
 ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/passenger/agent.log
 ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/passenger/service.log
 ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/passenger/messages
+ENV APP_LOG=/tmp/passenger/app.log
 
 RUN ./docker/app_name_generator.sh Passenger >> /tmp/app_name.txt
 RUN cat /tmp/app_name.txt

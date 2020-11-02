@@ -28,6 +28,7 @@ RUN mkdir -p /tmp/thin/messages
 ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/thin/agent.log
 ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/thin/service.log
 ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/thin/messages
+ENV APP_LOG=/tmp/thin/app.log
 
 RUN ./docker/app_name_generator.sh Thin >> /tmp/app_name.txt
 RUN cat /tmp/app_name.txt
