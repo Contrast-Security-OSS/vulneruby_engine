@@ -85,7 +85,7 @@ end
 # Convert the hashes of the test data into the given type
 #
 # @param test_class [Class] the class type to build with the given hashes
-# @param test_data [Array<Hash>] the data used to generate the test classe
+# @param test_data [Array<Hash>] the data used to generate the test classes
 # @return [Array<>] the generated test classes
 def generate_tests test_class, test_data
   test_data.map { |test_hash| test_class.new(test_hash) }

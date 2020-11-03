@@ -28,6 +28,7 @@ RUN mkdir -p /tmp/unicorn4/messages
 ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/unicorn4/agent.log
 ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/unicorn4/service.log
 ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/unicorn4/messages
+ENV APP_LOG=/tmp/unicorn4/app.log
 
 RUN ./docker/app_name_generator.sh Unicorn4 >> /tmp/app_name.txt
 RUN cat /tmp/app_name.txt

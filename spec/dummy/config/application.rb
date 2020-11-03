@@ -5,6 +5,7 @@ require_relative('boot')
 require('rails/all')
 
 Bundler.require(*Rails.groups)
+Bundler.require(:passenger) if !!ENV['PASSENGER_TEST']
 Bundler.require(:puma) if !!ENV['PUMA_TEST']
 Bundler.require(:thin) if !!ENV['THIN_TEST']
 Bundler.require(:unicorn_4) if !!ENV['UNICORN_4_TEST']
@@ -16,6 +17,8 @@ module Dummy
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults(6.0)
+    log_path = ENV['APP_LOG'] || "log/#{Rails.env}.log"
+    config.logger = ActiveSupport::Logger.new(log_path)
 
     # Settings in config/environments/* take precedence over those specified
     # here. Application configuration can go into files in config/initializers
