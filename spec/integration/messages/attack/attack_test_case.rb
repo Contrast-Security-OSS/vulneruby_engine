@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class ProtectTestCase
-  attr_accessor :rule_id, :trigger_class, :trigger_method
-
+class AttackTestCase
   def self.msg_source
     'activity_application'
   end
@@ -28,7 +26,7 @@ class ProtectTestCase
   end
 
   def to_s
-    "#{ rule_id } - #{ found? } #{ " - Ticket: #{ @ticket }" if has_ticket? }"
+    "#{ @rule_id } - #{ found? } #{ " - Ticket: #{ @ticket }" if has_ticket? }"
   end
 
   def assert! reported_messages
@@ -50,7 +48,7 @@ class ProtectTestCase
   private
 
   def attack_match? attacker_message
-    messages = attacker_message.fetch('protectionRules', nil)&.fetch(rule_id, nil)
+    messages = attacker_message.fetch('protectionRules', nil)&.fetch(@rule_id, nil)
     return unless messages
 
     probes = messages['ineffective']&.fetch('samples', nil)
