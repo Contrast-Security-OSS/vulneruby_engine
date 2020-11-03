@@ -6,8 +6,10 @@ require 'headless'
 require 'watir'
 require 'webdrivers'
 require 'net/http'
-require_relative './assess/assess_test_case'
-require_relative './protect/protect_test_case'
+require_relative './messages/attack/attack_test_case'
+require_relative './messages/route/route_test_case'
+require_relative './messages/vulnerability/vulnerability_test_case'
+
 
 def exercise_rails_app hosts
   exercise_apps(hosts, 'rails', 'vulneruby_engine')
@@ -44,12 +46,16 @@ def exercise_request browser, test
   browser.button(action: 'submit').click
 end
 
-def verify_assess hosts, test_data
-  verify(hosts, test_data, AssessTestCase)
+def verify_attack hosts, test_data
+  verify(hosts, test_data, AttackTestCase)
 end
 
-def verify_protect hosts, test_data
-  verify(hosts, test_data, ProtectTestCase)
+def verify_route hosts, test_data
+  verify(hosts, test_data, RouteTestCase)
+end
+
+def verify_vulnerability hosts, test_data
+  verify(hosts, test_data, VulnerabilityTestCase)
 end
 
 def verify hosts, test_data, test_class
@@ -105,12 +111,12 @@ begin
 
   # Assert Results Results
   web_frameworks = %w[rails sinatra]
-  features = %w[assess protect]
+  features = %w[attack route vulnerability]
   failed = false
   web_frameworks.each do |framework|
     features.each do |feature|
       # load the framework test
-      test_data = JSON.parse(File.read("#{ __dir__ }/#{ feature }/#{ framework }_test.json"))
+      test_data = JSON.parse(File.read("#{ __dir__ }/messages/#{ feature }/#{ framework }_test.json"))
       # verify the expected results
       puts("Verifying #{ framework } - #{ feature }")
       result_data = send(:"verify_#{ feature }", test_hosts, test_data) # rubocop:disable Style/Send

@@ -1,0 +1,17 @@
+[
+  {
+    "sources": [
+      {
+        "type": "PARAMETER_KEY",
+        "name": "data"
+      },
+      {
+        "type": "PARAMETER",
+        "name": "data"
+      }
+    ],
+    "signature": "VulnerubyEngine::SinatraController#POST /reflected_xss",
+    "verb": "POST",
+    "url": "/reflected_xss"
+  }
+]
