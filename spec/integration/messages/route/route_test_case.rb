@@ -1,43 +1,35 @@
 # frozen_string_literal: true
 
-class RouteTestCase
+require_relative '../test_case'
+
+# This tests covers the runtime discovery of Observed Routes in the Assess
+# feature set of the Contrast Agent.
+class RouteTestCase < TestCase
   def self.msg_source
     'routes_observed'
   end
 
   def initialize data
+    super
     @signature = data['signature']
     @verb = data['verb']
     @url = data['url']
     @sources = data['sources']
-    @found = false
   end
 
-  def found?
-    !!@found
-  end
-
-  def has_ticket?
-    !!@ticket
-  end
-
-  def passed?
-    found? || has_ticket?
-  end
-
-  def to_s
-    "#{ @signature } - #{ found? } #{ " - Ticket: #{ @ticket }" if has_ticket? }"
+  def name
+    @signature
   end
 
   def assert! route_observed_messages
     @found = match?(route_observed_messages)
   end
 
+  private
+
   def match? route_observed_messages
     route_observed_messages.any? { |m| message_match?(m) }
   end
-
-  private
 
   # A message matches if it has the same signature, verb, and url and all of
   # the sources that we're checking for.

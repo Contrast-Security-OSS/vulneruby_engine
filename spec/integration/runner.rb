@@ -7,6 +7,8 @@ require 'watir'
 require 'webdrivers'
 require 'net/http'
 require_relative './messages/attack/attack_test_case'
+require_relative './messages/library_discovery/library_discovery_test_case'
+require_relative './messages/library_usage/library_usage_test_case'
 require_relative './messages/route/route_test_case'
 require_relative './messages/vulnerability/vulnerability_test_case'
 
@@ -44,18 +46,6 @@ def exercise_request browser, test
   browser.link(text: test['navigation_name']).click
   browser.text_field(name: test['input_field_name']).set(test['value']) if test['value']
   browser.button(action: 'submit').click
-end
-
-def verify_attack hosts, test_data
-  verify(hosts, test_data, AttackTestCase)
-end
-
-def verify_route hosts, test_data
-  verify(hosts, test_data, RouteTestCase)
-end
-
-def verify_vulnerability hosts, test_data
-  verify(hosts, test_data, VulnerabilityTestCase)
 end
 
 def verify hosts, test_data, test_class
@@ -111,15 +101,22 @@ begin
 
   # Assert Results Results
   web_frameworks = %w[rails sinatra]
-  features = %w[attack route vulnerability]
+  features = {
+      attack: AttackTestCase,
+      library_discovery: LibraryDiscoveryTestCase,
+      library_usage: LibraryUsageTestCase,
+      route: RouteTestCase,
+      vulnerability: VulnerabilityTestCase
+  }
+
   failed = false
   web_frameworks.each do |framework|
-    features.each do |feature|
+    features.each_pair do |feature, test_class|
       # load the framework test
       test_data = JSON.parse(File.read("#{ __dir__ }/messages/#{ feature }/#{ framework }_test.json"))
       # verify the expected results
       puts("Verifying #{ framework } - #{ feature }")
-      result_data = send(:"verify_#{ feature }", test_hosts, test_data) # rubocop:disable Style/Send
+      result_data = send(:verify, test_hosts, test_data, test_class) # rubocop:disable Style/Send
       # and if any were not found, then this test failed
       if result_data.values.flatten.all?(&:passed?)
         puts("Completed #{ framework } - #{ feature } tests: pass.")

@@ -46,4 +46,4 @@ RUN bundle exec rails db:migrate
 ENV PASSENGER_TEST=true
 ENV PORT=$PORT_ARG
 
-CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec rails s -p $PORT
+CMD CONTRAST_CONFIG_PATH=/app/contrast_security.yaml CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec rails s -p $PORT
