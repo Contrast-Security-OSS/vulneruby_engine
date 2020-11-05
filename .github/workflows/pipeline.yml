@@ -57,8 +57,12 @@ jobs:
           key: bundle-use-ruby-rspec
           restore-keys: |
             bundle-use-ruby-rspec
+      - name: Copy Test Suite
+        uses: actions/checkout@v2
       - name: Run the tests
         run: |
+          gem install bundler
+          bundle install --path vendor/bundle
           bundle exec rspec
       - name: Move artifacts
         if: ${{ always() }}
