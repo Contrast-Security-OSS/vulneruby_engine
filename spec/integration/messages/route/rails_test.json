@@ -1,0 +1,107 @@
+[
+  {
+    "sources": [
+      {
+        "type": "PARAMETER_KEY",
+        "name": "command"
+      },
+      {
+        "type": "PARAMETER",
+        "name": "command"
+      }
+    ],
+    "signature": "#",
+    "verb": "",
+    "url": "/vulneruby_engine"
+  },
+  {
+    "sources": [
+      {
+        "type": "PARAMETER_KEY",
+        "name": "file_path"
+      },
+      {
+        "type": "PARAMETER",
+        "name": "file_path"
+      }
+    ],
+    "signature": "#",
+    "verb": "",
+    "url": "/vulneruby_engine"
+  },
+  {
+    "sources": [
+      {
+        "type": "PARAMETER_KEY",
+        "name": "const"
+      },
+      {
+        "type": "PARAMETER",
+        "name": "const"
+      }
+    ],
+    "signature": "#",
+    "verb": "",
+    "url": "/vulneruby_engine"
+  },
+  {
+    "sources": [
+      {
+        "type": "PARAMETER_KEY",
+        "name": "id"
+      },
+      {
+        "type": "PARAMETER",
+        "name": "id"
+      }
+    ],
+    "signature": "#",
+    "verb": "",
+    "url": "/vulneruby_engine"
+  },
+  {
+    "sources": [
+      {
+        "type": "PARAMETER_KEY",
+        "name": "uri"
+      },
+      {
+        "type": "PARAMETER",
+        "name": "uri"
+      }
+    ],
+    "signature": "#",
+    "verb": "",
+    "url": "/vulneruby_engine"
+  },
+  {
+    "sources": [
+      {
+        "type": "PARAMETER_KEY",
+        "name": "xpath_data"
+      },
+      {
+        "type": "PARAMETER",
+        "name": "xpath_data"
+      }
+    ],
+    "signature": "#",
+    "verb": "",
+    "url": "/vulneruby_engine"
+  },
+  {
+    "sources": [
+      {
+        "type": "PARAMETER_KEY",
+        "name": "entity"
+      },
+      {
+        "type": "PARAMETER",
+        "name": "entity"
+      }
+    ],
+    "signature": "#",
+    "verb": "",
+    "url": "/vulneruby_engine"
+  }
+]

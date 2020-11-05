@@ -1,0 +1,30 @@
+[
+  {
+    "hash": "54dc19bef898b700b6f51ac1a025b0d310708a5e1c1b127ec35ed4dafb11619d",
+    "file": "parallel",
+    "version": "1.19.2",
+    "classCount": 3,
+    "url": "https://github.com/grosser/parallel"
+  },
+  {
+    "hash": "741448db59366073e86fc965ba403f881c636b79a2c39a48d0486f2607182e94",
+    "file": "rails-controller-testing",
+    "version": "1.0.5",
+    "classCount": 7,
+    "url": "https://github.com/rails/rails-controller-testing"
+  },
+  {
+    "hash": "ca788a49ac8312241c2ca97e261e4d82c930512a82fb67648142e0ec884e6b83",
+    "file": "actionmailbox",
+    "version": "6.0.3.4",
+    "classCount": 21,
+    "url": "https://rubyonrails.org"
+  },
+  {
+    "hash": "9b401338e287c50cd2354353b4b781d3766d863cae413b2a1bf585d237131e9c",
+    "file": "minitest",
+    "version": "5.14.2",
+    "classCount": 14,
+    "url": "https://github.com/seattlerb/minitest"
+  }
+]
