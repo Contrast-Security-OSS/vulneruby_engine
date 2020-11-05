@@ -47,7 +47,7 @@ jobs:
     name: "Running RSpec: Ruby ${{ matrix.version }}${{ matrix.os }}"
     runs-on: ubuntu-latest
     container: ruby:2.5
-    needs: protoc
+    needs: linting
     timeout-minutes: 10
     steps:
       - name: Setup Dependencies Cache
