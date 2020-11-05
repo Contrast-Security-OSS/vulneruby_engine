@@ -43,3 +43,31 @@ jobs:
         with:
           name: linter-artifacts-${{ matrix.linter }}
           path: ./${{ matrix.linter }}_out.txt
+  rspec:
+    name: "Running RSpec: Ruby ${{ matrix.version }}${{ matrix.os }}"
+    runs-on: ubuntu-latest
+    container: ruby:2.5
+    needs: protoc
+    timeout-minutes: 10
+    steps:
+      - name: Setup Dependencies Cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: bundle-use-ruby-rspec
+          restore-keys: |
+            bundle-use-ruby-rspec
+      - name: Run the tests
+        run: |
+          bundle exec rspec
+      - name: Move artifacts
+        if: ${{ always() }}
+        run: |
+          mv ./coverage ./upload/
+          mv ./test-results/results.xml ./upload/
+      - name: Upload results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: rspec-artifacts
+          path: ./upload/**

@@ -12,3 +12,4 @@ spec/dummy/tmp/
 **/contrast_security.yml
 **/*.log
 .DS_STORE
+**/contrast-agent.gem
