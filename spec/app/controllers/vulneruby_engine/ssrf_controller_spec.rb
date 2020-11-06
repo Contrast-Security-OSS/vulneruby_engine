@@ -10,7 +10,7 @@ RSpec.describe('SSRF Controller', type: :request) do
 
   describe 'POST /ssrf' do
     it 'renders the ssrf input page' do
-      input = 'http://localhost:3000'
+      input = 'http://google.com'
       post '/vulneruby_engine/ssrf',
            params: { uri: input }
       expect(response).to(render_template(:run))

@@ -13,7 +13,7 @@ RSpec.describe('Path Traversal Controller', type: :request) do
       post '/vulneruby_engine/path_traversal',
            params: { file_path: '/etc/passwd' }
       expect(response).to(render_template(:run))
-      expect(response.body).to(include('etc'))
+      expect(response.body).to(include('root'))
     end
   end
 end
