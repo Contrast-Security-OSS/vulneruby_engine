@@ -63,8 +63,8 @@ jobs:
         run: |
           gem install bundler
           bundle install --path vendor/bundle
-          bundle exec rails db:migrate
-          bundle exec rspec
+          APP_LOG=STDOUT bundle exec rails db:migrate
+          APP_LOG=STDOUT bundle exec rspec
       - name: Move artifacts
         if: ${{ always() }}
         run: |
