@@ -11,6 +11,7 @@ def self.add_dev_dependencies spec
   spec.add_development_dependency('rails-controller-testing')
   spec.add_development_dependency('rspec', '~> 3.0')
   spec.add_development_dependency('rspec-rails')
+  spec.add_development_dependency 'rspec_junit_formatter', '0.3.0'
   spec.add_development_dependency('simplecov', '~> 0.18.5')
   spec.add_development_dependency('sqlite3')
   spec.add_development_dependency('watir')
