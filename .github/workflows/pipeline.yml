@@ -62,8 +62,9 @@ jobs:
       - name: Run the tests
         run: |
           gem install bundler
-          bundle install --path vendor/bundle
-          APP_LOG=STDOUT bundle exec rails db:migrate
+          bundle config set path 'vendor/bundle'
+          bundle install
+          APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
           APP_LOG=STDOUT bundle exec rspec
       - name: Move artifacts
         if: ${{ always() }}
