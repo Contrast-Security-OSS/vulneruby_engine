@@ -44,7 +44,7 @@ jobs:
           name: linter-artifacts-${{ matrix.linter }}
           path: ./${{ matrix.linter }}_out.txt
   rspec:
-    name: "Running RSpec: Ruby ${{ matrix.version }}${{ matrix.os }}"
+    name: "Running rspec"
     runs-on: ubuntu-latest
     container: ruby:2.5
     needs: linting
@@ -63,6 +63,7 @@ jobs:
         run: |
           gem install bundler
           bundle install --path vendor/bundle
+          bundle exec rails db:migrate
           bundle exec rspec
       - name: Move artifacts
         if: ${{ always() }}
