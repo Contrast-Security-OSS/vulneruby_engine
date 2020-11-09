@@ -9,17 +9,24 @@ RSpec.describe('Misconfiguration Controller', type: :request) do
   end
 
   describe 'POST /misconfiguration' do
+    subject(:post_request) { post '/vulneruby_engine/misconfiguration' }
+
+    before { post_request }
+
     it 'renders the misconfiguration result page' do
-      post '/vulneruby_engine/misconfiguration'
       expect(response).to(render_template(:run))
-      expect(response.body).to(include(
-                                   'Cache-Control',
-                                   'Pragma',
-                                   'Expires',
-                                   'X-XSS-Protection',
-                                   'X-Frame-Options',
-                                   'X-Content-Type-Options',
-                                   'X-Content-Security-Policy'))
+    end
+
+    %w[
+      Cache-Control
+      Pragma
+      Expires
+      X-XSS-Protection
+      X-Frame-Options
+      X-Content-Type-Options
+      X-Content-Security-Policy
+    ].each do |header|
+      it { expect(response.body).to(include(header)) }
     end
   end
 end

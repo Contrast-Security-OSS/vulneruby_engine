@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ENV['APP_LOG'] = 'STDOUT'
+require('simplecov')
 require('rails-controller-testing')
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

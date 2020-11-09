@@ -43,3 +43,37 @@ jobs:
         with:
           name: linter-artifacts-${{ matrix.linter }}
           path: ./${{ matrix.linter }}_out.txt
+  rspec:
+    name: "Running rspec"
+    runs-on: ubuntu-latest
+    container: ruby:2.5
+    needs: linting
+    timeout-minutes: 10
+    steps:
+      - name: Setup Dependencies Cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: bundle-use-ruby-rspec
+          restore-keys: |
+            bundle-use-ruby-rspec
+      - name: Copy Test Suite
+        uses: actions/checkout@v2
+      - name: Run the tests
+        run: |
+          gem install bundler
+          bundle config set path 'vendor/bundle'
+          bundle install
+          APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
+          APP_LOG=STDOUT bundle exec rspec
+      - name: Move artifacts
+        if: ${{ always() }}
+        run: |
+          mv ./coverage ./upload/
+          mv ./test-results/results.xml ./upload/
+      - name: Upload results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: rspec-artifacts
+          path: ./upload/**
