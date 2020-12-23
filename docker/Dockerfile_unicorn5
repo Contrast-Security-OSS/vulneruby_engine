@@ -4,8 +4,15 @@ FROM ruby-app-test_agent
 ARG PORT_ARG=3012
 ENV PORT=$PORT_ARG
 
+# Because we also test Unicorn 4, we have to turn that off and re-install to get Unicorn 5
+ENV UNICORN_5=true
+RUN bundle config set with 'unicorn_5'
+RUN bundle install
+
 # Enable the web server gem
 ENV UNICORN_5_TEST=true
+
+
 
 # Name and run the application
 RUN ./docker/app_name_generator.sh Unicorn5 >> /tmp/app_name.txt

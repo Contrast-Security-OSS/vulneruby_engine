@@ -17,9 +17,8 @@ RUN gem install bundler -v 2.1.4
 ENV PASSENGER=true
 ENV PUMA=true
 ENV THIN=true
-ENV UNICORN_5=true
 
-RUN bundle config set with 'puma' 'passenger' 'thin' 'unicorn_5'
+RUN bundle config set with 'puma' 'passenger' 'thin'
 RUN bundle update
 
 # this is used by the volume in docker-compose
