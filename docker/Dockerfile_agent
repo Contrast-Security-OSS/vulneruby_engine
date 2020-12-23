@@ -1,0 +1,7 @@
+FROM ruby-app-test_base
+
+ENV CI_TEST=true
+COPY agent/* agent/
+RUN gem install ./agent/contrast-agent.gem
+
+CMD tail -f /tmp/tail_me
