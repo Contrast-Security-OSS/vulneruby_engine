@@ -17,8 +17,6 @@ RUN gem install bundler -v 2.1.4
 ENV PASSENGER=true
 ENV PUMA=true
 ENV THIN=true
-# ENV UNICORN_4=true
-# RUN bundle config set with 'unicorn_4'
 ENV UNICORN_5=true
 
 RUN bundle config set with 'puma' 'passenger' 'thin' 'unicorn_5'
