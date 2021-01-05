@@ -1,41 +1,17 @@
-FROM ruby:2.7
+FROM ruby-app-test_agent
+
+# Set port for testing
 ARG PORT_ARG=3011
+ENV PORT=$PORT_ARG
 
-RUN apt-get update && apt-get install -y build-essential coreutils
-
-WORKDIR app
-
-COPY agent/* agent/
-COPY Gemfile .
-COPY Gemfile.lock .
-COPY vulneruby_engine.gemspec .
-COPY lib/vulneruby_engine/version.rb ./lib/vulneruby_engine/version.rb
-
-# Used in CI to install gem dropped in ./agent/ directory
-RUN gem install ./agent/contrast-agent.gem
-
+# Because we also test Unicorn 5, we have to turn that off and re-install to get Unicorn 4
 ENV UNICORN_4=true
 RUN bundle config set with 'unicorn_4'
 RUN bundle install
 
-ENV CI_TEST=true
-
-COPY . .
-RUN rm **/*.log | true
-
-# this is used by the volume in docker-compose
-RUN mkdir -p /tmp/unicorn4/messages
-ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/unicorn4/agent.log
-ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/unicorn4/service.log
-ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/unicorn4/messages
-ENV APP_LOG=/tmp/unicorn4/app.log
-
-RUN ./docker/app_name_generator.sh Unicorn4 >> /tmp/app_name.txt
-RUN cat /tmp/app_name.txt
-
-RUN bundle exec rails db:migrate
-
+# Enable the web server gem
 ENV UNICORN_4_TEST=true
-ENV PORT=$PORT_ARG
 
+# Name and run the application
+RUN ./docker/app_name_generator.sh Unicorn4 >> /tmp/app_name.txt
 CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec unicorn -p $PORT -c ./spec/dummy/config/unicorn.rb ./spec/dummy/config.ru

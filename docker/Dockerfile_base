@@ -1,0 +1,37 @@
+FROM ruby:2.7
+
+RUN apt-get update && apt-get install -y build-essential coreutils
+
+WORKDIR app
+
+ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+ENV SECRET_KEY_BASE=foobarblah
+ENV RAILS_ENV=production
+ENV APP_HOME=./
+
+COPY . .
+RUN rm **/*.log | true
+
+RUN gem install bundler -v 2.1.4
+
+ENV PASSENGER=true
+ENV PUMA=true
+ENV THIN=true
+
+RUN bundle config set with 'puma' 'passenger' 'thin'
+RUN bundle update
+
+# this is used by the volume in docker-compose
+RUN mkdir -p /tmp/agent/messages
+RUN mkdir -p tmp/pids
+ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/agent/agent.log
+ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/agent/service.log
+ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/agent/messages
+ENV APP_LOG=/tmp/agent/app.log
+
+RUN bundle exec rake app:assets:precompile
+RUN bundle exec rails db:migrate
+
+RUN touch /tmp/tail_me
+
+CMD tail -f /tmp/tail_me
