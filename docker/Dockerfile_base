@@ -19,7 +19,7 @@ ENV PUMA=true
 ENV THIN=true
 
 RUN bundle config set with 'puma' 'passenger' 'thin'
-RUN bundle update
+RUN bundle install
 
 # this is used by the volume in docker-compose
 RUN mkdir -p /tmp/agent/messages
