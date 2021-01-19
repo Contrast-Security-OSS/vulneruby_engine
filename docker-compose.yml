@@ -1,0 +1,50 @@
+version: '3'
+services:
+  base:
+    build:
+      dockerfile: ./docker/performance/Dockerfile_base
+      context: .
+  agent:
+    depends_on:
+      - base
+    build:
+      dockerfile: ./docker/performance/Dockerfile_agent
+      context: ../vulneruby_engine
+  without-agent:
+    depends_on:
+      - base
+    build:
+      dockerfile: ./docker/performance/Dockerfile_no_agent
+      context: .
+    env_file:
+      - ./docker/.env
+    ports:
+      - "3009:3009"
+    volumes:
+      - ./run-data/no_agent:/tmp/agent
+  with-agent-assess:
+    depends_on:
+      - agent
+    build:
+      dockerfile: ./docker/performance/Dockerfile_assess
+      context: .
+    env_file:
+      - ./docker/.env
+    ports:
+      - "3009:3009"
+    volumes:
+      - ./run-data/assess:/tmp/agent
+  with-agent-protect:
+    depends_on:
+      - agent
+    build:
+      dockerfile: ./docker/performance/Dockerfile_protect
+      context: .
+    env_file:
+      - ./docker/.env
+    volumes:
+      - ./run-data/protect:/tmp/agent
+    ports:
+      - "3009:3009"
+volumes:
+  run-data:
