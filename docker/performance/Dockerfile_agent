@@ -1,0 +1,9 @@
+FROM vulneruby_engine_base
+
+ENV CI_TEST=true
+
+# Download and install the Agent
+COPY agent/* agent/
+RUN gem install ./agent/contrast-agent.gem
+RUN cp Gemfile.bk Gemfile
+RUN bundle install

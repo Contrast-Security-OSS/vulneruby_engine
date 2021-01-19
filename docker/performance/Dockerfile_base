@@ -1,0 +1,47 @@
+FROM ruby:2.7
+
+RUN apt-get update && apt-get install -y build-essential coreutils
+
+WORKDIR app
+
+# Set Rails Env Vars
+ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+ENV SECRET_KEY_BASE=foobarblah
+ENV RAILS_ENV=production
+ENV APP_HOME=./
+ENV RAILS_SERVE_STATIC_FILES=true
+ENV WEB_CONCURRENCY=1
+
+# Set port for testing
+ARG PORT_ARG=3009
+ENV PORT=$PORT_ARG
+
+# Enable the web server gem
+ENV PUMA_TEST=true
+
+# Disable the Agent
+ENV CI_TEST=false
+
+COPY . .
+RUN rm **/*.log | true
+
+RUN gem install bundler -v 2.1.4
+
+ENV PUMA=true
+RUN bundle config set with 'puma'
+
+# Make sure the Agent isn't included
+RUN cp Gemfile Gemfile.bk
+RUN sed -i '/agent/d' Gemfile
+RUN bundle install
+
+# this is used by the volume in docker-compose
+RUN mkdir -p /tmp/agent/messages
+RUN mkdir -p tmp/pids
+ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/agent/agent.log
+ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/agent/service.log
+ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/agent/messages
+ENV APP_LOG=/tmp/agent/app.log
+
+RUN bundle exec rake app:assets:precompile
+RUN bundle exec rails db:migrate
