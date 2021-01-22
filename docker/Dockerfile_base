@@ -1,4 +1,5 @@
-FROM ruby:2.7
+ARG RUBY_VER=2.7 # Just default. Env var takes precedence.
+FROM ruby:${RUBY_VER}
 
 RUN apt-get update && apt-get install -y build-essential coreutils
 
