@@ -1,4 +1,5 @@
-ARG RUBY_VER=2.7 # Just default. Env var takes precedence.
+# Just default. Env var takes precedence.
+ARG RUBY_VER=2.7
 FROM ghcr.io/contrast-security-oss/vulneruby_engine/base:${RUBY_VER}
 
 ENV CI_TEST=true
