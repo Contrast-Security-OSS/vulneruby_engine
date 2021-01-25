@@ -4,6 +4,7 @@ FROM ghcr.io/contrast-security-oss/vulneruby_engine/base:${RUBY_VER}
 
 ENV CI_TEST=true
 COPY agent/* agent/
+COPY ../ruby-app-test/contrast_security.example.yaml ./contrast_security.yaml
 RUN gem install ./agent/contrast-agent.gem
 
 CMD tail -f /tmp/tail_me
