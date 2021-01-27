@@ -39,7 +39,9 @@ RUN bundle install
 RUN mkdir -p /tmp/agent/messages
 RUN mkdir -p tmp/pids
 ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/agent/agent.log
+ENV CONTRAST__AGENT__LOGGER__LEVEL=INFO
 ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/agent/service.log
+ENV CONTRAST__AGENT__SERVICE__LOGGER__LEVEL=INFO
 ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/agent/messages
 ENV APP_LOG=/tmp/agent/app.log
 
