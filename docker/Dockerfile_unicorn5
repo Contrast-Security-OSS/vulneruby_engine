@@ -6,11 +6,12 @@ ENV PORT=$PORT_ARG
 
 # Because we also test Unicorn 4, we have to turn that off and re-install to get Unicorn 5
 ENV UNICORN_5=true
-RUN unset CI_TEST bundle config set with 'unicorn_5'
-RUN unset CI_TEST && bundle add unicorn
+RUN bundle config set with 'unicorn_5'
+RUN bundle install
 
 # Enable the web server gem
 ENV UNICORN_5_TEST=true
+
 
 
 # Name and run the application
