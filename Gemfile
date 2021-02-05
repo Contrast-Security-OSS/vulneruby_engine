@@ -43,7 +43,8 @@ end
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]gem 'contrast-agent', path: './agent'
-if (agent=`gem which contrast-agent`.gsub('/lib/contrast-agent.rb', ''))
+if (agent_path=`gem which contrast-agent`.gsub('/lib/contrast-agent.rb', ''))
+  puts agent_path
   gem 'contrast-agent', path: agent_path if !!ENV['CI_TEST']
 else
    gem 'contrast-agent' if !!ENV['CI_TEST']
