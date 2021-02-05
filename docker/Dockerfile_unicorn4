@@ -6,6 +6,7 @@ ENV PORT=$PORT_ARG
 
 # Because we also test Unicorn 5, we have to turn that off and re-install to get Unicorn 4
 ENV UNICORN_4=true
+COPY Gemfile ./Gemfile
 RUN bundle config set with 'unicorn_4'
 RUN bundle install
 
