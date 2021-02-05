@@ -9,9 +9,10 @@ ENV UNICORN_5=true
 RUN bundle config set with 'unicorn_5'
 RUN bundle install
 
+RUN gem install ./agent/contrast-agent.gem
+
 # Enable the web server gem
 ENV UNICORN_5_TEST=true
-
 
 
 # Name and run the application
