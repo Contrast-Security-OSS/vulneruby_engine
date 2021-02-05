@@ -6,15 +6,12 @@ ENV PORT=$PORT_ARG
 
 # Because we also test Unicorn 4, we have to turn that off and re-install to get Unicorn 5
 ENV UNICORN_5=true
-COPY Gemfile ./Gemfile
-RUN cat Gemfile
 RUN bundle config set with 'unicorn_5'
-RUN bundle install
+
+RUN AGENT_PATH=`gem which contrast-agent` bundle install
 
 # Enable the web server gem
 ENV UNICORN_5_TEST=true
-
-
 
 # Name and run the application
 RUN ./docker/app_name_generator.sh Unicorn5 >> /tmp/app_name.txt
