@@ -14,6 +14,7 @@ def self.add_dev_dependencies spec
   spec.add_development_dependency 'rspec_junit_formatter', '0.3.0'
   spec.add_development_dependency('simplecov', '~> 0.18.5')
   spec.add_development_dependency('sqlite3')
+  spec.add_development_dependency('warning')
   spec.add_development_dependency('watir')
   spec.add_development_dependency('webdrivers', '~> 4.0')
 end
