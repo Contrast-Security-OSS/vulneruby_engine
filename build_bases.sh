@@ -6,7 +6,7 @@ SCRIPTNAME=$(basename "${BASH_SOURCE[0]}")
 APP_ROOT=$(dirname "${BASH_SOURCE[0]}")
 GIT_REPO=contrast-security-oss/vulneruby_engine
 
-RUBY_VERS="2.5 2.6 2.7 3.0"
+RUBY_VERS="2.5 2.6 2.7 3"
 
 
 usage() {
@@ -15,7 +15,11 @@ Usa ge: $SCRIPTNAME [-h] [options]
 
     Build and upload base images for supported Ruby versions: $RUBY_VERS
 
-    Sign in to these first.
+    Sign into GitHub with a PAT before running this.
+
+    To do this in pipeline, research:
+        https://docs.github.com/en/packages/guides/pushing-and-pulling-docker-images
+        'you can use the GITHUB_TOKEN to publish and install packages'
 
 Available options:
 

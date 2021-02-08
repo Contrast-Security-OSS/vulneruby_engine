@@ -13,6 +13,10 @@ Bundler.require(:unicorn_5) if !!ENV['UNICORN_5_TEST']
 
 require('vulneruby_engine')
 
+require('warning')
+Warning.ignore(/Using the last argument as keyword parameters is deprecated/)
+
+
 module Dummy
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
