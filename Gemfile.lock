@@ -109,17 +109,19 @@ GEM
     method_source (1.0.0)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.5.0)
     minitest (5.14.2)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.4)
-    nokogiri (1.10.10)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.11.1)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     parallel (1.19.2)
     parser (2.7.2.0)
       ast (~> 2.4.1)
     path_expander (1.1.0)
+    racc (1.5.2)
     rack (2.2.3)
     rack-protection (2.1.0)
       rack
@@ -229,6 +231,7 @@ GEM
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
+    warning (1.1.0)
     watir (6.17.0)
       regexp_parser (~> 1.2)
       selenium-webdriver (~> 3.6)
@@ -260,6 +263,7 @@ DEPENDENCIES
   sqlite3
   vulneruby!
   vulneruby_engine!
+  warning
   watir
   webdrivers (~> 4.0)
 
