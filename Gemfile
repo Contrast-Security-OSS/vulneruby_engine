@@ -47,5 +47,3 @@ if (agent_path=ENV['AGENT_PATH'])
 else
    gem 'contrast-agent' if !!ENV['CI_TEST']
 end
-
-gem "sqlite", "~> 1.0"
