@@ -43,9 +43,11 @@ end
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]gem 'contrast-agent', path: './agent'
-if (agent_path=`gem which contrast-agent`.gsub('/lib/contrast-agent.rb', ''))
-  puts agent_path
+if (agent_path=ENV['AGENT_PATH'])
+  agent_path = agent_path.gsub('/lib/contrast-agent.rb', '')
   gem 'contrast-agent', path: agent_path if !!ENV['CI_TEST']
 else
    gem 'contrast-agent' if !!ENV['CI_TEST']
 end
+
+gem "sqlite", "~> 1.0"
