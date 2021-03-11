@@ -8,7 +8,8 @@ ENV PORT=$PORT_ARG
 ENV UNICORN_4=true
 RUN bundle config set with 'unicorn_4'
 
-RUN AGENT_PATH=`gem which contrast-agent` bundle install
+
+RUN AGENT_PATH=`gem which contrast-agent` bundle update && bundle install
 
 
 # Enable the web server gem

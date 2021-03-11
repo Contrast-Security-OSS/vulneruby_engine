@@ -7,6 +7,8 @@ ENV PORT=$PORT_ARG
 # Enable the web server gem
 ENV PASSENGER_TEST=true
 
+RUN bundle update
+
 # Name and run the application
 RUN ./docker/app_name_generator.sh Passenger >> /tmp/app_name.txt
 CMD CONTRAST_CONFIG_PATH=/app/contrast_security.yaml CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) PASSENGER_START_TIMEOUT=300 bundle exec rails s -p $PORT

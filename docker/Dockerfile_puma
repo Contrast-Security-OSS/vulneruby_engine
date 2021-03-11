@@ -10,6 +10,8 @@ ENV WEB_CONCURRENCY=1
 # Enable the web server gem
 ENV PUMA_TEST=true
 
+RUN bundle update
+
 # Name and run the application
 RUN ./docker/app_name_generator.sh Puma >> /tmp/app_name.txt
 CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec puma -C ./spec/dummy/config/puma.rb ./spec/dummy/config.ru
