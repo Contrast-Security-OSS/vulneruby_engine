@@ -16,4 +16,4 @@ ENV UNICORN_5_TEST=true
 
 # Name and run the application
 RUN ./docker/app_name_generator.sh Unicorn5 >> /tmp/app_name.txt
-CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec unicorn -p $PORT -c ./spec/dummy/config/unicorn.rb ./spec/dummy/config.ru
+CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) cat /tmp/app_name.txt && bundle exec unicorn -p $PORT -c ./spec/dummy/config/unicorn.rb ./spec/dummy/config.ru

@@ -11,4 +11,5 @@ RUN bundle update
 
 # Name and run the application
 RUN ./docker/app_name_generator.sh Thin >> /tmp/app_name.txt
-CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec thin -p $PORT -R /app/spec/dummy/config.ru start
+RUN cat /tmp/app_name.txt
+CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) cat /tmp/app_name.txt && bundle exec thin -p $PORT -R /app/spec/dummy/config.ru start
