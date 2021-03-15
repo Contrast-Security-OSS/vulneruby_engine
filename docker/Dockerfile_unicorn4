@@ -8,7 +8,8 @@ ENV PORT=$PORT_ARG
 ENV UNICORN_4=true
 RUN bundle config set with 'unicorn_4'
 
-RUN AGENT_PATH=`gem which contrast-agent` bundle install
+
+RUN AGENT_PATH=`gem which contrast-agent` bundle update && bundle install
 
 
 # Enable the web server gem
@@ -16,4 +17,4 @@ ENV UNICORN_4_TEST=true
 
 # Name and run the application
 RUN ./docker/app_name_generator.sh Unicorn4 >> /tmp/app_name.txt
-CMD CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec unicorn -p $PORT -c ./spec/dummy/config/unicorn.rb ./spec/dummy/config.ru
+CMD cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec unicorn -p $PORT -c ./spec/dummy/config/unicorn.rb ./spec/dummy/config.ru

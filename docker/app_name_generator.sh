@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-echo "RailsEngine-$1-$(date +%s)"
+RUBYVER=$(ruby --version | awk '{print $2}')
+echo "RailsEngine-$RUBYVER-$1-$(date +%s)"
