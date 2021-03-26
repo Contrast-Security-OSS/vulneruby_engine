@@ -32,7 +32,7 @@ RUN bundle config set with 'puma'
 
 # Make sure the Agent isn't included
 RUN cp Gemfile Gemfile.bk
-RUN sed -i '/agent/d' Gemfile
+RUN sed -i '/contrast-agent/d' Gemfile
 RUN bundle install
 
 # this is used by the volume in docker-compose
