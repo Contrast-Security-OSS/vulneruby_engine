@@ -29,10 +29,10 @@ end
 
 1.) Clone this repo.
 
-2.) Run `bundle install`.
+2.) Run `CI_TEST=true bundle update`.
 
-3.) Run `cd /spec/dummy`.
+3.) Run `CI_TEST=true bundle exec rake db:setup`.
 
-4.) Run `bundle exec rails s`.
+4.) Run `CI_TEST=true bundle exec rails s`.
 
 5.) Visit: `http://localhost:3000/vulneruby_engine/` and you will be at the engine's home page.
