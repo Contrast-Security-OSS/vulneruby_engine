@@ -20,7 +20,7 @@ dirs:
 
 .PHONY: db
 db: vendor dirs
-	bundle exec rails db:setup
+	unset CI_TEST && bundle exec rails db:setup
 
 run: vendor dirs db
 	bundle exec rails server
