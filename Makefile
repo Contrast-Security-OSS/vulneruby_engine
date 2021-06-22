@@ -6,12 +6,12 @@ export CI_TEST=true
 # If rbenv is not available, ruby --version should work regardless of .ruby-version.
 .PHONY: ruby_ver
 ruby_ver:
-	ruby --version > /dev/null ||  rbenv versions --bare | grep 2.8 > .ruby-version || \
+	ruby --version > /dev/null ||  rbenv versions --bare | grep 2.7 > .ruby-version || \
 		echo "No appropriate ruby version available"
 	@echo ".ruby-version set to:" `cat .ruby-version`
 
 .PHONY: vendor
-vendor: ruby-ver
+vendor: ruby_ver
 	bundle install
 
 .PHONY: dirs
@@ -19,8 +19,8 @@ dirs:
 	mkdir -p $(APP_ROOT)/log $(APP_ROOT)/spec/dummy/log
 
 .PHONY: db
-db:
+db: vendor dirs
 	bundle exec rails db:setup
 
-run:
+run: vendor dirs db
 	bundle exec rails server
