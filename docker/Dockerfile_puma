@@ -13,7 +13,7 @@ ENV PUMA_TEST=true
 RUN bundle update
 
 # So we may use whatever command we want to trigger rake, to be sure
-# that the agent is not braking the agent
+# that the agent is not braking the rake task
 
 # Check routes
 RUN bundle exec rake routes
