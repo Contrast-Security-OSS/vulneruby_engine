@@ -9,6 +9,12 @@ ENV THIN_TEST=true
 
 RUN bundle update
 
+# So we may use whatever command we want to trigger rake, to be sure
+# that the agent is not braking the rake task
+
+# Check routes
+RUN bundle exec rake routes
+
 # Name and run the application
 RUN ./docker/app_name_generator.sh Thin >> /tmp/app_name.txt
 RUN cat /tmp/app_name.txt
