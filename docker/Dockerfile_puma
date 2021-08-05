@@ -15,8 +15,8 @@ RUN bundle update
 # So we may use whatever command we want to trigger rake, to be sure
 # that the agent is not braking the rake task
 
-# Check routes
-RUN bundle exec rake routes
+# Check Database Version
+RUN bundle exec rake db:version
 
 # Name and run the application
 RUN ./docker/app_name_generator.sh Puma >> /tmp/app_name.txt
