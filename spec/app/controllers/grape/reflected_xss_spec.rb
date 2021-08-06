@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe('Reflected XSS Controller', type: :request) do
+RSpec.describe('Grape Reflected XSS', type: :request) do
   let(:route) { '/vulneruby_engine/grape/reflected_xss' }
 
   describe 'GET /grape/reflected_xss' do
