@@ -21,7 +21,7 @@ ENV PASSENGER=true
 ENV PUMA=true
 ENV THIN=true
 
-RUN bundle config set with 'puma' 'passenger' 'thin'
+RUN bundle config set with 'puma' 'thin'
 RUN bundle install
 
 # this is used by the volume in docker-compose
