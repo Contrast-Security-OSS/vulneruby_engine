@@ -17,7 +17,6 @@ RUN rm **/*.log | true
 
 RUN gem install bundler
 
-ENV PASSENGER=true
 ENV PUMA=true
 ENV THIN=true
 
