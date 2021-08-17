@@ -4,4 +4,5 @@
 
 require_relative('config/environment')
 
+use Rack::Session::Cookie
 run(Rails.application)
