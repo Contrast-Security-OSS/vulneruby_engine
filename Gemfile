@@ -11,8 +11,8 @@ gemspec
 # Pull in our vulnerable gem used to call the triggers
 gem('vulneruby', git: 'https://github.com/Contrast-Security-OSS/vulneruby')
 
-group 'passenger', optional: true do
-  if !!ENV['PASSENGER']
+group 'passenger_max', optional: true do
+  if !!ENV['PASSENGER_MAX']
     gem 'passenger', '~> 6.0', require: 'phusion_passenger/rack_handler'
     gem 'tzinfo-data'
   end
