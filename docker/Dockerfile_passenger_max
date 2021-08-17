@@ -6,6 +6,7 @@ ENV PORT=$PORT_ARG
 
 # Enable the web server gem
 ENV PASSENGER_MAX=true
+RUN bundle config set with 'passenger_max'
 
 RUN bundle update
 
