@@ -2,6 +2,7 @@
 
 VulnerubyEngine::Engine.routes.draw do
   root 'application#home'
+  mount Api => '/grape'
 
   RULES = %w[
     cmdi
@@ -26,6 +27,6 @@ VulnerubyEngine::Engine.routes.draw do
 
   get  '/sinatra' => VulnerubyEngine::SinatraController, :anchor => false # rubocop:disable Style/StringHashKeys
   post '/sinatra' => VulnerubyEngine::SinatraController, :anchor => false # rubocop:disable Style/StringHashKeys
-  get  '/grape' => VulnerubyEngine::GrapeController, :anchor => false # rubocop:disable Style/StringHashKeys
-  post '/grape' => VulnerubyEngine::GrapeController, :anchor => false # rubocop:disable Style/StringHashKeys
+  # get  '/grape' => VulnerubyEngine::GrapeController, :anchor => false # rubocop:disable Style/StringHashKeys
+  # post '/grape' => VulnerubyEngine::GrapeController, :anchor => false # rubocop:disable Style/StringHashKeys
 end
