@@ -1,0 +1,21 @@
+FROM ruby-app-test_agent
+
+# Set port for testing
+ARG PORT_ARG=3007
+ENV PORT=$PORT_ARG
+
+# Enable the web server gem
+ENV PASSENGER_MIN=true
+RUN bundle config set with 'passenger_min'
+
+RUN bundle update
+
+# So we may use whatever command we want to trigger rake, to be sure
+# that the agent is not braking the rake task
+
+# Check Database Version
+RUN bundle exec rake db:version
+
+# Name and run the application
+RUN ./docker/app_name_generator.sh Passenger_min >> /tmp/app_name.txt
+CMD cat /tmp/app_name.txt && CONTRAST_CONFIG_PATH=/app/contrast_security.yaml CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) PASSENGER_START_TIMEOUT=300 bundle exec rails s -p $PORT

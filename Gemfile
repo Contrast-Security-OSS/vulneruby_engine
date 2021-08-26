@@ -18,6 +18,12 @@ group 'passenger_max', optional: true do
   end
 end
 
+group 'passenger_min', optional: true do
+  if !!ENV['PASSENGER_MIN']
+    gem 'passenger', '5.3.7', require: 'phusion_passenger/rack_handler'
+  end
+end
+
 group 'puma', optional: true do
   gem 'puma', '~> 3.0' if !!ENV['PUMA']
 end
