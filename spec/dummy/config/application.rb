@@ -7,7 +7,8 @@ require('rails/all')
 Bundler.require(*Rails.groups)
 Bundler.require(:passenger_max) if !!ENV['PASSENGER_MAX']
 Bundler.require(:passenger_min) if !!ENV['PASSENGER_MIN']
-Bundler.require(:puma) if !!ENV['PUMA_TEST']
+Bundler.require(:puma_max) if !!ENV['PUMA_MAX']
+Bundler.require(:puma_min) if !!ENV['PUMA_MIN']
 Bundler.require(:thin) if !!ENV['THIN_TEST']
 Bundler.require(:unicorn_4) if !!ENV['UNICORN_4_TEST']
 Bundler.require(:unicorn_5) if !!ENV['UNICORN_5_TEST']
