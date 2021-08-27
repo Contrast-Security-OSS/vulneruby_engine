@@ -8,7 +8,8 @@ ENV RAILS_SERVE_STATIC_FILES=true
 ENV WEB_CONCURRENCY=1
 
 # Enable the web server gem
-ENV PUMA_TEST=true
+ENV PUMA_MIN=true
+RUN bundle config set with 'puma_min'
 
 RUN bundle update
 
@@ -19,5 +20,5 @@ RUN bundle update
 RUN bundle exec rake db:version
 
 # Name and run the application
-RUN ./docker/app_name_generator.sh Puma >> /tmp/app_name.txt
+RUN ./docker/app_name_generator.sh Puma_min >> /tmp/app_name.txt
 CMD  cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec puma -C ./spec/dummy/config/puma.rb ./spec/dummy/config.ru

@@ -24,8 +24,12 @@ group 'passenger_min', optional: true do
   end
 end
 
-group 'puma', optional: true do
-  gem 'puma', '~> 3.0' if !!ENV['PUMA']
+group 'puma_min', optional: true do
+  gem 'puma', '~> 3.7' if !!ENV['PUMA_MIN']
+end
+
+group 'puma_max', optional: true do
+  gem 'puma', '~> 5.0' if !!ENV['PUMA_MAX']
 end
 
 group 'thin', optional: true do
