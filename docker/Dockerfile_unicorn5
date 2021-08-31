@@ -1,7 +1,7 @@
 FROM ruby-app-test_agent
 
 # Set port for testing
-ARG PORT_ARG=3013
+ARG PORT_ARG=3014
 ENV PORT=$PORT_ARG
 
 # Because we also test Unicorn 4, we have to turn that off and re-install to get Unicorn 5

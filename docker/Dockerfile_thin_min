@@ -1,0 +1,22 @@
+FROM ruby-app-test_agent
+
+# Set port for testing
+ARG PORT_ARG=3011
+ENV PORT=$PORT_ARG
+
+# Enable the web server gem
+ENV THIN_MIN=true
+RUN bundle config set with 'thin_min'
+
+RUN bundle update
+
+# So we may use whatever command we want to trigger rake, to be sure
+# that the agent is not braking the rake task
+
+# Check Database Version
+RUN bundle exec rake db:version
+
+# Name and run the application
+RUN ./docker/app_name_generator.sh Thin_min >> /tmp/app_name.txt
+RUN cat /tmp/app_name.txt
+CMD cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec thin -p $PORT -R /app/spec/dummy/config.ru start
