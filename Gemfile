@@ -32,8 +32,12 @@ group 'puma_max', optional: true do
   gem 'puma', '~> 5.0' if !!ENV['PUMA_MAX']
 end
 
-group 'thin', optional: true do
-  gem 'thin', '~> 1.0' if !!ENV['THIN']
+group 'thin_min', optional: true do
+  gem 'thin', '1.7.2' if !!ENV['THIN_MIN']
+end
+
+group 'thin_max', optional: true do
+  gem 'thin', '~> 1.0' if !!ENV['THIN_MAX']
 end
 
 group 'unicorn_4', optional: true do
