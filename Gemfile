@@ -41,11 +41,11 @@ group 'thin_max', optional: true do
 end
 
 group 'unicorn_min', optional: true do
-  gem 'unicorn', '~> 5.0.0' if !!ENV['UNICORN_MIN']
+  gem 'unicorn', '~> 5.0.0' if !!ENV['UNICORN_4']
 end
 
 group 'unicorn_max', optional: true do
-  gem 'unicorn', '~> 6' if !!ENV['UNICORN_MAX']
+  gem 'unicorn', '~> 6' if !!ENV['UNICORN_5']
 end
 
 # Declare any dependencies that are still in development here instead of in

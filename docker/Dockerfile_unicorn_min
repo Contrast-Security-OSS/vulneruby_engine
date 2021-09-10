@@ -1,11 +1,11 @@
 FROM ruby-app-test_agent
 
 # Set port for testing
-ARG PORT_ARG=3014
+ARG PORT_ARG=3013
 ENV PORT=$PORT_ARG
 
 # Enable the web server gem
-ENV UNICORN_MIN=true
+ENV UNICORN_4=true
 RUN bundle config set with 'unicorn_min'
 
 RUN AGENT_PATH=`gem which contrast-agent` bundle update && bundle install
