@@ -5,13 +5,15 @@ ARG PORT_ARG=3013
 ENV PORT=$PORT_ARG
 
 # Enable the web server gem
-ENV UNICORN_4=true
+ENV UNICORN_MIN=true
 RUN bundle config set with 'unicorn_min'
 
 RUN AGENT_PATH=`gem which contrast-agent` bundle update && bundle install
 
 # So we may use whatever command we want to trigger rake, to be sure
 # that the agent is not braking the rake task
+
+ENV UNICORN_MIN_TEST=true
 
 # Check Database Version
 RUN bundle exec rake db:version
