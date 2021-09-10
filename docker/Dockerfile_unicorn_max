@@ -10,7 +10,6 @@ RUN bundle config set with 'unicorn_max'
 
 RUN AGENT_PATH=`gem which contrast-agent` bundle update && bundle install
 
-
 # So we may use whatever command we want to trigger rake, to be sure
 # that the agent is not braking the rake task
 
