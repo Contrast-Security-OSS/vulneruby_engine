@@ -41,7 +41,7 @@ group 'thin_max', optional: true do
 end
 
 group 'unicorn_min', optional: true do
-  gem 'unicorn', '5.0.0' if !!ENV['UNICORN_MIN']
+  gem 'unicorn', '~> 5.0.0' if !!ENV['UNICORN_MIN']
 end
 
 group 'unicorn_max', optional: true do
