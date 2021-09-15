@@ -1,0 +1,6 @@
+speedups:
+  rescue_vs_respond_to: false
+  fetch_with_argument_vs_block: false
+
+exclude_paths:
+  - 'vendor/**/*.rb'
