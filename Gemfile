@@ -41,7 +41,13 @@ group 'thin_max', optional: true do
 end
 
 group 'unicorn_min', optional: true do
-  gem 'unicorn', '~> 5.0.0' if !!ENV['UNICORN_MIN']
+  if !!ENV['UNICORN_MIN']
+    if RUBY_VERSION >= '3.0.0'
+      gem 'unicorn', '~> 5.7.0'
+    else
+      gem 'unicorn', '~> 5.0.0'
+    end
+  end
 end
 
 group 'unicorn_max', optional: true do
