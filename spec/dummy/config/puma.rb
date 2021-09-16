@@ -8,8 +8,8 @@
 #
 max_threads_count = ENV.fetch('RAILS_MAX_THREADS', 32)
 min_threads_count = ENV.fetch('RAILS_MIN_THREADS', 8)
-worker_timeout ENV.fetch('WORKER_TIMEOUT') { 300 }
-worker_boot_timeout ENV.fetch('WORKER_TIMEOUT') { 300 }
+worker_timeout ENV.fetch('WORKER_TIMEOUT') { 600 }
+worker_boot_timeout ENV.fetch('WORKER_TIMEOUT') { 600 }
 threads(min_threads_count, max_threads_count)
 
 # Specifies the `port` that Puma will listen on to receive requests;
