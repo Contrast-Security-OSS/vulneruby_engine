@@ -16,8 +16,9 @@ module VulnerubyEngine
     end
 
     post '/reflected_xss' do
-      @result = params[:data].html_safe
-      { result: @result }
+     @result = params[:data].html_safe
+     header 'Content-Type', 'text/html'
+     { result: @result }
     end
 
     post '/unvalidated_redirect' do

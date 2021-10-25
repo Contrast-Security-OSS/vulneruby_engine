@@ -8,6 +8,8 @@ module VulnerubyEngine
     end
 
     def run
+      response = Rack::Response.new
+      response.headers['Content-Type'] = 'text/html'
       @result = params[:data]
       render('layouts/vulneruby_engine/reflected_xss/run')
     end
