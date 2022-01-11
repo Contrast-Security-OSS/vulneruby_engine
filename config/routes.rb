@@ -4,6 +4,7 @@ VulnerubyEngine::Engine.routes.draw do
   root 'application#home'
 
   RULES = %w[
+    cmdi_sidekiq
     cmdi
     insecure_algorithm
     path_traversal
