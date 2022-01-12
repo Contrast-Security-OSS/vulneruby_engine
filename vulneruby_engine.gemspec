@@ -34,6 +34,8 @@ def self.add_dependencies spec
   spec.add_dependency('rake', '~> 12.3.0')
   spec.add_dependency('sinatra', '~> 2.0')
   spec.add_dependency('grape', '~> 1.5.3')
+  spec.add_dependency('sidekiq', '~> 6.3', '>= 6.3.1')
+  spec.add_dependency('sidekiq-status', '~> 2.1')
 end
 
 # Describe your gem and declare its dependencies:

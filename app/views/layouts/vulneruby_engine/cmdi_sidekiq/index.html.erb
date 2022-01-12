@@ -1,0 +1,16 @@
+<div>
+  <h1>Cmd Injection</h1>
+  <form action=<%= cmdi_sidekiq_path %> method="post">
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" name="command" placeholder="ls">
+      </div>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="control">
+        <button class="button is-info" action="submit">
+          Execute
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
