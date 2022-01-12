@@ -23,15 +23,15 @@ def self.add_lint_dependencies spec
   spec.add_development_dependency('debride')
   spec.add_development_dependency('fasterer')
   spec.add_development_dependency('flay')
-  spec.add_development_dependency('rubocop', '0.89.1')
-  spec.add_development_dependency('rubocop-performance', '1.7.1')
-  spec.add_development_dependency('rubocop-rspec', '1.42.0')
+  spec.add_development_dependency('rubocop', '1.22.3')
+  spec.add_development_dependency('rubocop-performance', '1.12.0')
+  spec.add_development_dependency('rubocop-rspec', '2.6.0')
 end
 
 # Add those dependencies required to run the project
 def self.add_dependencies spec
   spec.add_dependency('rails', '~> 6.0.3', '>= 6.0.3.1')
-  spec.add_dependency('rake', '~> 12.0')
+  spec.add_dependency('rake', '~> 12.3.0')
   spec.add_dependency('sinatra', '~> 2.0')
   spec.add_dependency('grape', '~> 1.5.3')
   spec.add_dependency('sidekiq', '~> 6.3', '>= 6.3.1')
