@@ -30,6 +30,7 @@ end
 
 # Add those dependencies required to run the project
 def self.add_dependencies spec
+  spec.add_dependency('net-smtp')
   spec.add_dependency('rails', '~> 6.0.3', '>= 6.0.3.1')
   spec.add_dependency('rake', '~> 12.3.0')
   spec.add_dependency('sinatra', '~> 2.0')

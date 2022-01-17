@@ -69,3 +69,5 @@ if (agent_path=ENV['AGENT_PATH'])
 else
    gem 'contrast-agent' if !!ENV['CI_TEST']
 end
+
+gem "net-smtp", "~> 0.3.1"
