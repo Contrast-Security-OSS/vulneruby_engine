@@ -54,6 +54,10 @@ group 'unicorn_max', optional: true do
   gem 'unicorn', '~> 6' if !!ENV['UNICORN_MAX']
 end
 
+if RUBY_VERSION >= '3.1.0'
+  gem "net-smtp", '~> 0.3.1'
+end
+
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
@@ -69,5 +73,3 @@ if (agent_path=ENV['AGENT_PATH'])
 else
    gem 'contrast-agent' if !!ENV['CI_TEST']
 end
-
-gem "net-smtp", "~> 0.3.1"
