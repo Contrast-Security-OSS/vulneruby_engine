@@ -8,6 +8,7 @@ require('vulneruby_engine/version')
 # Add those dependencies required to develop or test the project
 def self.add_dev_dependencies spec
   spec.add_development_dependency('headless', '~> 2.3')
+  spec.add_development_dependency('net-pop', '~> 0.1.1')
   spec.add_development_dependency('net-smtp', '~> 0.3.1')
   spec.add_development_dependency('rails-controller-testing')
   spec.add_development_dependency('rspec', '~> 3.0')
