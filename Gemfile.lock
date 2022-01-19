@@ -146,6 +146,10 @@ GEM
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.1)
       mustermann (>= 1.0.0)
+    net-imap (0.2.3)
+      digest
+      net-protocol
+      strscan
     net-pop (0.1.1)
       digest
       net-protocol
@@ -308,6 +312,7 @@ DEPENDENCIES
   fasterer
   flay
   headless (~> 2.3)
+  net-imap (~> 0.2.3)
   net-pop (~> 0.1.1)
   net-smtp (~> 0.3.1)
   rails-controller-testing
