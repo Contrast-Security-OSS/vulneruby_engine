@@ -2,6 +2,9 @@
 
 # Generates a few 'secrets' meant to represent API keys or something similar
 
+require 'vulneruby_engine/application_record'
+require 'vulneruby_engine/secret'
+
 return if ActiveRecord::Base.connection.migration_context.needs_migration?
 return if VulnerubyEngine::Secret.all.count.positive?
 
