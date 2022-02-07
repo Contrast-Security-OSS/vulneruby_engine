@@ -1,4 +1,4 @@
-# VulnerubyEngine
+# VulnerubyEngine 
 This Ruby on Rails engine exposes an API that makes use a vulnerable methods and functions when passed user data.
 
 ## Installation
