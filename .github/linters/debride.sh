@@ -3,6 +3,10 @@
 OUT_FILE="debride_out.txt"
 
 bundle config set path 'vendor/bundle'
+echo "Installing rails by itself"
+gem install rails
+
+echo "Installing everything from Gemfile.lock"
 bundle install
 
 # Exclude the API classes b/c we'll never call all of them / debride has issues tracking
