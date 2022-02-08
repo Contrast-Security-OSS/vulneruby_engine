@@ -30,7 +30,7 @@ end
 
 # Add those dependencies required to run the project
 def self.add_dependencies spec
-  spec.add_dependency('rails', '~> 6.0.4')
+  spec.add_dependency('rails', '~> 6.1.0')
   spec.add_dependency('rake', '~> 12.3.0')
   spec.add_dependency('sinatra', '~> 2.0')
   spec.add_dependency('grape', '~> 1.5.3')
