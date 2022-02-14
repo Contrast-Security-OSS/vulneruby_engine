@@ -3,6 +3,7 @@
 require_relative('boot')
 
 require('rails/all')
+require('sprockets/railtie')
 
 Bundler.require(*Rails.groups)
 Bundler.require(:passenger_max) if !!ENV['PASSENGER_MAX']
@@ -23,7 +24,7 @@ Warning.ignore(/Using the last argument as keyword parameters is deprecated/)
 module Dummy
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults(6.0)
+    config.load_defaults(7.0)
     log_path = ENV['APP_LOG'] || "log/#{ Rails.env }.log"
     config.logger = ActiveSupport::Logger.new(log_path)
 
