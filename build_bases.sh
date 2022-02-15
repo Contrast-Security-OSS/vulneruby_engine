@@ -6,7 +6,7 @@ SCRIPTNAME=$(basename "${BASH_SOURCE[0]}")
 APP_ROOT=$(dirname "${BASH_SOURCE[0]}")
 GIT_REPO=contrast-security-oss/vulneruby_engine
 
-RUBY_VERS="2.6 2.7 3 3.1"
+RUBY_VERS="2.7 3 3.1"
 
 
 usage() {
