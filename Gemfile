@@ -69,3 +69,5 @@ if (agent_path=ENV['AGENT_PATH'])
 else
    gem 'contrast-agent' if !!ENV['CI_TEST']
 end
+
+gem 'puma' # TODO: RUBY-1541; remove puma dependency for capybara

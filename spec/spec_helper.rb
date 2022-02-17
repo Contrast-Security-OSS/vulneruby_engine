@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+require 'webdrivers'
+require 'download_helpers'
+
 ENV['APP_LOG'] = 'STDOUT'
 require('simplecov')
 require('rails-controller-testing')
