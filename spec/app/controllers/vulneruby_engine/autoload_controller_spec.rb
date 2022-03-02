@@ -9,7 +9,7 @@ RSpec.describe('Autoload Controller', type: :request) do
   end
 
   describe 'POST /included' do
-    it 'renders the included input page' do
+    it 'renders the autoload input page' do
       post '/vulneruby_engine/autoload'
       expect(response).to(render_template(:run))
       expect(response.body).to(include('digest', 'random'))
