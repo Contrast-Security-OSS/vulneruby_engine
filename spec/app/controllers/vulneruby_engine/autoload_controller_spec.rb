@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe('Autoload Controller', type: :request) do
-  describe 'GET /included' do
+  describe 'GET /autoload' do
     it 'renders the included input page' do
       get '/vulneruby_engine/autoload'
       expect(response).to(render_template(:index))
