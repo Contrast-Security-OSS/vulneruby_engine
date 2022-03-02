@@ -2,13 +2,13 @@
 
 RSpec.describe('Autoload Controller', type: :request) do
   describe 'GET /autoload' do
-    it 'renders the included input page' do
+    it 'renders the autoload input page' do
       get '/vulneruby_engine/autoload'
       expect(response).to(render_template(:index))
     end
   end
 
-  describe 'POST /included' do
+  describe 'POST /autoload' do
     it 'renders the autoload input page' do
       post '/vulneruby_engine/autoload'
       expect(response).to(render_template(:run))
