@@ -3,6 +3,9 @@ module VulnerubyEngine
   # settings here to add new SQL and Serialization vulnerabilities as we begin
   # to test them.
   module Included
+
+    attr_accessor :result
+
     SOME_HARDCODED_PASSWORD = 'BadPracticeOfStoringPasswordInRepo'
     SOME_HARDCODED_KEY = 'BadPracticeOfStoringKeyInRepo'
     public_constant :SOME_HARDCODED_KEY
