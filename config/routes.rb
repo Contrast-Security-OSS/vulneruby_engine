@@ -5,6 +5,7 @@ VulnerubyEngine::Engine.routes.draw do
   root 'application#home'
 
   RULES = %w[
+    autoload
     cmdi_sidekiq
     cmdi
     included
