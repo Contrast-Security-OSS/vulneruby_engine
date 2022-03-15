@@ -50,6 +50,8 @@ jobs:
     needs: linting
     timeout-minutes: 10
     steps:
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@latest
       - name: Setup Dependencies Cache
         uses: actions/cache@v2
         with:
