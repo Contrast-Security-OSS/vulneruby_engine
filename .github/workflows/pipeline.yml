@@ -51,7 +51,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Install chromium
-        run: apt install -y chromium-browser
+        run: |
+          cd ./.github/linters/
+          chmod +x install_chrome.sh
+          ./install_chrome.sh
       - name: Setup Dependencies Cache
         uses: actions/cache@v2
         with:
