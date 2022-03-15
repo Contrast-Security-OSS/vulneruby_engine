@@ -51,7 +51,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Install chromium
-        run: apt-get install chromium chromium-chromedriver
+        run: apt-get update -y && apt-get install -y chromium-chromedriver
       - name: Setup Dependencies Cache
         uses: actions/cache@v2
         with:
