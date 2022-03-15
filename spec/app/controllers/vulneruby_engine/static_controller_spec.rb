@@ -8,26 +8,24 @@ RSpec.describe('Static Controller', type: :request) do
     # Set up teh Capybara & Selenium things
     before do
       directory ||= Pathname.new(Dir.mktmpdir)
-      chrome = Capybara.drivers[:chrome]
-      Capybara.drivers[:chrome] = lambda do |app|
-        chrome.call(app).tap do |driver|
+      chromium = Capybara.drivers[:chromium]
+      Capybara.drivers[:chromium] = lambda do |app|
+        chromium.call(app).tap do |driver|
           driver.browser.download_path = directory
         end
       end
-      Capybara.register_driver :chrome_headless do |app|
+      Capybara.register_driver :chromium_headless do |app|
         Capybara::Selenium::Driver.load_selenium
-        browser_options = ::Selenium::WebDriver::Chrome::Options.new.tap do |opts|
+        browser_options = ::Selenium::WebDriver::Chromium::Options.new.tap do |opts|
           opts.args << '--headless'
           opts.args << '--no-sandbox'
           opts.args << '--disable-site-isolation-trials'
           opts.args << '--enable-features=NetworkService,NetworkServiceInProcess'
         end
 
-        # Chrome >= 77
         browser_options.add_preference(:download, default_directory: directory)
 
-        Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options).tap do |driver|
-          # Chrome < 77
+        Capybara::Selenium::Driver.new(app, browser: :chromium, options: browser_options).tap do |driver|
           driver.browser.download_path = directory
         end
       end
