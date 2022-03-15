@@ -18,11 +18,8 @@ RSpec.describe('Static Controller', type: :request) do
         Capybara::Selenium::Driver.load_selenium
         browser_options = ::Selenium::WebDriver::Chrome::Options.new.tap do |opts|
           opts.args << '--headless'
-          opts.args << '--disable-gpu' if Gem.win_platform?
           opts.args << '--no-sandbox'
-          # Workaround https://bugs.chromium.org/p/chromedriver/issues/detail?id=2650&q=load&sort=-id&colspec=ID%20Status%20Pri%20Owner%20Summary
           opts.args << '--disable-site-isolation-trials'
-          opts.args << '--window-size=1920,1080'
           opts.args << '--enable-features=NetworkService,NetworkServiceInProcess'
         end
 
