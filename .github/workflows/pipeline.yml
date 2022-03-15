@@ -50,10 +50,6 @@ jobs:
     needs: linting
     timeout-minutes: 10
     steps:
-      - name: Install chromium
-        run: |
-          chmod +x ./.github/linters/install_chrome.sh
-          ./.github/linters/install_chrome.sh
       - name: Setup Dependencies Cache
         uses: actions/cache@v2
         with:
@@ -63,6 +59,10 @@ jobs:
             bundle-use-ruby-rspec
       - name: Copy Test Suite
         uses: actions/checkout@v2
+      - name: Install chromium
+        run: |
+          chmod +x ./.github/linters/install_chrome.sh
+          ./.github/linters/install_chrome.sh
       - name: Run the tests
         run: |
           gem install bundler
