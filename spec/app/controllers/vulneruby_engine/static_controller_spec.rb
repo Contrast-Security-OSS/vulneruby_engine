@@ -7,11 +7,11 @@ RSpec.describe('Static Controller', type: :request) do
   describe 'Static content', type: :system do
     # Set up teh Capybara & Selenium things
     before do
-      DownloadHelpers.create_directory
+      directory ||= Pathname.new(Dir.mktmpdir)
       chrome = Capybara.drivers[:chrome]
       Capybara.drivers[:chrome] = lambda do |app|
         chrome.call(app).tap do |driver|
-          driver.browser.download_path = DownloadHelpers.directory
+          driver.browser.download_path = directory
         end
       end
       Capybara.register_driver :chrome_headless do |app|
@@ -24,11 +24,11 @@ RSpec.describe('Static Controller', type: :request) do
         end
 
         # Chrome >= 77
-        browser_options.add_preference(:download, default_directory: DownloadHelpers.directory)
+        browser_options.add_preference(:download, default_directory: directory)
 
         Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options).tap do |driver|
           # Chrome < 77
-          driver.browser.download_path = DownloadHelpers.directory
+          driver.browser.download_path = directory
         end
       end
     end

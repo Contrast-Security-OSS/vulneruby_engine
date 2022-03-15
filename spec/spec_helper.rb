@@ -2,7 +2,6 @@
 
 require 'spec_helper'
 require 'webdrivers'
-require 'download_helpers'
 
 ENV['APP_LOG'] = 'STDOUT'
 require('simplecov')
