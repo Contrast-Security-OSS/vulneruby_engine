@@ -52,9 +52,8 @@ jobs:
     steps:
       - name: Install chromium
         run: |
-          cd ./.github/linters/
-          chmod +x install_chrome.sh
-          ./install_chrome.sh
+          chmod +x ./.github/linters/install_chrome.sh
+          ./.github/linters/install_chrome.sh
       - name: Setup Dependencies Cache
         uses: actions/cache@v2
         with:
