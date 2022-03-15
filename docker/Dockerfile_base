@@ -3,8 +3,7 @@ ARG RUBY_VER=2.5
 
 FROM ruby:${RUBY_VER}
 
-RUN apt-get update && apt-get install -y build-essential coreutils
-RUN apt-get update add --no-cache chromium chromium-chromedriver
+RUN apt-get update && apt-get install -y build-essential coreutils chromium chromium-chromedriver
 
 WORKDIR app
 
