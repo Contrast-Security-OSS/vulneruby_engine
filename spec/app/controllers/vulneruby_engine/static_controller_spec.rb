@@ -7,28 +7,15 @@ RSpec.describe('Static Controller', type: :request) do
   describe 'Static content', type: :system do
     # Set up teh Capybara & Selenium things
     before do
-      directory ||= Pathname.new(Dir.mktmpdir)
-      chromium = Capybara.drivers[:chromium]
-      Capybara.drivers[:chromium] = lambda do |app|
-        chromium.call(app).tap do |driver|
-          driver.browser.download_path = directory
-        end
+      Capybara.register_driver :headless_chromium do |app|
+        options = Selenium::WebDriver::Chrome::Options.new
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--window-size=1280,900")
+        Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: options)
       end
-      Capybara.register_driver :chromium_headless do |app|
-        Capybara::Selenium::Driver.load_selenium
-        browser_options = ::Selenium::WebDriver::Chromium::Options.new.tap do |opts|
-          opts.args << '--headless'
-          opts.args << '--no-sandbox'
-          opts.args << '--disable-site-isolation-trials'
-          opts.args << '--enable-features=NetworkService,NetworkServiceInProcess'
-        end
-
-        browser_options.add_preference(:download, default_directory: directory)
-
-        Capybara::Selenium::Driver.new(app, browser: :chromium, options: browser_options).tap do |driver|
-          driver.browser.download_path = directory
-        end
-      end
+      Capybara.javascript_driver = :headless_chromium
     end
 
     it 'does whatever this is' do

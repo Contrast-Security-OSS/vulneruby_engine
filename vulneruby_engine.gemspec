@@ -18,7 +18,6 @@ def self.add_dev_dependencies spec
   spec.add_development_dependency('sqlite3')
   spec.add_development_dependency('warning')
   spec.add_development_dependency('watir')
-  spec.add_development_dependency('webdrivers', '~> 4.0')
 end
 
 def self.add_lint_dependencies spec
