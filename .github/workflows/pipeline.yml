@@ -50,6 +50,8 @@ jobs:
     needs: linting
     timeout-minutes: 10
     steps:
+      - name: Install chromium
+        run: apt-get install chromium chromium-chromedriver
       - name: Setup Dependencies Cache
         uses: actions/cache@v2
         with:
