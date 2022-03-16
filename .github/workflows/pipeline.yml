@@ -59,22 +59,17 @@ jobs:
             bundle-use-ruby-rspec
       - name: Copy Test Suite
         uses: actions/checkout@v2
-      - name: Install Chrome Driver
-        run: |
-          chmod +x ./.github/linters/install_chrome.sh
-          ./.github/linters/install_chrome.sh
-      - name: Set Chrome Driver
-        run: |
-          export DISPLAY=:99
-          chromedriver --url-base=/wd/hub &
-          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
       - name: Run the tests
         run: |
           gem install bundler
           bundle config set path 'vendor/bundle'
           bundle install
           APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
-          APP_LOG=STDOUT bundle exec rspec
+          APP_LOG=STDOUT bundle exec rspec --exclude-pattern spec/app/controllers/vulneruby_engine/static_controller_spec.rb
+      - name: Run headless test
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: APP_LOG=STDOUT bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       - name: Move artifacts
         if: ${{ always() }}
         run: |
