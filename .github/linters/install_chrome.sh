@@ -8,7 +8,6 @@ ARCH="linux64"
 CHROMEAPP=google-chrome
 if ! type -a google-chrome > /dev/null 2>&1; then
     apt-get update
-    apt-get install -y google-chrome
 fi
 
 if [ "$VERSION" == "" ]; then
