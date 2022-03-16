@@ -11,6 +11,7 @@ PATH
   specs:
     vulneruby_engine (0.1.0)
       grape (~> 1.5.3)
+      nokogiri (>= 1.13.2)
       rails (~> 7.0.1)
       rake (~> 12.3.0)
       sidekiq (~> 6.3, >= 6.3.1)
@@ -323,6 +324,7 @@ DEPENDENCIES
   fasterer
   flay
   headless (~> 2.3)
+  nokogiri (>= 1.13.2)
   rails-controller-testing
   rspec (~> 3.0)
   rspec-rails
