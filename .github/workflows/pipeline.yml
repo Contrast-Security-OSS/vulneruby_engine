@@ -60,8 +60,7 @@ jobs:
       - name: Copy Test Suite
         uses: actions/checkout@v2
       - name: Install Chrome Driver
-        run: |
-            chmod +x ./.github/linters/install_chrome.sh
+        run: chmod +x ./.github/linters/install_chrome.sh
           ./.github/linters/install_chrome.sh
       - name: Set Chrome Driver
         run: |
