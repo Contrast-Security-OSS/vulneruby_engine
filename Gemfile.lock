@@ -152,6 +152,7 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.0)
     minitest (5.15.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
@@ -173,7 +174,8 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.3-x86_64-darwin)
+    nokogiri (1.13.3)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     numerizer (0.1.1)
     parallel (1.21.0)
@@ -317,14 +319,13 @@ GEM
     zeitwerk (2.5.4)
 
 PLATFORMS
-  x86_64-darwin-20
+  ruby
 
 DEPENDENCIES
   debride
   fasterer
   flay
   headless (~> 2.3)
-  nokogiri (>= 1.13.2)
   rails-controller-testing
   rspec (~> 3.0)
   rspec-rails
