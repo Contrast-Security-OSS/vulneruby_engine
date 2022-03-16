@@ -59,9 +59,10 @@ jobs:
             bundle-use-ruby-rspec
       - name: Copy Test Suite
         uses: actions/checkout@v2
-      - name: Install chromium
-      - uses: nanasess/setup-chromedriver@v1
-      - run: |
+      - name: Install Chrome Driver
+        uses: nanasess/setup-chromedriver@v1
+      - name: Set Chrome Driver
+        run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
