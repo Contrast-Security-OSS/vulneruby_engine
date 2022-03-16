@@ -60,9 +60,11 @@ jobs:
       - name: Copy Test Suite
         uses: actions/checkout@v2
       - name: Install chromium
-        run: |
-          chmod +x ./.github/linters/install_chrome.sh
-          ./.github/linters/install_chrome.sh
+        uses: nanasess/setup-chromedriver@v1
+      - run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
       - name: Run the tests
         run: |
           gem install bundler
