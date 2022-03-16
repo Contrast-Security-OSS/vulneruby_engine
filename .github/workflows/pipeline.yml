@@ -60,7 +60,7 @@ jobs:
       - name: Copy Test Suite
         uses: actions/checkout@v2
       - name: Install chromium
-        uses: nanasess/setup-chromedriver@v1
+      - uses: nanasess/setup-chromedriver@v1
       - run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
