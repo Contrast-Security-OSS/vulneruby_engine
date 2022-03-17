@@ -7,8 +7,7 @@ RSpec.describe('Static Controller', type: :request) do
   describe 'Static content', type: :system do
     # Set up teh Capybara & Selenium things
     let(:driver) do
-      Selenium::WebDriver::Chrome.path = '/__t/chromium/latest/x64/chrome'
-      options = Selenium::WebDriver::Chrome::Options.new
+      options = Selenium::WebDriver::Chrome::Options.new(binary: "/__t/chromium/latest/x64/chrome")
       options.add_argument("--headless")
       options.add_argument("--no-sandbox")
       options.add_argument("--disable-dev-shm-usage")
@@ -18,10 +17,7 @@ RSpec.describe('Static Controller', type: :request) do
       driver
     end
 
-    let(:headless) { Headless.new }
-
     before do
-      headless.start
       # Capybara.register_driver :headless_chromium do |app|
       #   options = Selenium::WebDriver::Chrome::Options.new
       #   options.add_argument("--headless")
@@ -34,7 +30,6 @@ RSpec.describe('Static Controller', type: :request) do
     end
 
     after do
-      headless.destroy
       driver.quit
     end
 
