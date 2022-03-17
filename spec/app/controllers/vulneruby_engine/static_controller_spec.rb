@@ -10,7 +10,6 @@ RSpec.describe('Static Controller', type: :request) do
     # let(:headless) { Headless.new }
 
     before do
-      headless.start
       Capybara.register_driver :headless_chromium do |app|
         options = Selenium::WebDriver::Chrome::Options.new
         options.add_argument("--headless")
