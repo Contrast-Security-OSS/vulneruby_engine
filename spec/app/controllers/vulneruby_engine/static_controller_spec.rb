@@ -6,8 +6,17 @@ require 'rails_helper'
 RSpec.describe('Static Controller', type: :request) do
   describe 'Static content', type: :system do
     # Set up teh Capybara & Selenium things
-    # let(:driver) { Selenium::WebDriver.for :chrome }
-    # let(:headless) { Headless.new }
+    let(:driver) do
+      Selenium::WebDriver::Chrome.path = '/usr/bin/google-chrome'
+      options = Selenium::WebDriver::Chrome::Options.new
+      options.add_argument("--headless")
+      options.add_argument("--no-sandbox")
+      options.add_argument("--disable-dev-shm-usage")
+      options.add_argument("--window-size=1280,900")
+
+      driver = Selenium::WebDriver.for :chrome, desired_capabilities: options
+      driver
+    end
 
     before do
       Capybara.register_driver :headless_chromium do |app|
@@ -21,14 +30,13 @@ RSpec.describe('Static Controller', type: :request) do
       Capybara.javascript_driver = :headless_chromium
     end
 
-    # after do
-    #   driver.quit
-    #   headless.destroy
-    # end
+    after do
+      driver.quit
+    end
 
     it 'verifies selenium is working' do
-      visit '/vulneruby_engine/static/index'
-      expect(page).to have_content('Hello world')
+      driver.visit '/vulneruby_engine/static/index'
+      expect(driver.page).to have_content('Hello world')
     end
   end
 end
