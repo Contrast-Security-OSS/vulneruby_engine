@@ -66,6 +66,8 @@ jobs:
           bundle install
           APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
           APP_LOG=STDOUT bundle exec rspec --exclude-pattern spec/app/controllers/vulneruby_engine/static_controller_spec.rb
+      - name: Install sudo package
+        run: apt-get -y update && apt-get -y install sudo
       - name: Run headless test
         uses: GabrielBB/xvfb-action@v1
         with:
