@@ -27,7 +27,7 @@ RSpec.describe('Static Controller', type: :request) do
       headless.destroy
     end
 
-    it 'does whatever this is' do
+    it 'verifies selenium is working' do
       driver.visit '/vulneruby_engine/static/index'
       expect(driver.page).to have_content('Hello world')
     end
