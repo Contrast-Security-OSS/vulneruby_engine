@@ -76,7 +76,10 @@ jobs:
       - name: Fix Dependencies
         run: sudo apt-get --fix-broken install
       - uses: browser-actions/setup-chrome@latest
-      - run: which chrome
+      - run: | 
+          echo "export PATH=$PATH:/${{ which chrome }}" >> ~/.profile
+          source ~/.profile
+          echo $PATH
       - name: Run headless test
         run: bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       - name: Move artifacts
