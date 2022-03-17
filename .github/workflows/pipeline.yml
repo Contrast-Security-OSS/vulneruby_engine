@@ -76,7 +76,6 @@ jobs:
       - name: Fix Dependencies
         run: sudo apt-get --fix-broken install
       - uses: browser-actions/setup-chrome@latest
-      - run: chrome --version
         with:
           chrome-version: stable
       - run: |
