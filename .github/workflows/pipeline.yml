@@ -80,8 +80,11 @@ jobs:
           chrome-version: stable
       - run: |
           ls /usr/bin/
-          ls /__t/chromium/latest/x64/chrome
-          export PATH=$PATH:/__t/chromium/latest/x64/chrome
+          echo "after usb/bin"
+          ls /__t/chromium/latest/x64/
+          ls -l /__t/chromium/latest/x64/ | grep chrome
+          chrome --version
+          export PATH=$PATH:/__t/chromium/latest/x64/
           echo $PATH
       - name: Run headless test
         run: bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
