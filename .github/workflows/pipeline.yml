@@ -47,7 +47,7 @@ jobs:
     name: "Running rspec"
     runs-on: ubuntu-latest
     container: ruby:2.7
-    needs: linting
+    # needs: linting
     timeout-minutes: 10
     steps:
       - name: Setup Dependencies Cache
