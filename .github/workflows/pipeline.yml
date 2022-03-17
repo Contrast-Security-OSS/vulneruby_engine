@@ -76,12 +76,11 @@ jobs:
       - name: Fix Dependencies
         run: sudo apt-get --fix-broken install
       - uses: browser-actions/setup-chrome@latest
-      - run: chrome --version
-      - run: CHROMIUM_BIN=$(which chrome)
+      - run: which chrome
       - name: Run headless test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: CHROMIUM_BIN=$(which chrome) bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
+          run: bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       - name: Move artifacts
         if: ${{ always() }}
         run: |
