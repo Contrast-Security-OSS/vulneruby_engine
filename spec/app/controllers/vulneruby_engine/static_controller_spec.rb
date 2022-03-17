@@ -7,11 +7,12 @@ RSpec.describe('Static Controller', type: :request) do
   describe 'Static content', type: :system do
     # Set up teh Capybara & Selenium things
     let(:driver) do
-      options = Selenium::WebDriver::Chrome::Options.new(binary: "/__t/chromium/latest/x64/chrome")
-      options.add_argument("--headless")
-      options.add_argument("--no-sandbox")
-      options.add_argument("--disable-dev-shm-usage")
-      options.add_argument("--window-size=1280,900")
+      options = Selenium::WebDriver::Chrome::Options.new(capabilities: {
+        'browserName': 'chrome',
+        "chromeOptions": {
+          binary: "/__t/chromium/latest/x64/chrome"
+        },
+      })
 
       driver = Selenium::WebDriver.for :chrome, desired_capabilities: options
       driver
