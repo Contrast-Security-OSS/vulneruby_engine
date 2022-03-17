@@ -7,7 +7,6 @@ RSpec.describe('Static Controller', type: :request) do
   describe 'Static content', type: :system do
     # Set up teh Capybara & Selenium things
     let(:driver) do
-      Selenium::WebDriver::Chrome.path = '/usr/bin/google-chrome'
       options = Selenium::WebDriver::Chrome::Options.new
       options.add_argument("--headless")
       options.add_argument("--no-sandbox")
@@ -18,19 +17,23 @@ RSpec.describe('Static Controller', type: :request) do
       driver
     end
 
+    let(:headless) { Headless.new }
+
     before do
-      Capybara.register_driver :headless_chromium do |app|
-        options = Selenium::WebDriver::Chrome::Options.new
-        options.add_argument("--headless")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--window-size=1280,900")
-        Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: options)
-      end
-      Capybara.javascript_driver = :headless_chromium
+      headless.start
+      # Capybara.register_driver :headless_chromium do |app|
+      #   options = Selenium::WebDriver::Chrome::Options.new
+      #   options.add_argument("--headless")
+      #   options.add_argument("--no-sandbox")
+      #   options.add_argument("--disable-dev-shm-usage")
+      #   options.add_argument("--window-size=1280,900")
+      #   Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: options)
+      # end
+      # Capybara.javascript_driver = :headless_chromium
     end
 
     after do
+      headless.destroy
       driver.quit
     end
 
