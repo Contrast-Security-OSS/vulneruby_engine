@@ -77,9 +77,7 @@ jobs:
         run: sudo apt-get --fix-broken install
       - uses: browser-actions/setup-chrome@latest
       - run: |
-          $CHROME_PATH=which chrome
-          echo "export PATH=$PATH:/${$CHROME_PATH}" >> ~/.profile
-          source ~/.profile
+          export PATH=$PATH:/__t/chromium/latest/x64/chrome
           echo $PATH
       - name: Run headless test
         run: bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
