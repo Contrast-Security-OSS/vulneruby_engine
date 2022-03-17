@@ -79,7 +79,7 @@ jobs:
         with:
           chrome-version: stable
       - run: |
-          echo which chrome
+          which chrome
           export PATH=$PATH:/__t/chromium/latest/x64/
           echo $PATH
       - name: Run headless test

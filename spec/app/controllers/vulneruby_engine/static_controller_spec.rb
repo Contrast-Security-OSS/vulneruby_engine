@@ -16,7 +16,7 @@ RSpec.describe('Static Controller', type: :request) do
     end
 
     before do
-      Selenium::WebDriver::Chrome.path = "/__t/chromium/latest/x64"
+      # Selenium::WebDriver::Chrome.path = "/__t/chromium/latest/x64"
       # Capybara.register_driver :headless_chromium do |app|
       #   options = Selenium::WebDriver::Chrome::Options.new
       #   options.add_argument("--headless")
