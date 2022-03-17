@@ -79,6 +79,8 @@ jobs:
         with:
           chrome-version: stable
       - run: |
+          ls /usr/bin/
+          ls /__t/chromium/latest/x64/chrome
           export PATH=$PATH:/__t/chromium/latest/x64/chrome
           echo $PATH
       - name: Run headless test
