@@ -7,7 +7,7 @@ RSpec.describe('Static Controller', type: :request) do
   describe 'Static content', type: :system do
     # Set up teh Capybara & Selenium things
     let(:driver) do
-      Selenium::WebDriver::Chrome.path = exec('which chrome')
+      Selenium::WebDriver::Chrome.path = '/__t/chromium/latest/x64/chrome'
       options = Selenium::WebDriver::Chrome::Options.new
       options.add_argument("--headless")
       options.add_argument("--no-sandbox")
