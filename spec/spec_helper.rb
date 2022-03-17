@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'webdrivers'
 require 'selenium-webdriver'
-require 'headless'
 
 ENV['APP_LOG'] = 'STDOUT'
 require('simplecov')
