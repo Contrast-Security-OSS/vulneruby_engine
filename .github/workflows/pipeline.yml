@@ -11,38 +11,38 @@ on:
       - master
       - develop
 jobs:
-  linting:
-    name: "Running ${{ matrix.linter }}"
-    runs-on: ubuntu-latest
-    container: ruby:2.7
-    timeout-minutes: 10
-    strategy:
-      matrix:
-        linter: ['debride', 'fasterer', 'flay', 'rubocop']
-    steps:
-      - name: Setup Dependencies Cache
-        uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: bundle-use-linter-${{ matrix.linter }}
-          restore-keys: |
-            bundle-use-linter-${{ matrix.linter }}
-      - name: Install Bundler
-        run: |
-          gem install bundler
-      - name: Copy Test Suite
-        uses: actions/checkout@v2
-      - name: Run the linter
-        run: |
-          cd ./.github/linters/
-          chmod +x ${{ matrix.linter }}.sh
-          ./${{ matrix.linter }}.sh
-      - name: Upload results
-        if: failure()
-        uses: actions/upload-artifact@v2
-        with:
-          name: linter-artifacts-${{ matrix.linter }}
-          path: ./${{ matrix.linter }}_out.txt
+  # linting:
+  #   name: "Running ${{ matrix.linter }}"
+  #   runs-on: ubuntu-latest
+  #   container: ruby:2.7
+  #   timeout-minutes: 10
+  #   strategy:
+  #     matrix:
+  #       linter: ['debride', 'fasterer', 'flay', 'rubocop']
+  #   steps:
+  #     - name: Setup Dependencies Cache
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: vendor/bundle
+  #         key: bundle-use-linter-${{ matrix.linter }}
+  #         restore-keys: |
+  #           bundle-use-linter-${{ matrix.linter }}
+  #     - name: Install Bundler
+  #       run: |
+  #         gem install bundler
+  #     - name: Copy Test Suite
+  #       uses: actions/checkout@v2
+  #     - name: Run the linter
+  #       run: |
+  #         cd ./.github/linters/
+  #         chmod +x ${{ matrix.linter }}.sh
+  #         ./${{ matrix.linter }}.sh
+  #     - name: Upload results
+  #       if: failure()
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: linter-artifacts-${{ matrix.linter }}
+  #         path: ./${{ matrix.linter }}_out.txt
   rspec:
     name: "Running rspec"
     runs-on: ubuntu-latest
@@ -76,8 +76,9 @@ jobs:
       - name: Fix Dependencies
         run: sudo apt-get --fix-broken install
       - uses: browser-actions/setup-chrome@latest
-      - run: | 
-          echo "export PATH=$PATH:/${which chrome}" >> ~/.profile
+      - run: |
+          CHROME_PATH = which chrome
+          echo "export PATH=$PATH:/${CHROME_PATH}" >> ~/.profile
           source ~/.profile
           echo $PATH
       - name: Run headless test
