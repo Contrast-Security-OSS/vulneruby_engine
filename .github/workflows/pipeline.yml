@@ -79,11 +79,6 @@ jobs:
         with:
           chrome-version: stable
       - run: |
-          ls /usr/bin/
-          echo "after usb/bin"
-          ls /__t/chromium/latest/x64/
-          ls -l /__t/chromium/latest/x64/ | grep chrome
-          chrome --version
           export PATH=$PATH:/__t/chromium/latest/x64/
           echo $PATH
       - name: Run headless test
