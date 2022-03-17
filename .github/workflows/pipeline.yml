@@ -77,7 +77,7 @@ jobs:
         run: sudo apt-get --fix-broken install
       - uses: browser-actions/setup-chrome@latest
       - run: | 
-          echo "export PATH=$PATH:/${{ which chrome }}" >> ~/.profile
+          echo "export PATH=$PATH:/${which chrome}" >> ~/.profile
           source ~/.profile
           echo $PATH
       - name: Run headless test
