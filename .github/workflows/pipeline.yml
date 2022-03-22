@@ -98,6 +98,7 @@ jobs:
 #          which chrome
 #          export PATH=$PATH:/__t/chromium/latest/x64/
 #          echo $PATH
+#     FROM https://github.com/nbulaj/ruby-chromedriver
       - name: Install dependencies & Chrome
         run: |
           apt-get -y update
