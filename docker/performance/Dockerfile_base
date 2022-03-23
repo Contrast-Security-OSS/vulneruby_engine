@@ -1,4 +1,4 @@
-FROM ruby:2.7
+FROM ruby:3.1
 
 RUN apt-get update && apt-get install -y build-essential coreutils
 
@@ -7,7 +7,6 @@ WORKDIR app
 # Set Rails Env Vars
 ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 ENV SECRET_KEY_BASE=foobarblah
-ENV RAILS_ENV=production
 ENV APP_HOME=./
 ENV RAILS_SERVE_STATIC_FILES=true
 ENV WEB_CONCURRENCY=1
@@ -46,4 +45,22 @@ ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/agent/messages
 ENV APP_LOG=/tmp/agent/app.log
 
 RUN bundle exec rake app:assets:precompile
-RUN bundle exec rails db:migrate
+RUN bundle exec rails db:migrate RAILS_ENV=test
+
+# https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
+RUN apt-get -y update  \
+    && apt-get -y --no-install-recommends install zlib1g-dev liblzma-dev wget xvfb unzip libnss3 nodejs \
+    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
+    && export CHROME_VERSION=99.0.4844.82-1 \
+    && apt-get -y update && apt-get -y --no-install-recommends install google-chrome-stable=$CHROME_VERSION \
+    && rm -rf /var/lib/apt/lists/*  \
+    && export DRIVER_VERSION=99.0.4844.51 \
+    && wget -O /tmp/chromedriver.zip "http://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip" \
+    && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
+    && rm /tmp/chromedriver.zip \
+    && chmod ugo+rx /usr/bin/chromedriver \
+    && apt-mark hold google-chrome-stable \
+    && bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
+
+#RUN bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
