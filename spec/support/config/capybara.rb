@@ -3,11 +3,7 @@ JS_DRIVER = :selenium_chrome_headless
 Capybara.default_driver = :rack_test
 Capybara.javascript_driver = JS_DRIVER
 Capybara.default_max_wait_time = 2
-
-Capybara.register_server :puma do |app, port, host|
-    require 'rack/handler/puma'
-    Rack::Handler::Puma.run(app, Host: host, Port: port, Threads: "0:4")
-end
+Capybara.server = :webrick
 
 RSpec.configure do |config|
   config.before(:each) do |example|
