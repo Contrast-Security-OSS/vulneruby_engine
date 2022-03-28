@@ -56,8 +56,6 @@ jobs:
           key: bundle-use-ruby-rspec
           restore-keys: |
             bundle-use-ruby-rspec
-      - name: Add Server dependency
-        run: gem install puma
       - name: Copy Test Suite
         uses: actions/checkout@v2
       - name: Run the tests
@@ -67,6 +65,8 @@ jobs:
           bundle install
           APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
           APP_LOG=STDOUT bundle exec rspec --exclude-pattern spec/app/controllers/vulneruby_engine/static_controller_spec.rb
+      - name: Add Server dependency
+        run: gem install puma
       - name: Run headless test
         run: bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       - name: Move artifacts
