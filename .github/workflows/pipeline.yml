@@ -46,13 +46,12 @@ jobs:
   rspec:
     name: "Running rspec"
     runs-on: macos-latest
-    container: ruby:2.7
     # needs: linting
     timeout-minutes: 10
     steps:
-      # - name: Install OS dependencies - brew
-      #   run: |
-      #     brew install docker git make autoconf automake libtool unzip shared-mime-info
+      - name: Install OS dependencies - brew
+        run: |
+          brew install docker git make autoconf automake libtool unzip shared-mime-info
       - name: Setup Dependencies Cache
         uses: actions/cache@v2
         with:
@@ -60,30 +59,30 @@ jobs:
           key: bundle-use-ruby-rspec
           restore-keys: |
             bundle-use-ruby-rspec
-      # - name: Copy Test Suite
-      #   uses: actions/checkout@v2
-      # - name: Run the tests
-      #   run: |
-      #     gem install bundler
-      #     bundle config set path 'vendor/bundle'
-      #     bundle install
-      #     APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
-      #     APP_LOG=STDOUT bundle exec rspec --exclude-pattern spec/app/controllers/vulneruby_engine/static_controller_spec.rb
+      - name: Copy Test Suite
+        uses: actions/checkout@v2
+      - name: Run the tests
+        run: |
+          gem install bundler
+          bundle config set path 'vendor/bundle'
+          bundle install
+          APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
+          APP_LOG=STDOUT bundle exec rspec --exclude-pattern spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       # - name: Install Browser Dependencies
       #   run: |
       #     brew update
       #     brew install chromedriver
       #     brew install google-chrome
-      # - name: Run headless test
-      #   run: bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
-      # - name: Move artifacts
-      #   if: ${{ always() }}
-      #   run: |
-      #     mv ./coverage ./upload/
-      #     mv ./test-results/results.xml ./upload/
-      # - name: Upload results
-      #   if: ${{ always() }}
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: rspec-artifacts
-      #     path: ./upload/**
+      - name: Run headless test
+        run: bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
+      - name: Move artifacts
+        if: ${{ always() }}
+        run: |
+          mv ./coverage ./upload/
+          mv ./test-results/results.xml ./upload/
+      - name: Upload results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: rspec-artifacts
+          path: ./upload/**
