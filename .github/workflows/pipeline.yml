@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Install OS dependencies - brew
         run: |
-          brew install git make autoconf automake libtool unzip shared-mime-info
+          brew install docker git make autoconf automake libtool unzip shared-mime-info
       # - name: Setup Dependencies Cache
       #   uses: actions/cache@v2
       #   with:
