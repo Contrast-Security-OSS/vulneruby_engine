@@ -66,7 +66,7 @@ jobs:
           APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
           APP_LOG=STDOUT bundle exec rspec --exclude-pattern spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       - name: Add Server dependency
-        run: gem install puma
+        run: bundle exec gem install puma
       - name: Run headless test
         run: bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       - name: Move artifacts
