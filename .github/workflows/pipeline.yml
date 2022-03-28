@@ -11,42 +11,42 @@ on:
       - master
       - develop
 jobs:
-  # linting:
-  #   name: "Running ${{ matrix.linter }}"
-  #   runs-on: ubuntu-latest
-  #   container: ruby:2.7
-  #   timeout-minutes: 10
-  #   strategy:
-  #     matrix:
-  #       linter: ['debride', 'fasterer', 'flay', 'rubocop']
-  #   steps:
-  #     - name: Setup Dependencies Cache
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: vendor/bundle
-  #         key: bundle-use-linter-${{ matrix.linter }}
-  #         restore-keys: |
-  #           bundle-use-linter-${{ matrix.linter }}
-  #     - name: Install Bundler
-  #       run: |
-  #         gem install bundler
-  #     - name: Copy Test Suite
-  #       uses: actions/checkout@v2
-  #     - name: Run the linter
-  #       run: |
-  #         cd ./.github/linters/
-  #         chmod +x ${{ matrix.linter }}.sh
-  #         ./${{ matrix.linter }}.sh
-  #     - name: Upload results
-  #       if: failure()
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: linter-artifacts-${{ matrix.linter }}
-  #         path: ./${{ matrix.linter }}_out.txt
+  linting:
+    name: "Running ${{ matrix.linter }}"
+    runs-on: ubuntu-latest
+    container: ruby:2.7
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        linter: ['debride', 'fasterer', 'flay', 'rubocop']
+    steps:
+      - name: Setup Dependencies Cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: bundle-use-linter-${{ matrix.linter }}
+          restore-keys: |
+            bundle-use-linter-${{ matrix.linter }}
+      - name: Install Bundler
+        run: |
+          gem install bundler
+      - name: Copy Test Suite
+        uses: actions/checkout@v2
+      - name: Run the linter
+        run: |
+          cd ./.github/linters/
+          chmod +x ${{ matrix.linter }}.sh
+          ./${{ matrix.linter }}.sh
+      - name: Upload results
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: linter-artifacts-${{ matrix.linter }}
+          path: ./${{ matrix.linter }}_out.txt
   rspec:
     name: "Running rspec"
     runs-on: macos-latest
-    # needs: linting
+    needs: linting
     timeout-minutes: 10
     steps:
       - name: Setup Dependencies Cache
@@ -56,13 +56,15 @@ jobs:
           key: bundle-use-ruby-rspec
           restore-keys: |
             bundle-use-ruby-rspec
+      - name: Add Server dependency
+        run: gem install puma
       - name: Copy Test Suite
         uses: actions/checkout@v2
       - name: Run the tests
         run: |
           gem install bundler
           bundle config set path 'vendor/bundle'
-          PUMA_MAX=true bundle install
+          bundle install
           APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
           APP_LOG=STDOUT bundle exec rspec --exclude-pattern spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       - name: Run headless test
