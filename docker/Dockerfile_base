@@ -1,7 +1,7 @@
 # Just default. Env var takes precedence.
 ARG RUBY_VER=3.1
 
-FROM ruby:${RUBY_VER}
+FROM cimg/ruby:3.1-browsers
 
 USER root
 #
@@ -9,38 +9,38 @@ USER root
 # Taken and modified from Selenium Docker File
 #
 #
-ARG CHROME_VERSION='google-chrome-stable'
-RUN apt-get -y update  \
-    && apt-get -y --no-install-recommends install zlib1g-dev liblzma-dev wget xvfb unzip libnss3 nodejs \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
-    && apt-get update -qqy \
-    && apt-get -qqy install \
-        ${CHROME_VERSION:-google-chrome-stable} \
-    && rm /etc/apt/sources.list.d/google-chrome.list \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+# ARG CHROME_VERSION='google-chrome-stable'
+# RUN apt-get -y update  \
+#     && apt-get -y --no-install-recommends install zlib1g-dev liblzma-dev wget xvfb unzip libnss3 nodejs \
+#     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+#     && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+#     && apt-get update -qqy \
+#     && apt-get -qqy install \
+#         ${CHROME_VERSION:-google-chrome-stable} \
+#     && rm /etc/apt/sources.list.d/google-chrome.list \
+#     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
-COPY docker/wrap_chrome_binary.sh /opt/bin/wrap_chrome_binary.sh
-RUN chmod +x /opt/bin/wrap_chrome_binary.sh
-RUN /opt/bin/wrap_chrome_binary.sh
+# COPY docker/wrap_chrome_binary.sh /opt/bin/wrap_chrome_binary.sh
+# RUN chmod +x /opt/bin/wrap_chrome_binary.sh
+# RUN /opt/bin/wrap_chrome_binary.sh
 
-USER 1200
+# USER 1200
 
-ARG CHROME_DRIVER_VERSION
-RUN if [ -z "$CHROME_DRIVER_VERSION" ]; \
-  then CHROME_MAJOR_VERSION=$(google-chrome --version | sed -E "s/.* ([0-9]+)(\.[0-9]+){3}.*/\1/") \
-    && CHROME_DRIVER_VERSION=$(wget --no-verbose -O - "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_MAJOR_VERSION}"); \
-  fi \
-  && echo "Using chromedriver version: "$CHROME_DRIVER_VERSION \
-  && wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
-  && rm -rf /opt/selenium/chromedriver \
-  && unzip /tmp/chromedriver_linux64.zip -d /opt/selenium \
-  && rm /tmp/chromedriver_linux64.zip \
-  && mv /opt/selenium/chromedriver /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION \
-  && chmod 755 /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION \
-  && sudo ln -fs /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION /usr/bin/chromedriver
+# ARG CHROME_DRIVER_VERSION
+# RUN if [ -z "$CHROME_DRIVER_VERSION" ]; \
+#   then CHROME_MAJOR_VERSION=$(google-chrome --version | sed -E "s/.* ([0-9]+)(\.[0-9]+){3}.*/\1/") \
+#     && CHROME_DRIVER_VERSION=$(wget --no-verbose -O - "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_MAJOR_VERSION}"); \
+#   fi \
+#   && echo "Using chromedriver version: "$CHROME_DRIVER_VERSION \
+#   && wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
+#   && rm -rf /opt/selenium/chromedriver \
+#   && unzip /tmp/chromedriver_linux64.zip -d /opt/selenium \
+#   && rm /tmp/chromedriver_linux64.zip \
+#   && mv /opt/selenium/chromedriver /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION \
+#   && chmod 755 /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION \
+#   && sudo ln -fs /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION /usr/bin/chromedriver
 
-RUN echo "chrome" > /opt/selenium/browser_name
+# RUN echo "chrome" > /opt/selenium/browser_name
 #
 #
 # Harold's chrome driver install
@@ -59,28 +59,12 @@ WORKDIR app
 
 COPY . .
 RUN apt-get install xvfb
-#
-#
-# Fireforx + geckodriver installation
-#
-#
-# RUN wget -O ~/FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64" \
-#     && tar xjf ~/FirefoxSetup.tar.bz2 -C /opt/ \
-#     && mkdir /usr/lib/firefox/ \
-#     && ln -s /opt/firefox/firefox /usr/lib/firefox/firefox \
-#     && wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz \
-#     && tar -xvzf geckodriver-v0.30.0-linux64.tar.gz -C /opt/ \
-#     && chmod +x /opt/geckodriver \
-#     && mkdir /usr/lib/geckodriver \
-#     && ln -s /opt/geckodriver /usr/lib/geckodriver/geckodriver \
-#     && export PATH=$PATH:/usr/lib/geckodriver/geckodriver \
-#     && export PATH=$PATH:/usr/lib/firefox/firefox
 
 RUN gem install bundler
 RUN bundle install
 RUN Xvfb :99 -ac -screen 0 1280x1024x24 &
 RUN export DISPLAY=:99
-RUN bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
+# RUN bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
 
 # RUN apt-get update && apt-get install -y build-essential coreutils
 
