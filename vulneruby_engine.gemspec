@@ -8,7 +8,6 @@ require('vulneruby_engine/version')
 # Add those dependencies required to develop or test the project
 def self.add_dev_dependencies spec
   spec.add_development_dependency('capybara')
-  spec.add_development_dependency('headless', '~> 2.3')
   spec.add_development_dependency('rails-controller-testing')
   spec.add_development_dependency('rspec', '~> 3.0')
   spec.add_development_dependency('rspec-rails')
@@ -18,7 +17,6 @@ def self.add_dev_dependencies spec
   spec.add_development_dependency('sqlite3')
   spec.add_development_dependency('warning')
   spec.add_development_dependency('watir')
-  spec.add_development_dependency('webdrivers', '~> 4.0')
 end
 
 def self.add_lint_dependencies spec

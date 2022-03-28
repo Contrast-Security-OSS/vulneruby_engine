@@ -45,7 +45,7 @@ jobs:
   #         path: ./${{ matrix.linter }}_out.txt
   rspec:
     name: "Running rspec"
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     container: ruby:2.7
     # needs: linting
     timeout-minutes: 10
@@ -66,22 +66,11 @@ jobs:
           bundle install
           APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
           APP_LOG=STDOUT bundle exec rspec --exclude-pattern spec/app/controllers/vulneruby_engine/static_controller_spec.rb
-      - name: Install sudo package
-        run: apt-get -y update && apt-get -y install sudo
-      - name: Install Dependencies
-        run: sudo apt-get -y install ca-certificates fonts-liberation libasound2 libatk-bridge2.0-0 libatk1.0-0
-          libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libglib2.0-0 libgtk-3-0 libnspr4
-          libnss3 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1
-          libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils
-      - name: Fix Dependencies
-        run: sudo apt-get --fix-broken install
-      - uses: browser-actions/setup-chrome@latest
-        with:
-          chrome-version: stable
-      - run: |
-          which chrome
-          export PATH=$PATH:/__t/chromium/latest/x64/
-          echo $PATH
+      - name: Install MacOS Dependencies
+        run: |
+          brew update
+          brew install chromedriver
+          brew install google-chrome
       - name: Run headless test
         run: bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       - name: Move artifacts
