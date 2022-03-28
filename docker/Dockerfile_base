@@ -1,107 +1,44 @@
 # Just default. Env var takes precedence.
-ARG RUBY_VER=3.1
+ARG RUBY_VER=2.5
 
-FROM cimg/ruby:3.1-browsers
+FROM ruby:${RUBY_VER}
 
-USER root
-#
-#
-# Taken and modified from Selenium Docker File
-#
-#
-# ARG CHROME_VERSION='google-chrome-stable'
-# RUN apt-get -y update  \
-#     && apt-get -y --no-install-recommends install zlib1g-dev liblzma-dev wget xvfb unzip libnss3 nodejs \
-#     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-#     && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
-#     && apt-get update -qqy \
-#     && apt-get -qqy install \
-#         ${CHROME_VERSION:-google-chrome-stable} \
-#     && rm /etc/apt/sources.list.d/google-chrome.list \
-#     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
-
-# COPY docker/wrap_chrome_binary.sh /opt/bin/wrap_chrome_binary.sh
-# RUN chmod +x /opt/bin/wrap_chrome_binary.sh
-# RUN /opt/bin/wrap_chrome_binary.sh
-
-# USER 1200
-
-# ARG CHROME_DRIVER_VERSION
-# RUN if [ -z "$CHROME_DRIVER_VERSION" ]; \
-#   then CHROME_MAJOR_VERSION=$(google-chrome --version | sed -E "s/.* ([0-9]+)(\.[0-9]+){3}.*/\1/") \
-#     && CHROME_DRIVER_VERSION=$(wget --no-verbose -O - "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_MAJOR_VERSION}"); \
-#   fi \
-#   && echo "Using chromedriver version: "$CHROME_DRIVER_VERSION \
-#   && wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
-#   && rm -rf /opt/selenium/chromedriver \
-#   && unzip /tmp/chromedriver_linux64.zip -d /opt/selenium \
-#   && rm /tmp/chromedriver_linux64.zip \
-#   && mv /opt/selenium/chromedriver /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION \
-#   && chmod 755 /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION \
-#   && sudo ln -fs /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION /usr/bin/chromedriver
-
-# RUN echo "chrome" > /opt/selenium/browser_name
-#
-#
-# Harold's chrome driver install
-#
-#
-# RUN apt-get -y update && apt-get -y --no-install-recommends install google-chrome-stable=$CHROME_VERSION \
-#     && rm -rf /var/lib/apt/lists/*  \
-#     && export DRIVER_VERSION=99.0.4844.51 \
-#     && wget -O /tmp/chromedriver.zip "http://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip" \
-#     && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
-#     && rm /tmp/chromedriver.zip \
-#     && chmod ugo+rx /usr/bin/chromedriver \
-#     && apt-mark hold google-chrome-stable
+RUN apt-get update && apt-get install -y build-essential coreutils
 
 WORKDIR app
 
+ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+ENV SECRET_KEY_BASE=foobarblah
+ENV RAILS_ENV=production
+ENV APP_HOME=./
+
 COPY . .
-RUN apt-get install xvfb
+RUN rm **/*.log | true
 
 RUN gem install bundler
+
+ENV PUMA=true
+ENV THIN=true
+
+RUN bundle config set with 'puma' 'thin'
 RUN bundle install
-RUN Xvfb :99 -ac -screen 0 1280x1024x24 &
-RUN export DISPLAY=:99
-# RUN bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
 
-# RUN apt-get update && apt-get install -y build-essential coreutils
+# this is used by the volume in docker-compose
+RUN mkdir -p /tmp/agent/messages
+RUN mkdir -p tmp/pids
+ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/agent/agent.log
+ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/agent/service.log
+ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/agent/messages
+ENV APP_LOG=/tmp/agent/app.log
 
-# WORKDIR app
+RUN bundle exec rake app:assets:precompile
+RUN bundle exec rails db:migrate
 
-# ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
-# ENV SECRET_KEY_BASE=foobarblah
-# ENV RAILS_ENV=production
-# ENV APP_HOME=./
+# Just in case, clean up local.
+RUN rm ./contrast_security.yaml ./spec/dummy/contrast_security.yaml || true
+RUN rm ./*log ./spec/dummy/*log || true
+RUN rm ./agent || true
 
-# COPY . .
-# RUN rm **/*.log | true
+RUN touch /tmp/tail_me
 
-# RUN gem install bundler
-
-# ENV PUMA=true
-# ENV THIN=true
-
-# RUN bundle config set with 'puma' 'thin'
-# RUN bundle install
-
-# # this is used by the volume in docker-compose
-# RUN mkdir -p /tmp/agent/messages
-# RUN mkdir -p tmp/pids
-# ENV CONTRAST__AGENT__LOGGER__PATH=/tmp/agent/agent.log
-# ENV CONTRAST__AGENT__SERVICE__LOGGER__PATH=/tmp/agent/service.log
-# ENV CONTRAST__API__REQUEST_AUDIT__PATH=/tmp/agent/messages
-# ENV APP_LOG=/tmp/agent/app.log
-
-# RUN bundle exec rake app:assets:precompile
-# RUN bundle exec rails db:migrate
-
-# # Just in case, clean up local.
-# RUN rm ./contrast_security.yaml ./spec/dummy/contrast_security.yaml || true
-# RUN rm ./*log ./spec/dummy/*log || true
-# RUN rm ./agent || true
-
-# RUN touch /tmp/tail_me
-
-# CMD tail -f /tmp/tail_me
+CMD tail -f /tmp/tail_me

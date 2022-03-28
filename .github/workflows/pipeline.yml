@@ -50,6 +50,9 @@ jobs:
     # needs: linting
     timeout-minutes: 10
     steps:
+      - name: Install OS dependencies - brew
+        run: |
+          brew install git make autoconf automake libtool unzip shared-mime-info
       - name: Setup Dependencies Cache
         uses: actions/cache@v2
         with:
