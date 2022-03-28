@@ -45,7 +45,7 @@ jobs:
   #         path: ./${{ matrix.linter }}_out.txt
   rspec:
     name: "Running rspec"
-    runs-on: macos-latest
+    runs-on: macos-11
     container: ruby:2.7
     # needs: linting
     timeout-minutes: 10
