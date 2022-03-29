@@ -45,8 +45,7 @@ jobs:
           path: ./${{ matrix.linter }}_out.txt
   rspec:
     name: "Running rspec"
-    runs-on: ubuntu-latest
-    container: ruby:2.7
+    runs-on: macos-latest
     needs: linting
     timeout-minutes: 10
     steps:
@@ -63,9 +62,14 @@ jobs:
         run: |
           gem install bundler
           bundle config set path 'vendor/bundle'
-          bundle install
+          bundle config set with 'puma_max'
+          HEADLESS=true bundle install
           APP_LOG=STDOUT bundle exec rails db:migrate RAILS_ENV=test
-          APP_LOG=STDOUT bundle exec rspec
+          APP_LOG=STDOUT bundle exec rspec --exclude-pattern spec/app/controllers/vulneruby_engine/static_controller_spec.rb
+      - name: Run headless test
+        run: |
+          bundle update
+          HEADLESS=true bundle exec rspec spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       - name: Move artifacts
         if: ${{ always() }}
         run: |

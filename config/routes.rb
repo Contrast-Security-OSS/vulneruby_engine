@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 VulnerubyEngine::Engine.routes.draw do
+  get 'static/index'
   root 'application#home'
 
   RULES = %w[
