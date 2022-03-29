@@ -2,7 +2,6 @@
 
 module VulnerubyEngine
   # Entry point for the Insecure Hash Algorithm and Random tests
-  autoload(:Autoload, './app/models/vulneruby_engine/autoload.rb')
   class AutoloadController < ApplicationController
     def index
       render('layouts/vulneruby_engine/autoload/index')
