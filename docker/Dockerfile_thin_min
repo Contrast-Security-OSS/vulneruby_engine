@@ -21,6 +21,5 @@ RUN ./docker/app_name_generator.sh Thin_min >> /tmp/app_name.txt
 RUN cat /tmp/app_name.txt
 RUN curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg \
     echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list \
-    apt-get update && apt-get install -y redis \
-    redis-server &
-CMD cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec thin -p $PORT -R /app/spec/dummy/config.ru start
+    apt-get update && apt-get install -y redis
+CMD redis-server & cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec thin -p $PORT -R /app/spec/dummy/config.ru start
