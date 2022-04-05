@@ -20,4 +20,7 @@ RUN bundle exec rake db:version
 
 # Name and run the application
 RUN ./docker/app_name_generator.sh Unicorn_min >> /tmp/app_name.txt
+RUN curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg \
+    echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list \
+    apt-get update && apt-get install redis
 CMD  cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec unicorn -p $PORT -c ./spec/dummy/config/unicorn.rb ./spec/dummy/config.ru
