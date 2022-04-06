@@ -19,4 +19,4 @@ RUN bundle exec rake db:version
 # Name and run the application
 RUN ./docker/app_name_generator.sh Thin_min >> /tmp/app_name.txt
 RUN cat /tmp/app_name.txt
-CMD cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec thin -p $PORT -R /app/spec/dummy/config.ru start
+CMD redis-server & cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec thin -p $PORT -R /app/spec/dummy/config.ru start

@@ -21,4 +21,4 @@ RUN bundle exec rake db:version
 
 # Name and run the application
 RUN ./docker/app_name_generator.sh Puma_min >> /tmp/app_name.txt
-CMD  cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec puma -C ./spec/dummy/config/puma.rb ./spec/dummy/config.ru
+CMD redis-server & cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) bundle exec puma -C ./spec/dummy/config/puma.rb ./spec/dummy/config.ru

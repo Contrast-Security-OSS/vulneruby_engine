@@ -18,4 +18,4 @@ RUN bundle exec rake db:version
 
 # Name and run the application
 RUN ./docker/app_name_generator.sh Passenger_max >> /tmp/app_name.txt
-CMD cat /tmp/app_name.txt && CONTRAST_CONFIG_PATH=/app/contrast_security.yaml CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) PASSENGER_START_TIMEOUT=300 bundle exec rails s -p $PORT
+CMD redis-server & cat /tmp/app_name.txt && CONTRAST_CONFIG_PATH=/app/contrast_security.yaml CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) PASSENGER_START_TIMEOUT=300 bundle exec rails s -p $PORT
