@@ -1,9 +1,10 @@
 # Just default. Env var takes precedence.
 ARG RUBY_VER=3.1
+ARG DISTRO=''
 
-FROM ruby:${RUBY_VER}
+FROM ruby:${RUBY_VER}${DISTRO}
 
-RUN apt-get update && apt-get install -y build-essential coreutils
+RUN apt-get update && apt-get install -y build-essential coreutils git libsqlite3-dev
 
 WORKDIR app
 
@@ -15,7 +16,7 @@ ENV APP_HOME=./
 COPY . .
 RUN rm **/*.log | true
 
-RUN gem install bundler
+RUN gem install bundler -v 2.3.6
 
 ENV PUMA=true
 ENV THIN=true
