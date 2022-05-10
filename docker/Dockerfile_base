@@ -16,7 +16,7 @@ ENV APP_HOME=./
 COPY . .
 RUN rm **/*.log | true
 
-RUN gem install bundler -v 2.3.6
+RUN gem install bundler
 
 ENV PUMA=true
 ENV THIN=true
