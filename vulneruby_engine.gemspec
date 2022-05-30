@@ -37,7 +37,8 @@ def self.add_dependencies spec
   spec.add_dependency('grape', '~> 1.5.3')
   spec.add_dependency('sidekiq', '~> 6.3', '>= 6.3.1')
   spec.add_dependency('sidekiq-status', '~> 2.1')
-  spec.add_dependency('nokogiri', '>= 1.13.2')
+  spec.add_dependency('nokogiri', '>= 1.13.6')
+  spec.add_dependency('rack', '>= 2.2.3.1')
 end
 
 # Describe your gem and declare its dependencies:
