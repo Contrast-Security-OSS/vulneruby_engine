@@ -13,6 +13,9 @@ RUN bundle update
 # So we may use whatever command we want to trigger rake, to be sure
 # that the agent is not braking the rake task
 
+# Tesing 
+RUN apk add --no-cache libc6-compat && ln -s /lib/libc.musl-x86_64.so.1 /lib/ld-linux-x86-64.so.2 
+
 # Check Database Version
 RUN bundle exec rake db:version
 
