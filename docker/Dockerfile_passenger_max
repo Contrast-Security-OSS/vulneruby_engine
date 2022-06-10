@@ -14,7 +14,7 @@ RUN bundle update
 # that the agent is not braking the rake task
 
 # Tesing 
-RUN apk add --no-cache libc6-compat && ln -s /lib/libc.musl-x86_64.so.1 /lib/ld-linux-x86-64.so.2 
+RUN apt-get install musl-dev -y && ln -s /usr/lib/x86_64-linux-musl/libc.so /lib/libc.musl-x86_64.so.1
 
 # Check Database Version
 RUN bundle exec rake db:version
