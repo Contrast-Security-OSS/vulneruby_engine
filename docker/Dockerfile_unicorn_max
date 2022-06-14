@@ -15,9 +15,6 @@ RUN AGENT_PATH=`gem which contrast-agent` bundle update && bundle install
 
 ENV UNICORN_MAX_TEST=true
 
-# Tesing 
-RUN apt-get install musl-dev -y && ln -s /usr/lib/x86_64-linux-musl/libc.so /lib/libc.musl-x86_64.so.1
-
 # Check Database Version
 RUN bundle exec rake db:version
 

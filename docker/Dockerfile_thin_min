@@ -10,9 +10,6 @@ RUN bundle config set with 'thin_min'
 
 RUN bundle update
 
-# Tesing 
-RUN apt-get install musl-dev -y && ln -s /usr/lib/x86_64-linux-musl/libc.so /lib/libc.musl-x86_64.so.1
-
 # So we may use whatever command we want to trigger rake, to be sure
 # that the agent is not braking the rake task
 
