@@ -13,6 +13,9 @@ RUN bundle update
 # So we may use whatever command we want to trigger rake, to be sure
 # that the agent is not braking the rake task
 
+# Add dependency for AgentLib gem support.
+RUN apt-get install musl-dev -y && ln -s /usr/lib/x86_64-linux-musl/libc.so /lib/libc.musl-x86_64.so.1
+
 # Check Database Version
 RUN bundle exec rake db:version
 
