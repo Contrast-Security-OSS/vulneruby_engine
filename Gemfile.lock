@@ -10,6 +10,7 @@ PATH
   remote: .
   specs:
     vulneruby_engine (0.1.0)
+      google-protobuf
       grape (~> 1.5.3)
       nokogiri (>= 1.13.6)
       rack (>= 2.2.3.1)
@@ -144,6 +145,8 @@ GEM
       sexp_processor (~> 4.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    google-protobuf (3.21.2-x86_64-darwin)
+    google-protobuf (3.21.2-x86_64-linux)
     grape (1.5.3)
       activesupport
       builder
@@ -184,6 +187,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.6-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.6-x86_64-linux)
+      racc (~> 1.4)
     numerizer (0.1.1)
     parallel (1.22.1)
     parser (3.1.2.0)
@@ -219,7 +224,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.2)
+    rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
     railties (7.0.3)
       actionpack (= 7.0.3)
@@ -328,6 +333,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   capybara
