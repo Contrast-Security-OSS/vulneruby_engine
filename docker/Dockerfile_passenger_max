@@ -14,7 +14,7 @@ RUN bundle update
 # that the agent is not braking the rake task
 
 # Add dependency for AgentLib gem support.
-RUN apt-get install musl-dev -y && ln -s /usr/lib/x86_64-linux-musl/libc.so /lib/libc.musl-x86_64.so.1
+RUN if [[-z "$DISTRO" == "-alpine3.15"]]; then apt-get install musl-dev -y ; fi
 
 # Check Database Version
 RUN bundle exec rake db:version

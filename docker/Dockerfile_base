@@ -14,7 +14,7 @@ RUN curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyri
 # RUN apk update && apk add --update autoconf automake bash build-base coreutils curl git libxml2 libxml2-dev libxslt libxslt-dev nodejs openssh openssl openssl-dev perl ruby-nokogiri sqlite sqlite-dev tar shared-mime-info protobuf tzdata redis
 
 # Add dependency for FFI/AgentLib gem support.
-RUN apt-get install musl-dev -y && ln -s /usr/lib/x86_64-linux-musl/libc.so /lib/libc.musl-x86_64.so.1
+RUN if [[-z "$DISTRO" == "-alpine3.15"]]; then apt-get install musl-dev -y ; fi
 
 WORKDIR app
 
