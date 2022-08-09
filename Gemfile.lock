@@ -10,6 +10,7 @@ PATH
   remote: .
   specs:
     vulneruby_engine (0.1.0)
+      google-protobuf
       grape (~> 1.5.3)
       nokogiri (>= 1.13.6)
       rack (>= 2.2.3.1)
@@ -144,6 +145,7 @@ GEM
       sexp_processor (~> 4.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    google-protobuf (3.21.4-x86_64-darwin)
     grape (1.5.3)
       activesupport
       builder
@@ -328,6 +330,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-darwin-21
 
 DEPENDENCIES
   capybara
