@@ -2,6 +2,6 @@
 
 module VulnerubyEngine
   class ApplicationJob < ActiveJob::Base
-    include Sidekiq::Status::Worker
+    # include Sidekiq::Status::Worker
   end
 end
