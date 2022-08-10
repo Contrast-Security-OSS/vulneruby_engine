@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'sidekiq-status'
+# require 'sidekiq-status'
 require('vulneruby/trigger/cmd_injection')
 
 module VulnerubyEngine
   class CmdiTriggerJob < ApplicationJob
-    include Sidekiq::Status::Worker
+    # include Sidekiq::Status::Worker
 
     self.queue_adapter = :sidekiq
     queue_as :default

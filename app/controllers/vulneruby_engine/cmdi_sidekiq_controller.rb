@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'sidekiq-status'
+# require 'sidekiq-status'
 require('vulneruby/trigger/cmd_injection')
 
 module VulnerubyEngine
