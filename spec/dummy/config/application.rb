@@ -12,8 +12,8 @@ Bundler.require(:puma_max) if !!ENV['PUMA_MAX']
 Bundler.require(:puma_min) if !!ENV['PUMA_MIN']
 Bundler.require(:thin_max) if !!ENV['THIN_MAX']
 Bundler.require(:thin_min) if !!ENV['THIN_MIN']
-Bundler.require(:unicorn_min) if !!ENV['UNICORN_MIN_TEST']
-Bundler.require(:unicorn_max) if !!ENV['UNICORN_MAX_TEST']
+Bundler.require(:unicorn_min) if !!ENV['UNICORN_MIN']
+Bundler.require(:unicorn_max) if !!ENV['UNICORN_MAX']
 
 require('vulneruby_engine')
 
