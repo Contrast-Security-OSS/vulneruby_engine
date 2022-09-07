@@ -30,7 +30,7 @@ module VulnerubyEngine
     end
 
     post '/sql_injection' do
-      @result = params[:id].html_safe
+      @result = params[:data].html_safe
       @page = erb(:'sql_injection/run.html')
       erb :'application.html'
     end
@@ -93,7 +93,7 @@ module VulnerubyEngine
 
     post '/trust_boundary' do
       env['rack.session'][:HTTP_USER_AGENT] = params["HTTP_USER_AGENT"]
-      env["rack.session"].body
+      env["rack.session"]
     end
 
     post '/cmdi' do
