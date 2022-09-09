@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'sinatra'
-require 'mongoid'
 
 module VulnerubyEngine
   # Base controller for the Sinatra mount, used to test XSS and other framework

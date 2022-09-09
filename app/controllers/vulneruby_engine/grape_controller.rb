@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'grape'
-require 'mongoid'
 
 module VulnerubyEngine
   # Base controller for the Grape framework mount

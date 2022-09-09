@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'mongoid'
-
 module VulnerubyEngine
     class SecretMongo
         include Mongoid::Document
