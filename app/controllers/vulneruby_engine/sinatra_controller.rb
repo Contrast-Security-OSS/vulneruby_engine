@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'sinatra'
+require 'mongoid'
 
 module VulnerubyEngine
   # Base controller for the Sinatra mount, used to test XSS and other framework
@@ -41,7 +42,7 @@ module VulnerubyEngine
     end
 
     post '/nosql_injection' do
-      @result = params[:id].html_safe
+      @result = SecretMongo.where(:'id'.ne => params[:id]).to_a
       @page = erb(:'nosql_injection/run.html')
       erb :'application.html'
     end

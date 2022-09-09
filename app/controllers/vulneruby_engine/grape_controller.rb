@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'grape'
+require 'mongoid'
 
 module VulnerubyEngine
   # Base controller for the Grape framework mount
@@ -84,7 +85,7 @@ module VulnerubyEngine
     end
 
     post '/nosql_injection' do
-      @result = params[:id].html_safe
+      @result = SecretMongo.where(:'id'.ne => params[:id]).to_a
       { result: @result }
     end
 
