@@ -1,11 +1,14 @@
 .bundle/
 log/*.log
 pkg/
+spec/dummy/node_modules/
+spec/dummy/yarn.lock
 spec/dummy/db/*.sqlite3
 spec/dummy/db/*.sqlite3-journal
 spec/dummy/db/*.sqlite3-*
 spec/dummy/log/*.log
 spec/dummy/storage/
+spec/dummy/coverage/
 spec/dummy/tmp/
 /.idea
 **/contrast_security.yaml
@@ -15,3 +18,4 @@ spec/dummy/tmp/
 **/contrast-agent.gem
 vendor
 run-data
+test-results

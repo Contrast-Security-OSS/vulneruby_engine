@@ -35,6 +35,17 @@ module VulnerubyEngine
       erb :'application.html'
     end
 
+    get '/nosql_injection' do
+      @page = erb(:'nosql_injection/index.html')
+      erb :'application.html'
+    end
+
+    post '/nosql_injection' do
+      @result = params[:id].html_safe
+      @page = erb(:'nosql_injection/run.html')
+      erb :'application.html'
+    end
+
     post '/unvalidated_redirect' do
       redirect params[:url]
     end
@@ -85,11 +96,11 @@ module VulnerubyEngine
     end
 
     use Rack::Session::Cookie,
-        key: 'rack.session',
-        domain: 'foo.com',
-        path: '/',
-        expire_after: 2_592_000,
-        secret: 'change_me'
+      key: 'rack.session',
+      domain: 'foo.com',
+      path: '/',
+      expire_after: 2_592_000,
+      secret: 'change_me'
 
     post '/trust_boundary' do
       env['rack.session'][:HTTP_USER_AGENT] = params["HTTP_USER_AGENT"]

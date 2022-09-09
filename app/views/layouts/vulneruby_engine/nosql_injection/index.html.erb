@@ -1,0 +1,16 @@
+<div>
+  <h1>NoSQL Injection</h1>
+  <form action=<%= nosql_injection_path %> method="post">
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" name="id" placeholder="id">
+      </div>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="control">
+        <button class="button is-info" action="submit">
+          Load Secret
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

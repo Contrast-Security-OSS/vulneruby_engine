@@ -79,6 +79,15 @@ module VulnerubyEngine
       { result: @result }
     end
 
+    get '/nosql_injection' do
+      { attack: 'NoSQL Injection' }
+    end
+
+    post '/nosql_injection' do
+      @result = params[:id].html_safe
+      { result: @result }
+    end
+
     use Rack::Session::Cookie,
         key: 'rack.session',
         domain: 'foo.com',

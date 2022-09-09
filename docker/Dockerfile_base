@@ -5,11 +5,16 @@ ARG DISTRO=''
 FROM ruby:${RUBY_VER}${DISTRO}
 
 # DEBIAN DISTRO UPDATES
-RUN apt-get update && apt-get install -y build-essential coreutils git libsqlite3-dev
+RUN apt-get update && apt-get install -y build-essential coreutils git libsqlite3-dev gnupg
 # Set up Redis for Sidekiq testing
 RUN curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg \
     echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list \
     apt-get update && apt-get install -y redis
+# Set up Mongo DB for NoSql Injection testing
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add - \
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list \
+    apt-get update && apt-get install -y mongodb-org \
+    systemctl enable mongod && systemctl daemon-reload && systemctl start mongod
 # ALPINE DISTRO UPDATES
 # RUN apk update && apk add --update autoconf automake bash build-base coreutils curl git libxml2 libxml2-dev libxslt libxslt-dev nodejs openssh openssl openssl-dev perl ruby-nokogiri sqlite sqlite-dev tar shared-mime-info protobuf tzdata redis
 
@@ -30,6 +35,13 @@ ENV THIN=true
 
 RUN bundle config set with 'puma' 'thin'
 RUN bundle install
+
+# We need to run npm install or yarn install to be able to run mongoid in rails
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    apt-get update && apt-get install -y nodejs yarn
+RUN cd ./spec/dummy && yarn install
 
 # this is used by the volume in docker-compose
 RUN mkdir -p /tmp/agent/messages

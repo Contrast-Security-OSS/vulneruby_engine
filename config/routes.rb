@@ -15,6 +15,7 @@ VulnerubyEngine::Engine.routes.draw do
     reflected_xss
     regex_dos
     sql_injection
+    nosql_injection
     ssrf
     unsafe_code_execution
     untrusted_deserialization
