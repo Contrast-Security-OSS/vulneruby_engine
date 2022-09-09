@@ -17,8 +17,6 @@ def self.add_dev_dependencies spec
   spec.add_development_dependency('sqlite3')
   spec.add_development_dependency('warning')
   spec.add_development_dependency('watir')
-  spec.add_development_dependency('mongoid')
-  spec.add_development_dependency('webpacker')
 end
 
 def self.add_lint_dependencies spec
@@ -42,6 +40,8 @@ def self.add_dependencies spec
   spec.add_dependency('nokogiri', '>= 1.13.6')
   spec.add_dependency('rack', '>= 2.2.3.1')
   spec.add_dependency('google-protobuf')
+  spec.add_dependency('mongoid')
+  spec.add_dependency('webpacker')
 end
 
 # Describe your gem and declare its dependencies:
