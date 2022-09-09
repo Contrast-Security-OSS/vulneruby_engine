@@ -11,8 +11,8 @@ RUN curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyri
     echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list \
     apt-get update && apt-get install -y redis
 # Set up Mongo DB for NoSql Injection testing
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add - \
-    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list \
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add - \
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list \
     apt-get update && apt-get install -y mongodb-org \
     systemctl enable mongod && systemctl daemon-reload && systemctl start mongod
 # ALPINE DISTRO UPDATES
