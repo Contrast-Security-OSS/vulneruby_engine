@@ -17,6 +17,7 @@ Bundler.require(:unicorn_min) if !!ENV['UNICORN_MIN']
 Bundler.require(:unicorn_max) if !!ENV['UNICORN_MAX']
 Bundler.require(:mongoid)
 
+Mongoid.load!('config/mongoid.yml')
 require('vulneruby_engine')
 
 require('warning')
@@ -30,7 +31,6 @@ module Dummy
     log_path = ENV['APP_LOG'] || "log/#{ Rails.env }.log"
     config.logger = ActiveSupport::Logger.new(log_path)
 
-    # config.mongoid.logger = Logger.new($stdout)
     # Settings in config/environments/* take precedence over those specified
     # here. Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
