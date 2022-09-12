@@ -5,6 +5,8 @@ require_relative('boot')
 require('rails/all')
 require('sprockets/railtie')
 
+require('mongoid')
+
 Bundler.require(*Rails.groups)
 Bundler.require(:passenger_max) if !!ENV['PASSENGER_MAX']
 Bundler.require(:passenger_min) if !!ENV['PASSENGER_MIN']
@@ -28,6 +30,7 @@ module Dummy
     log_path = ENV['APP_LOG'] || "log/#{ Rails.env }.log"
     config.logger = ActiveSupport::Logger.new(log_path)
 
+    config.mongoid.logger = Logger.new($stdout)
     # Settings in config/environments/* take precedence over those specified
     # here. Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
