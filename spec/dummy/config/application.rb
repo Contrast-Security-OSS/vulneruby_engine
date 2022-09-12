@@ -17,7 +17,7 @@ Bundler.require(:unicorn_min) if !!ENV['UNICORN_MIN']
 Bundler.require(:unicorn_max) if !!ENV['UNICORN_MAX']
 Bundler.require(:mongoid)
 
-Mongoid.load!('config/mongoid.yml')
+Mongoid.load!(File.join(File.dirname(__FILE__), 'mongoid.yml'))
 require('vulneruby_engine')
 
 require('warning')
