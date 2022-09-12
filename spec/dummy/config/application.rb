@@ -5,8 +5,6 @@ require_relative('boot')
 require('rails/all')
 require('sprockets/railtie')
 
-require('mongoid')
-
 Bundler.require(*Rails.groups)
 Bundler.require(:passenger_max) if !!ENV['PASSENGER_MAX']
 Bundler.require(:passenger_min) if !!ENV['PASSENGER_MIN']
@@ -16,6 +14,7 @@ Bundler.require(:thin_max) if !!ENV['THIN_MAX']
 Bundler.require(:thin_min) if !!ENV['THIN_MIN']
 Bundler.require(:unicorn_min) if !!ENV['UNICORN_MIN']
 Bundler.require(:unicorn_max) if !!ENV['UNICORN_MAX']
+Bundler.require(:mongoid)
 
 require('vulneruby_engine')
 

@@ -10,6 +10,10 @@ spec/dummy/log/*.log
 spec/dummy/storage/
 spec/dummy/coverage/
 spec/dummy/tmp/
+spec/dummy/config/contrast/.telemetry
+coverage
+tmp/
+agent/
 /.idea
 **/contrast_security.yaml
 **/contrast_security.yml
