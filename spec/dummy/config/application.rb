@@ -4,6 +4,7 @@ require_relative('boot')
 
 require('rails/all')
 require('sprockets/railtie')
+require 'mongoid'
 
 Bundler.require(*Rails.groups)
 Bundler.require(:passenger_max) if !!ENV['PASSENGER_MAX']
