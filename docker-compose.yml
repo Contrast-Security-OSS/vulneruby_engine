@@ -1,23 +1,9 @@
 version: '3'
 services:
-  db:
-    image: bitnami/mongodb:latest
-    restart: always
-    environment:
-      MONGODB_USERNAME: mongotest
-      MONGODB_PASSWORD: mongotestpass
-      MONGODB_DATABASE: dummy_production
-      ALLOW_EMPTY_PASSWORD: 'yes'
-    ports:
-      - "27017:27017"
   base:
     build:
       dockerfile: ./docker/performance/Dockerfile_base
       context: .
-    links:
-     - db
-    depends_on:
-      - db
   agent:
     depends_on:
       - base
