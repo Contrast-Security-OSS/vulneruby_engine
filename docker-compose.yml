@@ -1,12 +1,17 @@
 version: '3'
 services:
   db:
-    image: mongo:5.0.12
+    image: bitnami/mongodb:latest
     restart: always
-    env_file:
-      - ./docker/.env
+    environment:
+      MONGODB_USERNAME: mongotest
+      MONGODB_PASSWORD: mongotestpass
+      MONGODB_DATABASE: dummy_production
+      ALLOW_EMPTY_PASSWORD: 'yes'
     ports:
       - "27017:27017"
+    networks:
+      - webproxy
   base:
     build:
       dockerfile: ./docker/performance/Dockerfile_base
@@ -15,12 +20,16 @@ services:
      - db
     depends_on:
       - db
+    networks:
+      - webproxy
   agent:
     depends_on:
       - base
     build:
       dockerfile: ./docker/performance/Dockerfile_agent
       context: ../vulneruby_engine
+    networks:
+      - webproxy
   without-agent:
     depends_on:
       - base
@@ -33,6 +42,8 @@ services:
       - "3009:3009"
     volumes:
       - ./run-data/no_agent:/tmp/agent
+    networks:
+      - webproxy
   with-agent-assess:
     depends_on:
       - agent
@@ -45,6 +56,8 @@ services:
       - "3009:3009"
     volumes:
       - ./run-data/assess:/tmp/agent
+    networks:
+      - webproxy
   with-agent-protect:
     depends_on:
       - agent
@@ -57,5 +70,10 @@ services:
       - ./run-data/protect:/tmp/agent
     ports:
       - "3009:3009"
+    networks:
+      - webproxy
+networks:
+  webproxy:
+    driver: bridge
 volumes:
   run-data:

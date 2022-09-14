@@ -58,5 +58,5 @@ RUN rm ./*log ./spec/dummy/*log || true
 RUN rm ./agent || true
 
 RUN touch /tmp/tail_me
-
+EXPOSE 3000
 CMD tail -f /tmp/tail_me

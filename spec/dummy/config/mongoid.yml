@@ -11,9 +11,6 @@ development:
         user: 'mongotest'
         # The password of the user for authentication.
         password: 'mongotestpass'
-        # The user's database roles.
-        roles:
-          - 'dbOwner'
         # The timeout in seconds for selecting a server for an operation. (default: 30)
         server_selection_timeout: 20
   options:
@@ -27,3 +24,16 @@ test:
         read:
           mode: :primary
         max_pool_size: 5
+production:
+  clients:
+    default:
+      database: dummy_production
+      hosts:
+        - db:27017
+      options:
+        # The name of the user for authentication.
+        user: 'mongotest'
+        # The password of the user for authentication.
+        password: 'mongotestpass'
+        #The timeout in seconds for selecting a server for an operation. (default: 30)
+        server_selection_timeout: 20
