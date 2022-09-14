@@ -30,7 +30,7 @@ production:
         roles:
           - 'dbOwner'
         read:
-          mode: :primary
+          mode: :primary_preferred
         # The name of the user for authentication.
         user: 'mongotest'
         # The password of the user for authentication.
@@ -47,5 +47,5 @@ test:
         - db:27017
       options:
         read:
-          mode: :primary
+          mode: :secondary_preffered
         max_pool_size: 5
