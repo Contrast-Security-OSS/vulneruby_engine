@@ -15,6 +15,7 @@ module VulnerubyEngine
       @result = {
           digest: Vulneruby::Trigger::CryptoBadMac.run_digest_md5,
           random: Vulneruby::Trigger::CryptoWeakRandomness.run_rand
+          cipher: Vulneruby::Trigger::CryptoBadCipher.run_bad_cipher
       }
 
       render('layouts/vulneruby_engine/insecure_algorithm/run')
