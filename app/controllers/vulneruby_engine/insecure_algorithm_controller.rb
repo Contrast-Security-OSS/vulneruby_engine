@@ -14,7 +14,7 @@ module VulnerubyEngine
     def run
       @result = {
           digest: Vulneruby::Trigger::CryptoBadMac.run_digest_md5,
-          random: Vulneruby::Trigger::CryptoWeakRandomness.run_rand
+          random: Vulneruby::Trigger::CryptoWeakRandomness.run_rand,
           cipher: Vulneruby::Trigger::CryptoBadCipher.run_bad_cipher
       }
 
