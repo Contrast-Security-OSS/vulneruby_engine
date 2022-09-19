@@ -8,7 +8,7 @@ development:
         - db:27017
       options:
         read:
-          mode: :primary_preferred
+          mode: :secondary
         # The name of the user for authentication.
         user: 'mongotest'
         # The password of the user for authentication.
@@ -47,5 +47,5 @@ test:
         - db:27017
       options:
         read:
-          mode: :secondary_preferred
+          mode: :secondary_preffered
         max_pool_size: 5
