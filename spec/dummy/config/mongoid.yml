@@ -8,7 +8,7 @@ development:
         - db:27017
       options:
         read:
-          mode: :primary_preferred
+          mode: :secondary
         # The name of the user for authentication.
         user: 'mongotest'
         # The password of the user for authentication.
