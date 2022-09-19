@@ -8,7 +8,7 @@ module VulnerubyEngine
       end
   
       def run
-        @result = SecretMongo.where(:'id'.ne => params[:id]).to_a
+        @result = SecretMongo.where(name: params[:name]).to_a
         render('layouts/vulneruby_engine/nosql_injection/run')
       end
     end

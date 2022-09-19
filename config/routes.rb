@@ -18,6 +18,7 @@ VulnerubyEngine::Engine.routes.draw do
     nosql_injection
     ssrf
     unsafe_code_execution
+    unsafe_file_upload
     untrusted_deserialization
     misconfiguration
     xpath_injection

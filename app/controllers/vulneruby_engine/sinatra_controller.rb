@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 require 'sinatra'
+require 'fileutils'
 
 module VulnerubyEngine
   # Base controller for the Sinatra mount, used to test XSS and other framework
   # specific vulnerabilities
   class SinatraController < ::Sinatra::Base
+    include FileUtils::Verbose
     set :views, "#{ __dir__ }/../../views/layouts/sinatra"
 
     get '/' do
@@ -43,6 +45,20 @@ module VulnerubyEngine
     post '/nosql_injection' do
       @result = SecretMongo.where(:'id'.ne => params[:id]).to_a
       @page = erb(:'nosql_injection/run.html')
+      erb :'application.html'
+    end
+
+    get '/unsafe_file_upload' do
+      @page = erb(:'unsafe_file_upload/index.html')
+      erb :'application.html'
+    end
+
+    post '/unsafe_file_upload' do
+      tempfile = params[:data][:tempfile] 
+      filename = params[:data][:filename]
+      cp(tempfile.path, "./#{filename}")
+      @data = File.open("./#{filename}")
+      @page = erb(:'unsafe_file_upload/run.html')
       erb :'application.html'
     end
 

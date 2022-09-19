@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require 'grape'
+require 'fileutils'
 
 module VulnerubyEngine
   # Base controller for the Grape framework mount
   class GrapeController < Grape::API
+  include FileUtils::Verbose
     format :json
 
     get '/' do
@@ -28,6 +30,18 @@ module VulnerubyEngine
     post '/ssrf' do
       uri = CGI.unescape(params[:uri].split('=').last)
       Net::HTTP.get(URI(uri))
+    end
+
+    get '/unsafe_file_upload' do
+      { attack: 'Unsafe File Upload' }
+    end
+
+    post '/unsafe_file_upload' do
+      tempfile = params[:data][:tempfile]
+      filename = params[:data][:filename]
+      cp(tempfile.path, "./#{filename}")
+      @data = File.open("./#{filename}")
+      { "result": @data.read}  
     end
 
     get '/unset_rack_session' do
