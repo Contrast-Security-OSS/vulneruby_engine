@@ -6,7 +6,7 @@ require 'fileutils'
 module VulnerubyEngine
   # Base controller for the Grape framework mount
   class GrapeController < Grape::API
-  include FileUtils::Verbose
+    include FileUtils::Verbose
     format :json
 
     get '/' do
@@ -39,7 +39,7 @@ module VulnerubyEngine
     post '/unsafe_file_upload' do
       tempfile = params[:data][:tempfile]
       filename = params[:data][:filename]
-      cp(tempfile.path, "./#{filename}")
+      FileUtils.cp(tempfile.path, "./#{filename}")
       @data = File.open("./#{filename}")
       { "result": @data.read}  
     end
