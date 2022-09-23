@@ -40,6 +40,9 @@ def self.add_dependencies spec
   spec.add_dependency('nokogiri', '>= 1.13.6')
   spec.add_dependency('rack', '>= 2.2.3.1')
   spec.add_dependency('google-protobuf')
+  spec.add_dependency('mongoid')
+  spec.add_dependency('webpacker')
+  spec.add_dependency('cucumber')
 end
 
 # Describe your gem and declare its dependencies:

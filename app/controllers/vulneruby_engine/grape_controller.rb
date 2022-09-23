@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require 'grape'
+require 'fileutils'
 
 module VulnerubyEngine
   # Base controller for the Grape framework mount
   class GrapeController < Grape::API
+    include FileUtils::Verbose
     format :json
 
     get '/' do
@@ -28,6 +30,18 @@ module VulnerubyEngine
     post '/ssrf' do
       uri = CGI.unescape(params[:uri].split('=').last)
       Net::HTTP.get(URI(uri))
+    end
+
+    get '/unsafe_file_upload' do
+      { attack: 'Unsafe File Upload' }
+    end
+
+    post '/unsafe_file_upload' do
+      tempfile = params[:data][:tempfile]
+      filename = params[:data][:filename]
+      FileUtils.cp(tempfile.path, "./#{filename}")
+      @data = File.open("./#{filename}")
+      { "result": @data.read}  
     end
 
     get '/unset_rack_session' do
@@ -70,8 +84,22 @@ module VulnerubyEngine
       'httponly-flag'
     end
 
-    post '/cmdi' do
-      Kernel.`(params['cmd'])
+    get '/sql_injection' do
+      { attack: 'SQL Injection' }
+    end
+
+    post '/sql_injection' do
+      @result = params[:id].html_safe
+      { result: @result }
+    end
+
+    get '/nosql_injection' do
+      { attack: 'NoSQL Injection' }
+    end
+
+    post '/nosql_injection' do
+      @result = SecretMongo.where(:'id'.ne => params[:id]).to_a
+      { result: @result }
     end
 
     use Rack::Session::Cookie,
@@ -84,6 +112,10 @@ module VulnerubyEngine
     post '/trust_boundary' do
       env['rack.session'][:HTTP_USER_AGENT] = params[:HTTP_USER_AGENT]
       env['rack.session']
+    end
+
+    post '/cmdi' do
+      Kernel.`(params['cmd'])
     end
   end
 end

@@ -5,7 +5,7 @@ ARG DISTRO=''
 FROM ruby:${RUBY_VER}${DISTRO}
 
 # DEBIAN DISTRO UPDATES
-RUN apt-get update && apt-get install -y build-essential coreutils git libsqlite3-dev
+RUN apt-get update && apt-get install -y build-essential coreutils git libsqlite3-dev gnupg
 # Set up Redis for Sidekiq testing
 RUN curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg \
     echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list \
@@ -22,6 +22,8 @@ ENV APP_HOME=./
 
 COPY . .
 RUN rm **/*.log | true
+RUN rm -rf spec/dummy/node_modules | true \
+    rm -rf spec/dummy/yarn.lock | true
 
 RUN gem install bundler
 
@@ -30,6 +32,13 @@ ENV THIN=true
 
 RUN bundle config set with 'puma' 'thin'
 RUN bundle install
+
+# We need to run npm install or yarn install to be able to run mongoid in rails
+RUN apt-get remove -y cmdtest && apt-get remove -y yarn
+RUN curl -sL https://deb.nodesource.com/setup_16.x \
+    curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/pubkey.gpg \
+    echo "deb [signed-by=/usr/share/keyrings/pubkey.gpg] https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    apt-get update && apt-get install -y nodejs npm
 
 # this is used by the volume in docker-compose
 RUN mkdir -p /tmp/agent/messages
@@ -42,11 +51,12 @@ ENV APP_LOG=/tmp/agent/app.log
 RUN bundle exec rake app:assets:precompile
 RUN bundle exec rails db:migrate
 
+RUN npm install spec/dummy/
 # Just in case, clean up local.
 RUN rm ./contrast_security.yaml ./spec/dummy/contrast_security.yaml || true
 RUN rm ./*log ./spec/dummy/*log || true
 RUN rm ./agent || true
 
 RUN touch /tmp/tail_me
-
+EXPOSE 3000
 CMD tail -f /tmp/tail_me
