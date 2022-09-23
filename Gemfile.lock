@@ -10,6 +10,7 @@ PATH
   remote: .
   specs:
     vulneruby_engine (0.1.0)
+      cucumber
       google-protobuf
       grape (~> 1.5.3)
       mongoid
@@ -109,6 +110,30 @@ GEM
     concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
     crass (1.0.6)
+    cucumber (8.0.0)
+      builder (~> 3.2, >= 3.2.4)
+      cucumber-ci-environment (~> 9.0, >= 9.0.4)
+      cucumber-core (~> 11.0, >= 11.0.0)
+      cucumber-cucumber-expressions (~> 15.1, >= 15.1.1)
+      cucumber-gherkin (~> 23.0, >= 23.0.1)
+      cucumber-html-formatter (~> 19.1, >= 19.1.0)
+      cucumber-messages (~> 18.0, >= 18.0.0)
+      diff-lcs (~> 1.5, >= 1.5.0)
+      mime-types (~> 3.4, >= 3.4.1)
+      multi_test (~> 1.1, >= 1.1.0)
+      sys-uname (~> 1.2, >= 1.2.2)
+    cucumber-ci-environment (9.1.0)
+    cucumber-core (11.0.0)
+      cucumber-gherkin (~> 23.0, >= 23.0.1)
+      cucumber-messages (~> 18.0, >= 18.0.0)
+      cucumber-tag-expressions (~> 4.1, >= 4.1.0)
+    cucumber-cucumber-expressions (15.2.0)
+    cucumber-gherkin (23.0.1)
+      cucumber-messages (~> 18.0, >= 18.0.0)
+    cucumber-html-formatter (19.2.0)
+      cucumber-messages (~> 18.0, >= 18.0.0)
+    cucumber-messages (18.0.0)
+    cucumber-tag-expressions (4.1.0)
     debride (1.9.0)
       path_expander (~> 1.0)
       ruby_parser (~> 3.6)
@@ -134,6 +159,7 @@ GEM
     fasterer (0.10.0)
       colorize (~> 0.7)
       ruby_parser (>= 3.19.1)
+    ffi (1.15.5)
     flay (2.13.0)
       erubi (~> 1.10)
       path_expander (~> 1.0)
@@ -159,6 +185,9 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    mime-types (3.4.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     minitest (5.16.3)
     mongo (2.18.1)
@@ -167,6 +196,7 @@ GEM
       activemodel (>= 5.1, < 7.1, != 7.0.0)
       mongo (>= 2.18.0, < 3.0.0)
       ruby2_keywords (~> 0.0.5)
+    multi_test (1.1.0)
     mustermann (2.0.2)
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.2)
@@ -314,6 +344,8 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.5.0-x86_64-darwin)
     strscan (3.0.4)
+    sys-uname (1.2.2)
+      ffi (~> 1.1)
     thor (1.2.1)
     tilt (2.0.11)
     timeout (0.3.0)
@@ -361,4 +393,4 @@ DEPENDENCIES
   watir
 
 BUNDLED WITH
-   2.3.15
+   2.3.10
