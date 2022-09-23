@@ -18,7 +18,7 @@ PATH
       rack (>= 2.2.3.1)
       rails (~> 7.0.3)
       rake (~> 12.3.0)
-      sidekiq (= 6.3.1)
+      sidekiq (= 6.5.7)
       sinatra (~> 2.0)
       sprockets-rails
       webpacker
@@ -108,7 +108,7 @@ GEM
     childprocess (4.1.0)
     colorize (0.8.1)
     concurrent-ruby (1.1.10)
-    connection_pool (2.2.5)
+    connection_pool (2.3.0)
     crass (1.0.6)
     cucumber (8.0.0)
       builder (~> 3.2, >= 3.2.4)
@@ -168,6 +168,7 @@ GEM
     globalid (1.0.0)
       activesupport (>= 5.0)
     google-protobuf (3.21.6-x86_64-darwin)
+    google-protobuf (3.21.6-x86_64-linux)
     grape (1.5.3)
       activesupport
       builder
@@ -218,6 +219,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.8-x86_64-linux)
+      racc (~> 1.4)
     parallel (1.22.1)
     parser (3.1.2.1)
       ast (~> 2.4.1)
@@ -265,10 +268,7 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (12.3.3)
-    redis (5.0.4)
-      redis-client (>= 0.7.4)
-    redis-client (0.8.0)
-      connection_pool
+    redis (4.8.0)
     regexp_parser (2.5.0)
     rexml (3.2.5)
     rspec (3.11.0)
@@ -322,10 +322,10 @@ GEM
       websocket (~> 1.0)
     semantic_range (3.0.0)
     sexp_processor (4.16.1)
-    sidekiq (6.3.1)
-      connection_pool (>= 2.2.2)
+    sidekiq (6.5.7)
+      connection_pool (>= 2.2.5)
       rack (~> 2.0)
-      redis (>= 4.2.0)
+      redis (>= 4.5.0, < 5)
     simplecov (0.18.5)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -343,6 +343,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.5.0-x86_64-darwin)
+    sqlite3 (1.5.0-x86_64-linux)
     strscan (3.0.4)
     sys-uname (1.2.2)
       ffi (~> 1.1)
@@ -371,6 +372,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   capybara
