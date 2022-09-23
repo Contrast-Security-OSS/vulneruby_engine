@@ -1,5 +1,5 @@
 # Just default. Env var takes precedence.
-ARG RUBY_VER=2.7
+ARG RUBY_VER=3.0
 ARG DISTRO=''
 
 FROM ruby:${RUBY_VER}${DISTRO}
@@ -34,11 +34,13 @@ RUN bundle config set with 'puma' 'thin'
 RUN bundle install
 
 # We need to run npm install or yarn install to be able to run mongoid in rails
-RUN apt-get remove -y cmdtest && apt-get remove -y yarn
 RUN curl -sL https://deb.nodesource.com/setup_16.x \
     curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/pubkey.gpg \
-    echo "deb [signed-by=/usr/share/keyrings/pubkey.gpg] https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    apt-get update && apt-get install -y nodejs npm
+    echo "deb [signed-by=/usr/share/keyrings/pubkey.gpg] https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+# DEBIAN DISTRO UPDATES NPM
+RUN apt-get update && apt-get install -y nodejs npm
+# ALPINE DISTRO UPDATES NPM
+# RUN apk update && apk add --update nodejs npm
 
 # this is used by the volume in docker-compose
 RUN mkdir -p /tmp/agent/messages
