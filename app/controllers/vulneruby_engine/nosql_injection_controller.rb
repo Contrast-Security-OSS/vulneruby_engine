@@ -10,7 +10,6 @@ module VulnerubyEngine
       def run
         begin
           collection_name = "dummy_collections"
-          puts "NOSQLI PARAM: #{ params[:name]}"
 
           client = Mongoid::Clients.default
           db = client.database
