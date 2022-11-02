@@ -23,7 +23,7 @@ module VulnerubyEngine
           @result = collection.find(name: params[:name]).first
           render('layouts/vulneruby_engine/nosql_injection/run')
         rescue Mongo::Error => e
-          puts"[MongoError]. #{e}"
+          puts "[MongoError]. #{e}"
         end
       end
     end
