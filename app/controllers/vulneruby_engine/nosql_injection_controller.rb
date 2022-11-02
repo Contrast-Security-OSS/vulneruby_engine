@@ -18,7 +18,7 @@ module VulnerubyEngine
 
           client[collection_name, :capped => true, :size => 1024].create unless collections.include?(collection_name)
           collection = db[collections[0].to_sym]
-          doc = {"name": SecureRandom.base64(5), "date": DateTime.now, "text": SecureRandom.base64(3) }
+          doc = { name: SecureRandom.base64(5), date: DateTime.now, text: SecureRandom.base64(3) }
           collection.insert_one(doc)
           result = collection.find(name: params[:name]).first
           render('layouts/vulneruby_engine/nosql_injection/run')
