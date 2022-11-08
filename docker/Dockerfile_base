@@ -41,7 +41,7 @@ RUN apt-get remove -y cmdtest && apt-get remove -y yarn && apt-get clean \
 && cd ./spec/dummy/ && npm install
 RUN cd ./
 
-# ALPINE DISTRO UPDATES NPM
+# ALPINE-UPDATES-NPM
 
 # this is used by the volume in docker-compose
 RUN mkdir -p /tmp/agent/messages
