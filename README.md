@@ -5,17 +5,12 @@ This Ruby on Rails engine exposes an API that makes use a vulnerable methods and
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'vulneruby_engine'
+gem 'vulneruby_engine', git: 'https://github.com/Contrast-Security-OSS/vulneruby_engine'
 ```
 
 And then execute:
 ```bash
 $ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install vulneruby_engine
 ```
 
 Edit your `routes.rb` to mount the engine. 
