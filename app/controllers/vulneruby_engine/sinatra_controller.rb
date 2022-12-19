@@ -2,6 +2,7 @@
 
 require 'sinatra'
 require 'fileutils'
+require 'vulneruby/trigger/path_traversal'
 
 module VulnerubyEngine
   # Base controller for the Sinatra mount, used to test XSS and other framework
@@ -21,7 +22,9 @@ module VulnerubyEngine
     end
 
     post '/reflected_xss' do
-      @result = params[:data].html_safe
+      @result = params[:data]
+      res = Rack::Response.new('', 200, {})
+      res.body = @result
       @page = erb(:'reflected_xss/run.html')
       erb :'application.html'
     end
@@ -32,7 +35,9 @@ module VulnerubyEngine
     end
 
     post '/sql_injection' do
-      @result = params[:data].html_safe
+      @result = params[:data]
+      res = Rack::Response.new('', 200, {})
+      res.body = @result
       @page = erb(:'sql_injection/run.html')
       erb :'application.html'
     end
@@ -123,8 +128,26 @@ module VulnerubyEngine
       env["rack.session"]
     end
 
+    post '/path_traversal' do
+      Vulneruby::Trigger::PathTraversal.
+      run_file_read(params[:file_path])
+    end
+
+    get '/path_traversal' do
+      'here to test some v2 input tracing...'
+    end
+
+    get '/autoload'do
+      @result = Autoload::RESULT
+    end
+
+    post '/autoload'do
+      @result = Autoload::RESULT
+    end
+
     post '/cmdi' do
-      Kernel.`(params['cmd'])
+      cmd = params[:command]
+      Kernel.`(cmd)
     end
   end
 end
