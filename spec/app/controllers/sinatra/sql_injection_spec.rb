@@ -11,7 +11,6 @@ RSpec.describe('SQL Injection Controller', type: :request) do
     describe 'POST /sql_injection' do
       it 'renders any loads a rendered const' do
         post '/vulneruby_engine/sinatra/sql_injection', params: { id: '1 OR 1 = 1' }
-        binding.pry
         expect(response.body).to(include('1 OR 1 = 1'))
       end
     end
