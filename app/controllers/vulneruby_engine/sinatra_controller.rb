@@ -45,6 +45,17 @@ module VulnerubyEngine
       erb :'application.html'
     end
 
+    get '/sql_injection_exclusion' do
+      @page = erb(:'sql_injection/index.html')
+      erb :'application.html'
+    end
+
+    post '/sql_injection_exclusion' do
+      @result = params[:data].html_safe
+      @page = erb(:'sql_injection/run.html')
+      erb :'application.html'
+    end
+
     post '/nosql_injection' do
       @result = SecretMongo.where(:'id'.ne => params[:id]).to_a
       @page = erb(:'nosql_injection/run.html')
@@ -135,11 +146,11 @@ module VulnerubyEngine
       'here to test some v2 input tracing...'
     end
 
-    get '/autoload'do
+    get '/autoload' do
       @result = Autoload::RESULT
     end
 
-    post '/autoload'do
+    post '/autoload' do
       @result = Autoload::RESULT
     end
 

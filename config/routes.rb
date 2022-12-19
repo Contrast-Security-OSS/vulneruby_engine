@@ -29,6 +29,10 @@ VulnerubyEngine::Engine.routes.draw do
     get  "/#{ rule }" => "#{ rule }#index"
     post "/#{ rule }" => "#{ rule }#run"
   end
+  
+  # Exclusions
+  get "sql_injection_exclusion" => "sql_injection#index"
+  post "sql_injection_exclusion" => "sql_injection#run"
 
   get  '/sinatra' => VulnerubyEngine::SinatraController, :anchor => false # rubocop:disable Style/StringHashKeys
   post '/sinatra' => VulnerubyEngine::SinatraController, :anchor => false # rubocop:disable Style/StringHashKeys

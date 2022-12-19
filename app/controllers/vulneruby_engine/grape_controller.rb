@@ -40,6 +40,17 @@ module VulnerubyEngine
       { result: @result }
     end
 
+    get '/sql_injection_exclusion' do
+      'sql injection page'
+    end
+
+    post '/sql_injection_exclusion' do
+      @result = params[:id]
+      res = Rack::Response.new('', 200, {})
+      res.body = @result
+      { result: @result }
+    end
+
     post '/ssrf' do
       uri = CGI.unescape(params[:uri].split('=').last)
       Net::HTTP.get(URI(uri))
