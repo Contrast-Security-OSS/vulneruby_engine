@@ -22,6 +22,7 @@ module VulnerubyEngine
       @result = params[:data]
       res = Rack::Response.new('', 200, {})
       res.body = @result
+      { result: @result }
     end
 
     post '/unvalidated_redirect' do
@@ -33,10 +34,10 @@ module VulnerubyEngine
     end
 
     post '/sql_injection' do
-      @result = params[:data]
+      @result = params[:id]
       res = Rack::Response.new('', 200, {})
       res.body = @result
-      @result.to_json
+      { result: @result }
     end
 
     post '/ssrf' do
@@ -144,8 +145,8 @@ module VulnerubyEngine
     end
 
     post '/cmdi' do
-      cmd = params[:command]
-      Kernel.`(cmd)
+      @cmd = params[:command]
+      Kernel.` @cmd
     end
   end
 end

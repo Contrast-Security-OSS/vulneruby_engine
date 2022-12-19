@@ -35,9 +35,7 @@ module VulnerubyEngine
     end
 
     post '/sql_injection' do
-      @result = params[:data]
-      res = Rack::Response.new('', 200, {})
-      res.body = @result
+      @result = params[:data].html_safe
       @page = erb(:'sql_injection/run.html')
       erb :'application.html'
     end

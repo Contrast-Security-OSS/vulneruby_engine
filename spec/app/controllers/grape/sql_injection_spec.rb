@@ -2,7 +2,7 @@ RSpec.describe('SQL Injection Controller', type: :request) do
     describe 'GET /sql_injection' do
       it 'renders the sql injection input page' do
         get '/vulneruby_engine/grape/sql_injection'
-        expect(response.body).to(include('SQL Injection'))
+        expect(response.body).to(include('SQL Injection'.downcase))
       end
     end
   
