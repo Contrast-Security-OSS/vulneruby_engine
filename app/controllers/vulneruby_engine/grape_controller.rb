@@ -2,6 +2,7 @@
 
 require 'grape'
 require 'fileutils'
+require 'vulneruby/trigger/path_traversal'
 
 module VulnerubyEngine
   # Base controller for the Grape framework mount
@@ -18,13 +19,36 @@ module VulnerubyEngine
     end
 
     post '/reflected_xss' do
-     @result = params[:data].html_safe
-     header 'Content-Type', 'text/html'
-     { result: @result }
+      @result = params[:data]
+      res = Rack::Response.new('', 200, {})
+      res.body = @result
+      { result: @result }
     end
 
     post '/unvalidated_redirect' do
       redirect params[:url]
+    end
+
+    get '/sql_injection' do
+      'sql injection page'
+    end
+
+    post '/sql_injection' do
+      @result = params[:id]
+      res = Rack::Response.new('', 200, {})
+      res.body = @result
+      { result: @result }
+    end
+
+    get '/sql_injection_exclusion' do
+      'sql injection page'
+    end
+
+    post '/sql_injection_exclusion' do
+      @result = params[:id]
+      res = Rack::Response.new('', 200, {})
+      res.body = @result
+      { result: @result }
     end
 
     post '/ssrf' do
@@ -98,7 +122,7 @@ module VulnerubyEngine
     end
 
     post '/nosql_injection' do
-      @result = SecretMongo.where(:'id'.ne => params[:id]).to_a
+      @result = SecretMongo.where(:'id'.ne => params[:name]).to_a
       { result: @result }
     end
 
@@ -114,8 +138,26 @@ module VulnerubyEngine
       env['rack.session']
     end
 
+    post '/path_traversal' do
+      Vulneruby::Trigger::PathTraversal.
+      run_file_read(params[:file_path])
+    end
+
+    get '/path_traversal' do
+      'here to test some v2 input tracing...'
+    end
+
+    get '/autoload'do
+      @result = Autoload::RESULT
+    end
+
+    post '/autoload'do
+      @result = Autoload::RESULT
+    end
+
     post '/cmdi' do
-      Kernel.`(params['cmd'])
+      @cmd = params[:command]
+      Kernel.` @cmd
     end
   end
 end
