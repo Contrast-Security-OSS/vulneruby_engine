@@ -65,7 +65,12 @@ module VulnerubyEngine
       filename = params[:data][:filename]
       FileUtils.cp(tempfile.path, "./#{filename}")
       @data = File.open("./#{filename}")
-      { "result": @data.read}  
+      { "result": @data.read }  
+    end
+
+    post '/ssrf' do
+      uri = CGI.unescape(params[:uri].split('=').last)
+      Net::HTTP.get(URI(uri))
     end
 
     get '/unset_rack_session' do
@@ -135,7 +140,7 @@ module VulnerubyEngine
 
     post '/trust_boundary' do
       env['rack.session'][:HTTP_USER_AGENT] = params[:HTTP_USER_AGENT]
-      env['rack.session']
+      env['rack.session'].to_s
     end
 
     post '/path_traversal' do
@@ -149,10 +154,12 @@ module VulnerubyEngine
 
     get '/autoload'do
       @result = Autoload::RESULT
+      @result.to_s
     end
 
     post '/autoload'do
       @result = Autoload::RESULT
+      @result.to_s
     end
 
     post '/cmdi' do
