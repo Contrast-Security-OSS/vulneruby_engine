@@ -10,7 +10,7 @@ module VulnerubyEngine
     @user = User.create(name: 'Kaizen')
     @user.save!
     new_comment = Comment.create(user_id: @user.id, message: params[:message])
-    new_message.save!
+    new_comment.save!
 
     if @user
       response = Rack::Response.new
