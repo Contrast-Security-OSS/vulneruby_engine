@@ -64,6 +64,8 @@ jobs:
           bundle config set path 'vendor/bundle'
           bundle config set with 'puma_max'
           HEADLESS=true bundle install
+          rm -f db/*.sqlite3
+          APP_LOG=STDOUT bundle exec rake db:create RAILS_ENV=test
           APP_LOG=STDOUT bundle exec rake db:migrate RAILS_ENV=test
           APP_LOG=STDOUT bundle exec rspec --exclude-pattern spec/app/controllers/vulneruby_engine/static_controller_spec.rb
       - name: Run headless test
