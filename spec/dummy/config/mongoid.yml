@@ -5,9 +5,7 @@ development:
     default:
       database: dummy_development
       hosts:
-        #- db:27017
-        # Localy used docker mongodb image
-        - localhost:27017
+        - db:27017
       options:
         read:
           mode: :primary_preferred
@@ -24,8 +22,7 @@ production:
     default:
       database: dummy_production
       hosts:
-        # Localy used docker mongodb image
-        - localhost:27017
+        - db:27017
       options:
         write:
           w: 1
@@ -47,7 +44,7 @@ test:
     default:
       database: dummy_test
       hosts:
-        - localhost:27017
+        - db:27017
       options:
         read:
           mode: :primary_preferred
