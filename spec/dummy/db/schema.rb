@@ -32,5 +32,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_173755) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "vulneruby_engine_comments", "users"
+  add_foreign_key "vulneruby_engine_comments", "vulneruby_engine_users", column: "user_id"
 end
