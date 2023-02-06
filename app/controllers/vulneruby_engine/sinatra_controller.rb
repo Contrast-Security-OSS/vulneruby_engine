@@ -29,6 +29,24 @@ module VulnerubyEngine
       erb :'application.html'
     end
 
+    get '/stored_xss' do
+      @page = erb(:'stored_xss/index.html')
+      erb :'application.html'
+    end
+
+    post '/stored_xss' do
+      @user = VulnerubyEngine::User.create(name: 'Sinatra_Kaizen')
+      @user.save!
+      # Handle comments:
+      new_comment = VulnerubyEngine::Comment.create(user_id: @user.id, message: params[:message])
+      new_comment.save!
+      @result = @user.comments[0].message
+      res = Rack::Response.new('', 200, {})
+      res.body = @result
+      @page = erb(:'reflected_xss/run.html')
+      erb :'application.html'
+    end
+
     get '/sql_injection' do
       @page = erb(:'sql_injection/index.html')
       erb :'application.html'

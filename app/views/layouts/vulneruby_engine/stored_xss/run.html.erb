@@ -1,0 +1,4 @@
+<%=raw "All comments from user #{@user.name} "%>
+<% @user.comments.each do |c| %>
+  <br><%=raw "Comment: #{c.message}" %>
+<% end %>

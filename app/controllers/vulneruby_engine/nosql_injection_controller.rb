@@ -20,6 +20,7 @@ module VulnerubyEngine
           doc = { name: SecureRandom.base64(5), date: DateTime.now, text: SecureRandom.base64(3) }
           collection.insert_one(doc)
           @result = collection.find(name: params[:name]).first
+          collection.remove(doc)
           render('layouts/vulneruby_engine/nosql_injection/run')
         rescue Mongo::Error => e
           puts "[MongoError]. #{e}"

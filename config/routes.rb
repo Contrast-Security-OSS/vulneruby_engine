@@ -13,6 +13,7 @@ VulnerubyEngine::Engine.routes.draw do
     path_traversal
     reflection_injection
     reflected_xss
+    stored_xss
     regex_dos
     sql_injection
     nosql_injection

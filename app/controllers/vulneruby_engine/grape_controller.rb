@@ -15,11 +15,28 @@ module VulnerubyEngine
     end
 
     get '/reflected_xss' do
-      { attack: 'Reflected XSS' }
+      { attack: 'Post data for Reflected XSS' }
     end
 
     post '/reflected_xss' do
       @result = params[:data]
+      res = Rack::Response.new('', 200, {})
+      res.body = @result
+      { result: @result }
+    end
+
+
+    get '/stored_xss' do
+      { attack: 'Post message for Stored XSS' }
+    end
+
+    post '/stored_xss' do
+      @user = VulnerubyEngine::User.create(name: 'Grape_Kaizen')
+      @user.save!
+      # Handle comments:
+      new_comment = VulnerubyEngine::Comment.create(user_id: @user.id, message: params[:message])
+      new_comment.save!
+      @result = @user.comments[0].message
       res = Rack::Response.new('', 200, {})
       res.body = @result
       { result: @result }
