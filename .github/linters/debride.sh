@@ -14,5 +14,6 @@ if [ $COUNT == 1 ]; then
   echo "No dead code found"
 else
   echo "Dead code was found. See $OUT_FILE for details"
+  cat $OUT_FILE
   exit 1
 fi
