@@ -14,6 +14,7 @@ OUTPUT=$(cat $OUT_FILE)
 MATCH=$(expr "$OUTPUT" : '\(.*Total suspect LOC: 0\)')
 
 if [ -z "$MATCH" ]; then
+  # If the match is empty we have dead code
   echo "Dead code was found. See $OUT_FILE for details:"
   cat $OUT_FILE
   exit 1
