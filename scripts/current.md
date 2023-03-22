@@ -51,6 +51,7 @@ sed -i '' "s/ARG RUBY_VER=3.0/ARG RUBY_VER=3.1/g" ./docker/Dockerfile_base
 docker image build . -t ghcr.io/contrast-security-oss/vulneruby_engine/base:3.1-alpine3.16 -f ./docker/Dockerfile_base
 sed -i '' "s/ARG RUBY_VER=3.1/ARG RUBY_VER=3.2/g" ./docker/Dockerfile_base
 docker image build . -t ghcr.io/contrast-security-oss/vulneruby_engine/base:3.2-alpine3.16 -f ./docker/Dockerfile_base
+
 sed -i '' "s/ARG DISTRO='-alpine3.16'/ARG DISTRO=''/g" ./docker/Dockerfile_base
 sed -i '' "s/RUN apk update \&\& apk add --update autoconf automake bash build-base coreutils curl git libxml2 libxml2-dev libxslt libxslt-dev nodejs openssh openssl openssl-dev perl ruby-nokogiri sqlite sqlite-dev tar shared-mime-info protobuf tzdata redis/# ALPINE DISTRO UPDATES/g" ./docker/Dockerfile_base
 sed -i '' "s/# # ALPINE DISTRO UPDATES/# RUN apk update \&\& apk add --update autoconf automake bash build-base coreutils curl git libxml2 libxml2-dev libxslt libxslt-dev nodejs openssh openssl openssl-dev perl ruby-nokogiri sqlite sqlite-dev tar shared-mime-info protobuf tzdata redis/g" ./docker/Dockerfile_base
