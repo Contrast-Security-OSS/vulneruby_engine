@@ -34,7 +34,7 @@ end
 
 ## Adding to the Integration Tests
 
-Before runnig the `Script` for building images, you might need different configuration. 
+Before runnig the `Vulenruby Script` for building images, you might need different configuration. 
 `./scripts/config.json` is the configuration file used by `push_github_images` script.
 
 The configuration file looks like this:
