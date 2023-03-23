@@ -77,15 +77,13 @@ push_docker_images() {
 build_image() {
   if [ -z $2 ]; then
     ver=$1
-    cmd=""$TARGET":"$current_version" -f "$PATH_DOCKERFILE_BASE""
-    "`docker image build . -t "$TARGET":"$1" -f "$PATH_DOCKERFILE_BASE"`"
+    cmd=""$TARGET":"$ver" -f "$PATH_DOCKERFILE_BASE""
   else
     ver=$1
     dist=$2
     cmd=""$TARGET":"$ver""${dist//\"}" -f "$PATH_DOCKERFILE_BASE""
-    # distro format must follow the '-' pattern (-alpine3.2)
-    "`docker image build . -t $cmd`"
   fi
+  docker image build . -t $cmd
 }
 
 # Push single image.
