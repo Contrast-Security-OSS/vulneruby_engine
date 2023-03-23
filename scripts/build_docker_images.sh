@@ -93,12 +93,12 @@ push_image(){
   if [ -z $2 ]; then
     ver=$1
     cmd=""$TARGET":"$ver""
-    "`docker image push $cmd`"
+    docker image push $cmd
   else
     ver=$1
     dist=$2
     cmd=""$TARGET":"$ver""${dist//\"}""
-    "`docker image push $cmd`"
+    docker image push $cmd
   fi
 }
 
