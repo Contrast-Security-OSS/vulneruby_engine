@@ -15,7 +15,7 @@ echo
 # Loggin to Docker:
 if [ $PAT_VALID == true ] && [ $GH_USERNAME_VALID == true ]; then
   echo -e "$BLUE[Docker] Logging in...$WHITE"
- # echo $CR_PAT | docker login ghcr.io -u $GH_USERNAME --password-stdin
+  echo $CR_PAT | docker login ghcr.io -u $GH_USERNAME --password-stdin
   echo
 
   # Build images from config:
@@ -23,5 +23,5 @@ if [ $PAT_VALID == true ] && [ $GH_USERNAME_VALID == true ]; then
 
   # Push the images
   # Comment this out for local debug and troubleshooting, first test run.
-  # push_docker_images
+  push_docker_images
 fi

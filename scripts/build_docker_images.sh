@@ -122,7 +122,7 @@ build_distro() {
     # Alpine Distro needs more work and changing of the whole Dockerfile_base.
     # [NOTE] If any changes are made to the file they need to be reflected here as well.
     if [[ "$current_distro" == *"$ALPINE"* ]]; then
-      echo "ALPINE"
+      echo -e "Dockerfile_base in use. Writting..."
       # Add new packages inside this method: 
       install_alpine_dependecies
       # Build docker image:
