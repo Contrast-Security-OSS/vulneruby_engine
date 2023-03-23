@@ -9,14 +9,16 @@
 # may require different approach, and in that case most of the maintenance
 # will be done here. Comments placed here represent placeholders for code to 
 # be changed and restored back to default.
-
+#
 # Most of the changes are drastical b/c of alpine. It is well deserved that 
 # function is named after it.
+#
+# Always call restore_to_default after this function and build of alpine images.
+# Usage: {install_alpine_dependecies [build..] restore_to_default}
 install_alpine_dependecies() {
   dibian_distro_updates
   prep_npm_redis
   alpine_distro_update
-  restore_to_default
 }
 
 # Dependencies fetch by order of execution:
@@ -52,6 +54,7 @@ prep_npm_redis() {
 #
 # Alpine install packages
 # Comment in file ALPINE DISTRO UPDATES, ALPINE-UPDATES-NPM
+# Sets apk commands"
 alpine_distro_update() {
   sed -i '' "s/# ALPINE DISTRO UPDATES/RUN apk update \&\& apk add --update autoconf automake bash build-base coreutils curl git libxml2 libxml2-dev libxslt libxslt-dev nodejs openssh openssl openssl-dev perl ruby-nokogiri sqlite sqlite-dev tar shared-mime-info protobuf tzdata redis/g" $PATH_DOCKERFILE_BASE
   sed -i '' "s/# ALPINE-UPDATES-NPM/RUN apk update \&\& apk add --update nodejs npm/g" $PATH_DOCKERFILE_BASE
@@ -61,17 +64,19 @@ alpine_distro_update() {
 #
 # Restore file as default. (Also needed for next linux based install.)
 restore_to_default() {
+# Comment out apk parts
 sed -i '' "s/RUN apk update \&\& apk add --update autoconf automake bash build-base coreutils curl git libxml2 libxml2-dev libxslt libxslt-dev nodejs openssh openssl openssl-dev perl ruby-nokogiri sqlite sqlite-dev tar shared-mime-info protobuf tzdata redis/# ALPINE DISTRO UPDATES/g" $PATH_DOCKERFILE_BASE
 sed -i '' "s/# # ALPINE DISTRO UPDATES/# RUN apk update \&\& apk add --update autoconf automake bash build-base coreutils curl git libxml2 libxml2-dev libxslt libxslt-dev nodejs openssh openssl openssl-dev perl ruby-nokogiri sqlite sqlite-dev tar shared-mime-info protobuf tzdata redis/g" $PATH_DOCKERFILE_BASE
 sed -i '' "s/RUN apk update \&\& apk add --update nodejs npm/# ALPINE-UPDATES-NPM/g" $PATH_DOCKERFILE_BASE
 
+# Restore to Debian based apt package manager
+sed -i '' "s/RUN apk update \&\& apk add --update nodejs npm/# ALPINE-UPDATES-NPM/g" $PATH_DOCKERFILE_BASE
+sed -i '' "s/# DEBIAN DISTRO UPDATES RUN/RUN apt-get update \&\& apt-get install -y build-essential coreutils git libsqlite3-dev gnupg pkg-config libxml2-dev libxslt-dev make autoconf automake/g" $PATH_DOCKERFILE_BASE
+
 # Redis
 sed -i '' "s/# REDIS_ONE/RUN curl -fsSL https:\/\/packages.redis.io\/gpg | gpg --dearmor -o \/usr\/share\/keyrings\/redis-archive-keyring.gpg \\\/g" $PATH_DOCKERFILE_BASE
-sed -i '' "s/RUN curl -fsSL https:\/\/packages.redis.io\/gpg | gpg --dearmor -o \/usr\/share\/keyrings\/redis-archive-keyring.gpg \\\/# REDIS_ONE/g" $PATH_DOCKERFILE_BASE
-sed -i '' "s/    echo \"deb \[signed-by=\/usr\/share\/keyrings\/redis-archive-keyring.gpg\] https:\/\/packages.redis.io\/deb \$(lsb_release -cs) main\" \| tee \/etc\/apt\/sedsources.list.d\/redis.list \\\/# REDIS_TWO/g" $PATH_DOCKERFILE_BASE
-
-ed -i '' "s/RUN apk update \&\& apk add --update nodejs npm/# ALPINE-UPDATES-NPM/g" $PATH_DOCKERFILE_BASE
-sed -i '' "s/# DEBIAN DISTRO UPDATES RUN/RUN apt-get update \&\& apt-get install -y build-essential coreutils git libsqlite3-dev gnupg pkg-config libxml2-dev libxslt-dev make autoconf automake/g" $PATH_DOCKERFILE_BASE
+sed -i '' "s/# REDIS_TWO/    echo \"deb \[signed-by=\/usr\/share\/keyrings\/redis-archive-keyring.gpg\] https:\/\/packages.redis.io\/deb \$(lsb_release -cs) main\" \| tee \/etc\/apt\/sources.list.d\/redis.list \\\/g" $PATH_DOCKERFILE_BASE
+sed -i '' "s/# REDIS_THREE/    apt-get update \&\& apt-get install -y redis/g" $PATH_DOCKERFILE_BASE
 
 # NPM
 sed -i '' "s/# NPM_ONE/RUN apt-get remove -y cmdtest \&\& apt-get remove -y yarn \&\& apt-get clean \\\/g" $PATH_DOCKERFILE_BASE

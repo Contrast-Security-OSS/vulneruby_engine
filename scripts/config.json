@@ -2,13 +2,9 @@
   "dockerfile_base": "./docker/Dockerfile_base",
   "target": "ghcr.io/contrast-security-oss/vulneruby_engine/base",
   "ruby_versions": [ 
-    3.0,
-    3.1,
-    3.2 
+    3.0
   ],
   "distros": [
-    "-slim-bullseye",
-    "-slim-buster",
     "-alpine3.16"
   ]
 }

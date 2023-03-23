@@ -21,16 +21,15 @@ build_docker_images(){
     current_version=$(fix_assign_three_zero_current i)
     next_version=${VULNERUBY_RUBIES[$i+1]}
 
+    # On first run we must set ruby version from empty to current:
+    if (($i == 0)); then
+      echo "Initial run"
+      initial_ruby_version
+    fi
+
     # Prepare Dockerfile_base for next version:
     echo
     echo -e  "Building ruby version:" "$GREEN$current_version$WHITE"
-
-    # On last run set to first version again to rebuild with different distro.
-    if [ -z $next_version ]; then
-      next_version=${VULNERUBY_RUBIES[0]}
-      # Version 3.0 is displayed as 3 This fixes this.
-      next_version=$(fix_assign_three_zero_next 0)
-    fi
 
     # Build base images:
     # e.g. 3.0
@@ -41,9 +40,7 @@ build_docker_images(){
     # For each version all of the available distros will be build.
     build_distro $current_version
 
-    # After the first build we can start setting the next versions:
-    # We need to install all distros for current versions as well
-    # before changing it:
+    # Update ruby version to the next, or set to default on last run.
     set_ruby_version
   done
 }
@@ -64,7 +61,7 @@ push_docker_images() {
     dist_length=${#VULNERUBY_DISTROS[@]}
     for (( j=0; j<${length}; j++ )); do
      current_distro=${VULNERUBY_DISTROS[$j]}
-    # Push base + distro tags images:
+     # Push base + distro tags images:
      push_image $current_version $current_distro
      done
   done
@@ -120,7 +117,7 @@ build_distro() {
     echo
     echo -e  "with distro:" "$GREEN$current_distro$WHITE"
 
-     set_distro $current_distro
+    set_distro $current_distro
 
     # Alpine Distro needs more work and changing of the whole Dockerfile_base.
     # [NOTE] If any changes are made to the file they need to be reflected here as well.
@@ -128,10 +125,14 @@ build_distro() {
       echo "ALPINE"
       # Add new packages inside this method: 
       install_alpine_dependecies
+      # Build docker image:
+      build_image $1 $current_distro
+      # Restore file to default
+      restore_to_default
+      else
+      # Build docker image:
+      build_image $1 $current_distro
     fi
-
-    # Build docker image:
-    build_image $1 $current_distro
 
     # Reset after each run:
     reset_distro
@@ -141,8 +142,25 @@ build_distro() {
 # Setters:
 
 # Sets ARG RUBY_VER=X.X in Dockerfile_base
+# After the first build we can start setting the next versions:
+# But after the last we need to reset the state to '' for ruby
+# version.
 set_ruby_version() {
-  sed -i '' "s/ARG RUBY_VER=$current_version/ARG RUBY_VER=$next_version/g" $PATH_DOCKERFILE_BASE
+ if [ -z $next_version ]; then
+    reset_ruby_version
+    else
+    sed -i '' "s/ARG RUBY_VER=$current_version/ARG RUBY_VER=$next_version/g" $PATH_DOCKERFILE_BASE
+  fi
+}
+  
+# On initial run set to required version. You may want to build only for a perticular version:
+initial_ruby_version() {
+  sed -i '' "s/ARG RUBY_VER=''/ARG RUBY_VER=$current_version/g" $PATH_DOCKERFILE_BASE
+}
+
+# On last run we need to reset to empty state:
+reset_ruby_version() {
+  sed -i '' "s/ARG RUBY_VER=$current_version/ARG RUBY_VER=''/g" $PATH_DOCKERFILE_BASE
 }
 
 # Sets ARGS DISTR=current distro
@@ -156,7 +174,6 @@ reset_distro(){
   sed -i '' "s/ARG DISTRO=$current_distro/ARG DISTRO=''/g" $PATH_DOCKERFILE_BASE
 }
 
-
 # Utils:
 
 # Version 3.0 is displayed as 3 This fixes this.
@@ -164,17 +181,6 @@ reset_distro(){
 #
 fix_assign_three_zero_current() {
   if [ "`echo "${current_version} == 3.0" | bc`" -eq 1 ]; then
-    echo 3.0;
-    else 
-    echo ${VULNERUBY_RUBIES[$1]}
-  fi
-}
-
-# Version 3.0 is displayed as 3 This fixes this.
-# TODO: add one for 4.0 version.
-#
-fix_assign_three_zero_next() {
-  if [ "`echo "${next_version} == 3.0" | bc`" -eq 1 ]; then
     echo 3.0;
     else 
     echo ${VULNERUBY_RUBIES[$1]}

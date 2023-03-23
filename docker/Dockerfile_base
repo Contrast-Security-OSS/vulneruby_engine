@@ -1,5 +1,6 @@
 # Just default. Env var takes precedence.
-ARG RUBY_VER=3.0
+# These arguments are assigned by script if run locally and must remain empty.
+ARG RUBY_VER=''
 ARG DISTRO=''
 
 FROM ruby:${RUBY_VER}${DISTRO}
