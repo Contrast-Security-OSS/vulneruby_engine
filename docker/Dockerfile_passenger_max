@@ -16,6 +16,9 @@ RUN bundle update
 # Check Database Version
 RUN bundle exec rake db:version
 
+COPY contrast_security.yaml /app/contrast_security.yaml
+COPY config/contrast_security.yml /app/contrast_security.yml
+
 # Name and run the application
 RUN ./docker/app_name_generator.sh Passenger_max >> /tmp/app_name.txt
 CMD redis-server & cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) PASSENGER_START_TIMEOUT=300 bundle exec rails s -p $PORT
