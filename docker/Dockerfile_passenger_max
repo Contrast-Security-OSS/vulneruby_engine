@@ -10,6 +10,10 @@ RUN bundle config set with 'passenger_max'
 
 RUN bundle update
 
+# Copy configuration files to root directory:
+RUN cp /app/contrast_security.yaml /app/spec/dummy/contrast_security.yaml
+RUN cp /app/config/contrast_security.yml /app/spec/dummy/config/contrast_security.yml
+
 # So we may use whatever command we want to trigger rake, to be sure
 # that the agent is not braking the rake task
 
@@ -18,4 +22,4 @@ RUN bundle exec rake db:version
 
 # Name and run the application
 RUN ./docker/app_name_generator.sh Passenger_max >> /tmp/app_name.txt
-CMD redis-server & cat /tmp/app_name.txt && CONTRAST_CONFIG_PATH=./contrast_security.yaml CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) PASSENGER_START_TIMEOUT=300 bundle exec rails s -p $PORT
+CMD redis-server & cat /tmp/app_name.txt && CONTRAST__APPLICATION__NAME=$(cat /tmp/app_name.txt) PASSENGER_START_TIMEOUT=300 bundle exec rails s -p $PORT
