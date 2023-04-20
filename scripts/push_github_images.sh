@@ -19,7 +19,7 @@ if [ $PAT_VALID == true ] && [ $GH_USERNAME_VALID == true ]; then
   echo
 
   # Build images from config:
-  # build_docker_images
+   build_docker_images
 
   # Push the images
   # Comment this out for local debug and troubleshooting, first test run.
