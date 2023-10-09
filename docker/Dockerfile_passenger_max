@@ -8,7 +8,7 @@ ENV PORT=$PORT_ARG
 ENV PASSENGER_MAX=true
 RUN bundle config set with 'passenger_max'
 
-RUN bundle update
+RUN bundle install
 
 # Copy configuration files to root directory:
 RUN cp /app/contrast_security.yaml /app/spec/dummy/contrast_security.yaml

@@ -8,7 +8,7 @@ ENV PORT=$PORT_ARG
 ENV THIN_MAX=true
 RUN bundle config set with 'thin_max'
 
-RUN bundle update
+RUN bundle install
 
 # So we may use whatever command we want to trigger rake, to be sure
 # that the agent is not braking the rake task

@@ -31,6 +31,14 @@ RUN gem install bundler
 ENV PUMA=true
 ENV THIN=true
 
+# If ruby is 3.0 then use ffi 1.15.5:
+RUN if [ "$RUBY_VER" = "3.0" ]; \
+    then echo "RUBY_VER is 3.0" && export CONTRAST__PIPELINE__RUN=true \
+    && bundle config build.ffi -- --disable-system-libffi \
+    && gem install ffi -v 1.15.5 -- -- disable-system-libffi; \
+    fi
+
+
 RUN bundle config set with 'puma' 'thin'
 RUN bundle config force_ruby_platform true \
     && bundle config build.nokogiri --use-system-libraries
