@@ -8,7 +8,7 @@ ENV PORT=$PORT_ARG
 ENV UNICORN_MIN=true
 RUN bundle config set with 'unicorn_min'
 
-RUN AGENT_PATH=`gem which contrast-agent` bundle update && bundle install
+RUN AGENT_PATH=`gem which contrast-agent` bundle install
 
 # So we may use whatever command we want to trigger rake, to be sure
 # that the agent is not braking the rake task

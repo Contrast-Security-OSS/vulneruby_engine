@@ -8,7 +8,7 @@ ENV PORT=$PORT_ARG
 ENV PASSENGER_MIN=true
 RUN bundle config set with 'passenger_min'
 
-RUN bundle update
+RUN bundle install
 
 # Copy configuration files to root directory:
 RUN cp /app/contrast_security.yaml /app/spec/dummy/contrast_security.yaml

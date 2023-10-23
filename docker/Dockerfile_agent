@@ -3,6 +3,12 @@ ARG RUBY_VER=3.0
 FROM ghcr.io/contrast-security-oss/vulneruby_engine/base:${RUBY_VER}
 
 ENV CI_TEST=true
+
+# If ruby is 3.0 then use ffi 1.15.5:
+RUN if [ "$RUBY_VER" = "3.0" ]; \
+    then echo "RUBY_VER is 3.0" && export CONTRAST__PIPELINE__RUN=true; \
+    fi
+
 COPY agent/* agent/
 RUN rm contrast_security.yaml || true
 COPY contrast_security.yaml contrast_security.yaml
